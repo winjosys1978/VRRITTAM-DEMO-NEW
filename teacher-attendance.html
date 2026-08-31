@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>VRRITTAM - Teacher Attendance</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#eef5ff;
+}
+
+header{
+    background:#1f2c8c;
+    color:white;
+    padding:18px 20px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+header h1{
+    font-size:22px;
+}
+
+.back-btn{
+    background:white;
+    color:#1f2c8c;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:25px 20px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,.12);
+    margin-bottom:20px;
+}
+
+label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+select{
+    width:100%;
+    padding:12px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    margin-bottom:20px;
+    font-size:16px;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:15px;
+}
+
+th,
+td{
+    border:1px solid #ccc;
+    padding:12px;
+    text-align:center;
+}
+
+th{
+    background:#e3f2fd;
+    color:#003366;
+}
+
+.status-select{
+    width:auto;
+    margin:0;
+    padding:8px;
+}
+
+.save-btn{
+    width:100%;
+    margin-top:20px;
+    padding:13px;
+    border:none;
+    border-radius:8px;
+    background:#1565C0;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.save-btn:hover{
+    background:#0D47A1;
+}
+
+.message{
+    display:none;
+    margin-top:15px;
+    padding:12px;
+    background:#e8f5e9;
+    color:#2e7d32;
+    border-radius:8px;
+    text-align:center;
+    font-weight:bold;
+}
+
+@media(max-width:600px){
+
+    header{
+        flex-direction:column;
+        align-items:stretch;
+        gap:12px;
+    }
+
+    .back-btn{
+        width:100%;
+    }
+
+    .card{
+        padding:16px;
+    }
+
+    th,
+    td{
+        padding:8px 5px;
+        font-size:13px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h1>
+📋 Mark Attendance
+</h1>
+
+<button
+class="back-btn"
+onclick="goBack()">
+
+← Back
+
+</button>
+
+</header>
+
+
+
+<div class="container">
+
+
+<div class="card">
+
+<label>
+Select Class
+</label>
+
+<select id="classSelect">
+
+<option value="10-A">
+Class 10 A
+</option>
+
+<option value="10-B">
+Class 10 B
+</option>
+
+<option value="9-A">
+Class 9-A
+</option>
+
+</select>
+
+
+<h2>
+Student List
+</h2>
+
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+Student
+</th>
+
+<th>
+Attendance
+</th>
+
+</tr>
+
+</thead>
+
+
+<tbody>
+
+
+<tr>
+
+<td>
+Arun Kumar
+</td>
+
+<td>
+
+<select
+class="status-select"
+id="arunStatus">
+
+<option value="Present">
+Present
+</option>
+
+<option value="Absent">
+Absent
+</option>
+
+<option value="Late">
+Late
+</option>
+
+</select>
+
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td>
+Priya
+</td>
+
+<td>
+
+<select
+class="status-select"
+id="priyaStatus">
+
+<option value="Present">
+Present
+</option>
+
+<option value="Absent">
+Absent
+</option>
+
+<option value="Late">
+Late
+</option>
+
+</select>
+
+</td>
+
+</tr>
+
+
+
+<tr>
+
+<td>
+Rahul
+</td>
+
+<td>
+
+<select
+class="status-select"
+id="rahulStatus">
+
+<option value="Present">
+Present
+</option>
+
+<option value="Absent">
+Absent
+</option>
+
+<option value="Late">
+Late
+</option>
+
+</select>
+
+</td>
+
+</tr>
+
+
+</tbody>
+
+</table>
+
+
+<button
+class="save-btn"
+onclick="saveAttendance()">
+
+💾 Save Attendance
+
+</button>
+
+
+<div
+id="message"
+class="message">
+
+Attendance saved successfully!
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<script src="vrrittam-data.js"></script>
+
+
+<script>
+
+/* =====================================
+   SAVE TEACHER ATTENDANCE
+===================================== */
+
+function saveAttendance(){
+
+    let data =
+    loadVRRITTAMData();
+
+
+    let arunStatus =
+    document.getElementById(
+        "arunStatus"
+    ).value;
+
+
+    let priyaStatus =
+    document.getElementById(
+        "priyaStatus"
+    ).value;
+
+
+    let rahulStatus =
+    document.getElementById(
+        "rahulStatus"
+    ).value;
+
+
+    /*
+       Arun Kumar is the demo student
+       used by Student and Parent dashboards.
+    */
+
+
+    if(arunStatus === "Present"){
+
+        data.attendance.present = 1;
+        data.attendance.absent = 0;
+        data.attendance.late = 0;
+
+    }
+
+    else if(arunStatus === "Absent"){
+
+        data.attendance.present = 0;
+        data.attendance.absent = 1;
+        data.attendance.late = 0;
+
+    }
+
+    else{
+
+        data.attendance.present = 0;
+        data.attendance.absent = 0;
+        data.attendance.late = 1;
+
+    }
+
+
+    /*
+       Demo attendance percentage
+       for Arun Kumar.
+    */
+
+    if(arunStatus === "Present"){
+
+        data.attendance.percentage = 92;
+
+    }
+
+    else if(arunStatus === "Late"){
+
+        data.attendance.percentage = 88;
+
+    }
+
+    else{
+
+        data.attendance.percentage = 84;
+
+    }
+
+
+    /*
+       Store other student statuses
+       for future dashboard expansion.
+    */
+
+    data.studentAttendance = {
+
+        Arun: arunStatus,
+
+        Priya: priyaStatus,
+
+        Rahul: rahulStatus
+
+    };
+
+
+    localStorage.setItem(
+
+        "VRRITTAM_DATA",
+
+        JSON.stringify(data)
+
+    );
+
+
+    document.getElementById(
+        "message"
+    ).style.display = "block";
+
+
+    setTimeout(function(){
+
+        document.getElementById(
+            "message"
+        ).style.display = "none";
+
+    },2000);
+
+}
+
+
+
+/* =====================================
+   BACK
+===================================== */
+
+function goBack(){
+
+    window.location.href =
+    "teacher-dashboard.html";
+
+}
+
+</script>
+
+
+</body>
+
+</html>

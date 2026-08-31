@@ -1,0 +1,2636 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VRRITTAM | Super Admin</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+
+background:#EEF5FF;
+
+display:flex;
+
+min-height:100vh;
+
+}
+
+/* Sidebar */
+
+.sidebar{
+
+width:280px;
+
+background:#0D47A1;
+
+color:white;
+
+padding:25px;
+
+display:flex;
+
+flex-direction:column;
+
+}
+
+.logo{
+
+text-align:center;
+
+margin-bottom:35px;
+
+}
+
+.logo img{
+
+width:90px;
+
+margin-bottom:12px;
+
+}
+
+.logo h2{
+
+font-size:30px;
+
+letter-spacing:1px;
+
+}
+
+.menu{
+
+list-style:none;
+
+}
+
+.menu li{
+
+padding:15px;
+
+margin:8px 0;
+
+border-radius:10px;
+
+cursor:pointer;
+
+transition:.3s;
+
+}
+
+.menu li:hover{
+
+background:#1565C0;
+
+}
+
+/* Main */
+
+.main{
+
+flex:1;
+
+display:flex;
+
+flex-direction:column;
+
+}
+
+/* Header */
+
+.header{
+
+height:80px;
+
+background:white;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:0 30px;
+
+box-shadow:0 3px 12px rgba(0,0,0,.12);
+
+}
+
+.header h1{
+
+color:#0D47A1;
+
+font-size:28px;
+
+}
+
+.profile{
+
+display:flex;
+
+align-items:center;
+
+gap:15px;
+
+font-weight:bold;
+
+color:#333;
+
+}
+
+.profile img{
+
+width:45px;
+
+height:45px;
+
+border-radius:50%;
+
+background:#ddd;
+
+}
+
+/* Content */
+
+.content{
+
+padding:30px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- Sidebar -->
+
+<div class="sidebar">
+
+<div class="logo">
+
+<img src="assets/vrrittam-logo.png">
+
+<h2>VRRITTAM</h2>
+
+<p>Super Admin</p>
+
+</div>
+
+<ul class="menu">
+
+<li>🏠 Dashboard</li>
+
+<li>🏫 School Management</li>
+
+<li>👥 User Management</li>
+
+<li>🤖 AI Copilot</li>
+
+<li>📊 Reports</li>
+
+<li>⚙️ Settings</li>
+
+<li>🚪 Logout</li>
+
+</ul>
+
+</div>
+
+<!-- Main -->
+
+<div class="main">
+
+<div class="header">
+
+<h1>Super Admin Dashboard</h1>
+
+<div class="profile">
+
+🔔
+
+<img src="assets/winjosys-logo.png"
+alt="WinjoSys Logo"
+class="profile-logo">
+
+<span>CR. Sathish Kumar</span>
+
+</div>
+
+</div>
+
+<div class="content">
+<!-- ========================= -->
+<!-- DASHBOARD OVERVIEW -->
+<!-- ========================= -->
+
+<h2 class="section-title">Dashboard Overview</h2>
+
+<div class="dashboard-grid">
+
+<div class="dashboard-card">
+<div class="card-icon">🏫</div>
+<div class="card-value" id="schoolCount">0</div>
+<div class="card-title">Schools</div>
+</div>
+
+<div class="dashboard-card">
+<div class="card-icon">🎓</div>
+<div class="card-value" id="studentCount">0</div>
+<div class="card-title">Students</div>
+</div>
+
+<div class="dashboard-card">
+<div class="card-icon">👨‍🏫</div>
+<div class="card-value" id="teacherCount">0</div>
+<div class="card-title">Teachers</div>
+</div>
+
+<div class="dashboard-card">
+<div class="card-icon">👨‍👩‍👧</div>
+<div class="card-value" id="parentCount">0</div>
+<div class="card-title">Parents</div>
+</div>
+
+<div class="dashboard-card">
+<div class="card-icon">🤖</div>
+<div class="card-value" id="aiCount">0</div>
+<div class="card-title">AI Copilot</div>
+</div>
+
+<div class="dashboard-card">
+<div class="card-icon">📊</div>
+<div class="card-value" id="activeCount">0</div>
+<div class="card-title">Active Users</div>
+</div>
+
+</div>
+
+<h2 class="section-title">Quick Actions</h2>
+
+<div class="quick-grid">
+
+<div class="quick-card">🏫<br>New School</div>
+
+<div class="quick-card">🎓<br>New Student</div>
+
+<div class="quick-card">👨‍🏫<br>New Teacher</div>
+
+<div class="quick-card">👨‍👩‍👧<br>New Parent</div>
+
+<div class="quick-card">🤖<br>AI Copilot</div>
+
+<div class="quick-card">👑<br>School Admin</div>
+
+</div>
+
+<style>
+
+.section-title{
+margin:18px 0;
+font-size:24px;
+font-weight:bold;
+color:#0D47A1;
+}
+
+.dashboard-grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+
+gap:16px;
+
+}
+
+.dashboard-card{
+
+background:white;
+
+border-radius:18px;
+
+padding:18px;
+
+text-align:center;
+
+box-shadow:0 6px 18px rgba(0,0,0,.10);
+
+transition:.30s;
+
+cursor:pointer;
+
+}
+
+.dashboard-card:hover{
+
+transform:translateY(-5px) scale(1.03);
+
+box-shadow:0 15px 30px rgba(0,0,0,.18);
+
+}
+
+.card-icon{
+
+font-size:28px;
+
+margin-bottom:8px;
+
+}
+
+.card-value{
+
+font-size:32px;
+
+font-weight:bold;
+
+color:#1565C0;
+
+margin:6px 0;
+
+}
+
+.card-title{
+
+font-size:15px;
+
+font-weight:bold;
+
+color:#555;
+
+}
+
+.quick-grid{
+
+display:grid;
+
+grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+
+gap:16px;
+
+margin-top:10px;
+
+}
+
+.quick-card{
+
+background:linear-gradient(135deg,#1565C0,#0D47A1);
+
+color:white;
+
+padding:18px;
+
+border-radius:18px;
+
+text-align:center;
+
+font-size:17px;
+
+font-weight:bold;
+
+cursor:pointer;
+
+transition:.30s;
+
+box-shadow:0 6px 18px rgba(0,0,0,.15);
+
+}
+
+.quick-card:hover{
+
+transform:translateY(-5px) scale(1.03);
+
+}
+
+</style>
+<!-- ========================================= -->
+<!-- DV1 - PART 3.1 -->
+<!-- Recent Activities & Pending Approvals -->
+<!-- ========================================= -->
+
+<div class="admin-bottom-section">
+
+    <!-- Recent Activities -->
+    <div class="activity-panel">
+
+        <h3>📋 Recent Activities</h3>
+
+        <ul id="activityList">
+
+            <li>🚀 VRRITTAM Super Admin Dashboard Started</li>
+
+            <li>📌 Waiting for First School Registration</li>
+
+            <li>👨‍💻 System Status : Ready</li>
+
+        </ul>
+
+    </div>
+
+    <!-- Pending Approval -->
+
+    <div class="approval-panel">
+
+        <h3>🏫 Pending School Approvals</h3>
+
+        <div class="empty-box">
+
+            No School Registration Yet
+
+        </div>
+
+    </div>
+
+</div>
+
+<style>
+
+.admin-bottom-section{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:25px;
+
+margin-top:35px;
+
+}
+
+.activity-panel,
+
+.approval-panel{
+
+background:white;
+
+border-radius:18px;
+
+padding:22px;
+
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+
+transition:.30s;
+
+}
+
+.activity-panel:hover,
+
+.approval-panel:hover{
+
+transform:translateY(-4px);
+
+}
+
+.activity-panel h3,
+
+.approval-panel h3{
+
+color:#1565C0;
+
+margin-bottom:18px;
+
+font-size:22px;
+
+}
+
+.activity-panel ul{
+
+list-style:none;
+
+padding:0;
+
+margin:0;
+
+}
+
+.activity-panel li{
+
+padding:12px;
+
+margin-bottom:10px;
+
+background:#F5F9FF;
+
+border-radius:10px;
+
+font-size:15px;
+
+}
+
+.empty-box{
+
+height:170px;
+
+display:flex;
+
+justify-content:center;
+
+align-items:center;
+
+border:2px dashed #90CAF9;
+
+border-radius:12px;
+
+color:#777;
+
+font-size:16px;
+
+}
+
+@media(max-width:900px){
+
+.admin-bottom-section{
+
+grid-template-columns:1fr;
+
+}
+
+}
+
+</style>
+<!-- ========================================= -->
+<!-- DV1 PART 3.2 -->
+<!-- REGISTER NEW SCHOOL -->
+<!-- ========================================= -->
+
+<div style="margin-top:25px;">
+
+<button class="quick-card"
+onclick="openSchoolPopup()">
+
+🏫 Register New School
+
+</button>
+
+</div>
+
+<!-- Popup -->
+
+<div id="schoolPopup" class="popup-bg">
+
+<div class="popup-box">
+
+<h2>🏫 Register New School</h2>
+
+<input id="schoolName"
+type="text"
+placeholder="School Name">
+
+<input id="principalName"
+type="text"
+placeholder="Principal Name">
+
+<input id="schoolEmail"
+type="email"
+placeholder="Official Email">
+
+<input id="schoolPhone"
+type="text"
+placeholder="Mobile Number">
+
+<textarea id="schoolAddress"
+placeholder="School Address"></textarea>
+
+<div class="popup-buttons">
+
+<button class="save-btn"
+onclick="registerSchool()">
+
+Register
+
+</button>
+
+<button class="cancel-btn"
+onclick="closeSchoolPopup()">
+
+Cancel
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<style>
+
+.popup-bg{
+
+display:none;
+
+position:fixed;
+
+top:0;
+
+left:0;
+
+width:100%;
+
+height:100%;
+
+background:rgba(0,0,0,.45);
+
+justify-content:center;
+
+align-items:center;
+
+z-index:9999;
+
+}
+
+.popup-box{
+
+width:420px;
+
+background:white;
+
+padding:25px;
+
+border-radius:18px;
+
+box-shadow:0 20px 40px rgba(0,0,0,.25);
+
+}
+
+.popup-box h2{
+
+text-align:center;
+
+margin-bottom:20px;
+
+color:#1565C0;
+
+}
+
+.popup-box input,
+
+.popup-box textarea{
+
+width:100%;
+
+padding:12px;
+
+margin-bottom:12px;
+
+border:1px solid #ddd;
+
+border-radius:10px;
+
+font-size:15px;
+
+}
+
+.popup-box textarea{
+
+height:80px;
+
+resize:none;
+
+}
+
+.popup-buttons{
+
+display:flex;
+
+justify-content:space-between;
+
+margin-top:15px;
+
+}
+
+.save-btn{
+
+background:#1565C0;
+
+color:white;
+
+border:none;
+
+padding:12px 18px;
+
+border-radius:10px;
+
+cursor:pointer;
+
+}
+
+.cancel-btn{
+
+background:#E53935;
+
+color:white;
+
+border:none;
+
+padding:12px 18px;
+
+border-radius:10px;
+
+cursor:pointer;
+
+}
+
+</style>
+
+<script>
+
+function openSchoolPopup(){
+
+document.getElementById("schoolPopup").style.display="flex";
+
+}
+
+function closeSchoolPopup(){
+
+document.getElementById("schoolPopup").style.display="none";
+
+}
+
+function registerSchool(){
+
+let count=document.getElementById("schoolCount");
+
+count.innerHTML=parseInt(count.innerHTML)+1;
+
+alert("School Registered Successfully");
+
+closeSchoolPopup();
+
+}
+
+</script>
+<!-- ========================================= -->
+<!-- DV1 PART 3.3 -->
+<!-- LIVE SCHOOL REGISTRATION -->
+<!-- ========================================= -->
+
+<script>
+
+let schools=[];
+
+function registerSchool(){
+
+const school={
+
+name:document.getElementById("schoolName").value,
+
+principal:document.getElementById("principalName").value,
+
+email:document.getElementById("schoolEmail").value,
+
+phone:document.getElementById("schoolPhone").value,
+
+address:document.getElementById("schoolAddress").value
+
+};
+
+if(school.name==""){
+
+alert("Enter School Name");
+
+return;
+
+}
+
+schools.push(school);
+
+document.getElementById("schoolCount").innerHTML=schools.length;
+
+updatePendingSchools();
+
+updateActivities(school.name);
+
+clearSchoolForm();
+
+closeSchoolPopup();
+
+}
+
+function updatePendingSchools(){
+
+let html="";
+
+schools.forEach(function(s,index){
+
+html+=`
+
+<div class="school-item">
+
+<div>
+
+<b>${s.name}</b><br>
+
+<span style="font-size:13px;color:#666;">
+
+Pending Approval
+
+</span>
+
+</div>
+
+<button class="approve-btn"
+
+onclick="approveSchool(${index})">
+
+Approve
+
+</button>
+
+</div>
+
+`;
+
+});
+
+document.querySelector(".empty-box").innerHTML=html;
+
+}
+
+function updateActivities(name){
+
+const list=document.getElementById("activityList");
+
+const li=document.createElement("li");
+
+li.innerHTML="🏫 "+name+" Registered";
+
+list.prepend(li);
+
+}
+
+function approveSchool(i){
+
+alert(
+
+schools[i].name+
+
+" Approved Successfully"
+
+);
+
+}
+
+function clearSchoolForm(){
+
+document.getElementById("schoolName").value="";
+
+document.getElementById("principalName").value="";
+
+document.getElementById("schoolEmail").value="";
+
+document.getElementById("schoolPhone").value="";
+
+document.getElementById("schoolAddress").value="";
+
+}
+
+</script>
+
+<style>
+
+.school-item{
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+padding:12px;
+
+margin-bottom:10px;
+
+background:#F7F9FC;
+
+border-radius:10px;
+
+}
+
+.approve-btn{
+
+background:#2E7D32;
+
+color:white;
+
+border:none;
+
+padding:8px 14px;
+
+border-radius:8px;
+
+cursor:pointer;
+
+font-size:13px;
+
+}
+
+.approve-btn:hover{
+
+background:#1B5E20;
+
+}
+
+</style>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VRRITTAM | Super Admin V2</title>
+
+<link rel="icon" href="assets/vrrittam-logo.png">
+
+<link rel="stylesheet" href="super-admin-dashboard-v2.css">
+
+</head>
+
+<body>
+
+<!-- ========================= -->
+<!-- Sidebar -->
+<!-- ========================= -->
+
+<div class="sidebar">
+
+<div class="logo-area">
+
+<img src="assets/vrrittam-logo.png" alt="VRRITTAM">
+
+<h2>VRRITTAM</h2>
+
+<p>Super Admin</p>
+
+</div>
+
+<ul class="menu">
+
+<li class="active">
+🏠 Dashboard
+</li>
+
+<li>
+🏫 School Management
+</li>
+
+<li>
+👥 User Management
+</li>
+
+<li>
+🎓 Student Management
+</li>
+
+<li>
+👨‍🏫 Teacher Management
+</li>
+
+<li>
+👨‍👩‍👧 Parent Management
+</li>
+
+<li>
+🤖 AI Copilot
+</li>
+
+<li>
+📊 Reports
+</li>
+
+<li>
+⚙ Settings
+</li>
+
+<li>
+🚪 Logout
+</li>
+
+</ul>
+
+</div>
+
+<!-- ========================= -->
+<!-- Main Area -->
+<!-- ========================= -->
+
+<div class="main">
+
+<!-- Header -->
+
+<header class="header">
+
+<div class="header-left">
+
+<h1>Super Admin Dashboard</h1>
+
+</div>
+
+<div class="header-center">
+
+<input
+type="text"
+placeholder="Search..."
+id="globalSearch">
+
+</div>
+
+<div class="header-right">
+
+<button class="notification-btn">
+
+🔔
+
+</button>
+
+<img
+src="assets/winjosys-logo.png"
+class="profile-logo"
+alt="WinjoSys">
+
+<div class="profile-info">
+
+<b>CR. Sathish Kumar</b>
+
+<span>Super Administrator</span>
+
+</div>
+
+</div>
+
+</header>
+
+<!-- ========================= -->
+<!-- Main Content -->
+<!-- ========================= -->
+
+<main class="content">
+
+<!-- V2 Part 1B Starts Here -->
+
+</main>
+
+</div>
+
+<script src="super-admin-dashboard-v2.js"></script>
+
+</body>
+
+</html>
+<!-- ========================================= -->
+<!-- V2 PART 1B -->
+<!-- DASHBOARD OVERVIEW -->
+<!-- ========================================= -->
+
+<section class="dashboard-overview">
+
+<h2>Dashboard Overview</h2>
+
+<div class="dashboard-cards">
+
+<div class="card" id="cardSchools">
+<div class="icon">🏫</div>
+<h3 id="schoolCount">0</h3>
+<p>Registered Schools</p>
+</div>
+
+<div class="card" id="cardStudents">
+<div class="icon">🎓</div>
+<h3 id="studentCount">0</h3>
+<p>Total Students</p>
+</div>
+
+<div class="card" id="cardTeachers">
+<div class="icon">👨‍🏫</div>
+<h3 id="teacherCount">0</h3>
+<p>Total Teachers</p>
+</div>
+
+<div class="card" id="cardParents">
+<div class="icon">👨‍👩‍👧</div>
+<h3 id="parentCount">0</h3>
+<p>Total Parents</p>
+</div>
+
+<div class="card" id="cardAI">
+<div class="icon">🤖</div>
+<h3 id="aiCount">0</h3>
+<p>AI Copilot Users</p>
+</div>
+
+<div class="card" id="cardActive">
+<div class="icon">📊</div>
+<h3 id="activeCount">0</h3>
+<p>Active Users</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- QUICK ACTIONS -->
+<!-- ========================================= -->
+
+<section class="quick-actions">
+
+<h2>Quick Actions</h2>
+
+<div class="quick-grid">
+
+<button id="btnNewSchool">
+🏫<br>Register School
+</button>
+
+<button id="btnNewTeacher">
+👨‍🏫<br>New Teacher
+</button>
+
+<button id="btnNewStudent">
+🎓<br>New Student
+</button>
+
+<button id="btnNewParent">
+👨‍👩‍👧<br>New Parent
+</button>
+
+<button id="btnAICopilot">
+🤖<br>AI Copilot
+</button>
+
+<button id="btnSchoolAdmin">
+👑<br>School Admin
+</button>
+
+</div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- RECENT ACTIVITIES -->
+<!-- ========================================= -->
+
+<section class="recent-section">
+
+<div class="recent-box">
+
+<h2>📋 Recent Activities</h2>
+
+<ul id="activityList">
+
+<li>🚀 VRRITTAM V2 Dashboard Initialized</li>
+
+<li>📌 Waiting for First School Registration</li>
+
+<li>💙 System Status : Ready</li>
+
+</ul>
+
+</div>
+
+<div class="recent-box">
+
+<h2>🏫 Pending School Approvals</h2>
+
+<div id="pendingSchoolArea">
+
+No Pending Schools
+
+</div>
+
+</div>
+
+</section>
+
+<!-- ===== V2 PART 1B END ===== -->
+ <!-- ========================================= -->
+<!-- V2 PART 1C -->
+<!-- SCHOOL MANAGEMENT -->
+<!-- ========================================= -->
+
+<section class="school-management">
+
+<h2>🏫 School Management</h2>
+
+<div class="toolbar">
+
+<input
+type="text"
+id="searchSchool"
+placeholder="🔍 Search School...">
+
+<button id="registerSchoolBtn">
+
+➕ Register New School
+
+</button>
+
+</div>
+
+<!-- Pending Schools -->
+
+<div class="table-card">
+
+<h3>🟡 Pending School Approvals</h3>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>School</th>
+
+<th>Principal</th>
+
+<th>Email</th>
+
+<th>Status</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="pendingSchools">
+
+<tr>
+
+<td colspan="5"
+style="text-align:center;">
+
+No Pending Schools
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<br>
+
+<!-- Approved Schools -->
+
+<div class="table-card">
+
+<h3>🟢 Approved Schools</h3>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>School</th>
+
+<th>School Admin</th>
+
+<th>Login ID</th>
+
+<th>Status</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="approvedSchools">
+
+<tr>
+
+<td colspan="5"
+style="text-align:center;">
+
+No Approved Schools
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<br>
+
+<!-- School Admin Accounts -->
+
+<div class="table-card">
+
+<h3>👑 School Admin Accounts</h3>
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Admin Name</th>
+
+<th>School</th>
+
+<th>Login ID</th>
+
+<th>Password</th>
+
+<th>Status</th>
+
+</tr>
+
+</thead>
+
+<tbody id="schoolAdmins">
+
+<tr>
+
+<td colspan="5"
+style="text-align:center;">
+
+No School Admin Accounts
+
+</td>
+
+</tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+<!-- ========================================= -->
+<!-- REGISTER SCHOOL POPUP -->
+<!-- ========================================= -->
+
+<div id="schoolPopup" class="popup">
+
+<div class="popup-content">
+
+<h2>🏫 Register New School</h2>
+
+<input
+type="text"
+id="schoolName"
+placeholder="School Name">
+
+<input
+type="text"
+id="principalName"
+placeholder="Principal Name">
+
+<input
+type="email"
+id="schoolEmail"
+placeholder="Official Email">
+
+<input
+type="text"
+id="schoolPhone"
+placeholder="Mobile Number">
+
+<textarea
+id="schoolAddress"
+placeholder="School Address"></textarea>
+
+<div class="popup-buttons">
+
+<button id="saveSchool">
+
+💾 Register School
+
+</button>
+
+<button id="cancelSchool">
+
+❌ Cancel
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- ===== END OF V2 PART 1C ===== -->
+ /* =========================================
+   VRRITTAM V2 - PART 2A
+   BASE LAYOUT + SIDEBAR + HEADER
+========================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:"Segoe UI",Arial,sans-serif;
+}
+
+body{
+    background:#F4F7FC;
+    display:flex;
+    min-height:100vh;
+    color:#333;
+}
+
+/* ===========================
+   SIDEBAR
+=========================== */
+
+.sidebar{
+    width:270px;
+    background:linear-gradient(180deg,#0D47A1,#1565C0);
+    color:#fff;
+    display:flex;
+    flex-direction:column;
+    box-shadow:4px 0 18px rgba(0,0,0,.15);
+}
+
+.logo-area{
+    text-align:center;
+    padding:30px 20px;
+    border-bottom:1px solid rgba(255,255,255,.15);
+}
+
+.logo-area img{
+    width:85px;
+    margin-bottom:12px;
+}
+
+.logo-area h2{
+    font-size:28px;
+    font-weight:700;
+    letter-spacing:1px;
+}
+
+.logo-area p{
+    margin-top:8px;
+    opacity:.85;
+    font-size:15px;
+}
+
+.menu{
+    list-style:none;
+    padding:18px;
+}
+
+.menu li{
+    padding:14px 18px;
+    border-radius:12px;
+    margin-bottom:8px;
+    cursor:pointer;
+    transition:.3s;
+    font-size:15px;
+}
+
+.menu li:hover{
+    background:rgba(255,255,255,.15);
+    transform:translateX(6px);
+}
+
+.menu li.active{
+    background:#fff;
+    color:#1565C0;
+    font-weight:bold;
+}
+
+/* ===========================
+   MAIN AREA
+=========================== */
+
+.main{
+    flex:1;
+    display:flex;
+    flex-direction:column;
+}
+
+/* ===========================
+   HEADER
+=========================== */
+
+.header{
+    height:80px;
+    background:#fff;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 30px;
+    box-shadow:0 3px 15px rgba(0,0,0,.08);
+}
+
+.header-left h1{
+    color:#0D47A1;
+    font-size:28px;
+}
+
+.header-center{
+    flex:1;
+    display:flex;
+    justify-content:center;
+}
+
+.header-center input{
+    width:360px;
+    padding:11px 16px;
+    border:1px solid #D8E2F0;
+    border-radius:25px;
+    outline:none;
+    font-size:15px;
+    transition:.3s;
+}
+
+.header-center input:focus{
+    border-color:#1565C0;
+    box-shadow:0 0 10px rgba(21,101,192,.20);
+}
+
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.notification-btn{
+    width:45px;
+    height:45px;
+    border:none;
+    border-radius:50%;
+    background:#EEF4FF;
+    cursor:pointer;
+    font-size:18px;
+    transition:.3s;
+}
+
+.notification-btn:hover{
+    background:#1565C0;
+    color:#fff;
+}
+
+.profile-logo{
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    background:#fff;
+    padding:4px;
+    object-fit:contain;
+    box-shadow:0 3px 10px rgba(0,0,0,.15);
+}
+
+.profile-info{
+    display:flex;
+    flex-direction:column;
+}
+
+.profile-info b{
+    font-size:15px;
+}
+
+.profile-info span{
+    font-size:12px;
+    color:#666;
+}
+
+/* ===========================
+   CONTENT
+=========================== */
+
+.content{
+    padding:30px;
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media(max-width:992px){
+
+.sidebar{
+    width:90px;
+}
+
+.logo-area h2,
+.logo-area p{
+    display:none;
+}
+
+.menu li{
+    text-align:center;
+    font-size:18px;
+}
+
+.header-center{
+    display:none;
+}
+
+}
+/* =========================================
+   VRRITTAM V2 - PART 2B
+   DASHBOARD CARDS + QUICK ACTIONS
+========================================= */
+
+/* Section Titles */
+
+.dashboard-overview h2,
+.quick-actions h2,
+.recent-section h2{
+    color:#0D47A1;
+    margin-bottom:18px;
+    font-size:26px;
+    font-weight:700;
+}
+
+/* Dashboard Cards */
+
+.dashboard-cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+    gap:18px;
+    margin-bottom:35px;
+}
+
+.card{
+    background:#fff;
+    border-radius:18px;
+    padding:22px;
+    text-align:center;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+    transition:.35s;
+    cursor:pointer;
+    border:1px solid #EDF2FA;
+}
+
+.card:hover{
+    transform:translateY(-8px) scale(1.03);
+    box-shadow:0 16px 30px rgba(0,0,0,.15);
+}
+
+.card .icon{
+    font-size:36px;
+    margin-bottom:12px;
+}
+
+.card h3{
+    font-size:34px;
+    color:#1565C0;
+    margin-bottom:8px;
+}
+
+.card p{
+    color:#666;
+    font-size:15px;
+    font-weight:600;
+}
+
+/* Different Card Colors */
+
+#cardSchools{
+    border-top:5px solid #1565C0;
+}
+
+#cardStudents{
+    border-top:5px solid #43A047;
+}
+
+#cardTeachers{
+    border-top:5px solid #8E24AA;
+}
+
+#cardParents{
+    border-top:5px solid #FB8C00;
+}
+
+#cardAI{
+    border-top:5px solid #E53935;
+}
+
+#cardActive{
+    border-top:5px solid #00897B;
+}
+
+/* Quick Actions */
+
+.quick-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+    gap:18px;
+    margin-bottom:35px;
+}
+
+.quick-grid button{
+    border:none;
+    border-radius:18px;
+    padding:22px;
+    background:linear-gradient(135deg,#1565C0,#0D47A1);
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:.35s;
+    box-shadow:0 8px 18px rgba(0,0,0,.12);
+}
+
+.quick-grid button:hover{
+    transform:translateY(-6px);
+    box-shadow:0 16px 28px rgba(0,0,0,.18);
+}
+
+/* Recent Section */
+
+.recent-section{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:22px;
+    margin-top:10px;
+}
+
+.recent-box{
+    background:#fff;
+    border-radius:18px;
+    padding:22px;
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+}
+
+.recent-box ul{
+    list-style:none;
+}
+
+.recent-box li{
+    padding:12px;
+    margin-bottom:10px;
+    background:#F6F9FE;
+    border-radius:10px;
+    transition:.3s;
+}
+
+.recent-box li:hover{
+    background:#E8F1FF;
+}
+
+/* Pending Area */
+
+#pendingSchoolArea{
+    min-height:180px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border:2px dashed #BFD7FF;
+    border-radius:12px;
+    color:#777;
+    font-weight:600;
+}
+
+/* Mobile */
+
+@media(max-width:900px){
+
+.recent-section{
+    grid-template-columns:1fr;
+}
+
+.dashboard-cards{
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+}
+
+.quick-grid{
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+}
+
+}
+/* ==========================================
+   VRRITTAM V2 - PART 2C
+   SCHOOL MANAGEMENT + POPUP
+========================================== */
+
+/* ==========================
+   School Management
+========================== */
+
+.school-management{
+    margin-top:40px;
+}
+
+.school-management h2{
+    color:#0D47A1;
+    font-size:28px;
+    margin-bottom:20px;
+}
+
+.toolbar{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.toolbar input{
+    flex:1;
+    padding:13px 18px;
+    border:1px solid #D7E3F4;
+    border-radius:12px;
+    outline:none;
+    font-size:15px;
+}
+
+.toolbar input:focus{
+    border-color:#1565C0;
+}
+
+.toolbar button{
+    background:linear-gradient(135deg,#1565C0,#0D47A1);
+    color:white;
+    border:none;
+    border-radius:12px;
+    padding:13px 20px;
+    cursor:pointer;
+    font-weight:bold;
+    transition:.30s;
+}
+
+.toolbar button:hover{
+    transform:translateY(-3px);
+}
+
+/* ==========================
+   Tables
+========================== */
+
+.table-card{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:22px;
+
+    margin-bottom:25px;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.08);
+
+}
+
+.table-card h3{
+
+    color:#1565C0;
+
+    margin-bottom:18px;
+
+}
+
+.table-card table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+.table-card thead{
+
+    background:#1565C0;
+
+    color:white;
+
+}
+
+.table-card th{
+
+    padding:15px;
+
+    text-align:left;
+
+    font-size:15px;
+
+}
+
+.table-card td{
+
+    padding:15px;
+
+    border-bottom:1px solid #EEF2F7;
+
+    font-size:14px;
+
+}
+
+.table-card tbody tr:hover{
+
+    background:#F6FAFF;
+
+}
+
+/* ==========================
+   Popup
+========================== */
+
+.popup{
+
+    display:none;
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:100%;
+
+    background:rgba(0,0,0,.45);
+
+    justify-content:center;
+
+    align-items:center;
+
+    z-index:9999;
+
+}
+
+.popup-content{
+
+    width:500px;
+
+    background:white;
+
+    border-radius:22px;
+
+    padding:30px;
+
+    box-shadow:0 20px 45px rgba(0,0,0,.25);
+
+}
+
+.popup-content h2{
+
+    color:#1565C0;
+
+    text-align:center;
+
+    margin-bottom:22px;
+
+}
+
+.popup-content input,
+
+.popup-content textarea{
+
+    width:100%;
+
+    padding:14px;
+
+    margin-bottom:14px;
+
+    border:1px solid #D9E2EF;
+
+    border-radius:12px;
+
+    outline:none;
+
+    font-size:15px;
+
+}
+
+.popup-content textarea{
+
+    resize:none;
+
+    height:90px;
+
+}
+
+.popup-buttons{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    margin-top:10px;
+
+}
+
+.popup-buttons button{
+
+    flex:1;
+
+    border:none;
+
+    border-radius:12px;
+
+    padding:14px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+    transition:.30s;
+
+}
+
+#saveSchool{
+
+    background:#1565C0;
+
+    color:white;
+
+}
+
+#cancelSchool{
+
+    background:#E53935;
+
+    color:white;
+
+}
+
+.popup-buttons button:hover{
+
+    transform:translateY(-2px);
+
+}
+
+/* ==========================
+   Mobile Responsive
+========================== */
+
+@media(max-width:900px){
+
+.toolbar{
+
+    flex-direction:column;
+
+}
+
+.toolbar button{
+
+    width:100%;
+
+}
+
+.table-card{
+
+    overflow-x:auto;
+
+}
+
+.popup-content{
+
+    width:92%;
+
+}
+
+}
+/* ==========================================
+   VRRITTAM V2
+   PART 3A
+   SCHOOL REGISTRATION
+========================================== */
+
+// =======================
+// Global Data
+// =======================
+
+let schools = [];
+let activities = [];
+
+// =======================
+// Popup
+// =======================
+
+function openSchoolPopup(){
+
+    document.getElementById("schoolPopup").style.display="flex";
+
+}
+
+function closeSchoolPopup(){
+
+    document.getElementById("schoolPopup").style.display="none";
+
+}
+
+// =======================
+// Register School
+// =======================
+
+document.getElementById("registerSchoolBtn").onclick=openSchoolPopup;
+
+document.getElementById("cancelSchool").onclick=closeSchoolPopup;
+
+document.getElementById("saveSchool").onclick=registerSchool;
+
+function registerSchool(){
+
+let schoolName=document.getElementById("schoolName").value.trim();
+
+let principal=document.getElementById("principalName").value.trim();
+
+let email=document.getElementById("schoolEmail").value.trim();
+
+let phone=document.getElementById("schoolPhone").value.trim();
+
+let address=document.getElementById("schoolAddress").value.trim();
+
+if(schoolName===""){
+
+alert("Enter School Name");
+
+return;
+
+}
+
+let school={
+
+name:schoolName,
+
+principal:principal,
+
+email:email,
+
+phone:phone,
+
+address:address,
+
+status:"Pending"
+
+};
+
+schools.push(school);
+
+updateCounters();
+
+updatePendingSchools();
+
+addActivity("🏫 "+schoolName+" registered.");
+
+clearSchoolForm();
+
+closeSchoolPopup();
+
+}
+
+// =======================
+// Dashboard Counters
+// =======================
+
+function updateCounters(){
+
+document.getElementById("schoolCount").innerHTML=schools.length;
+
+}
+
+// =======================
+// Pending School List
+// =======================
+
+function updatePendingSchools(){
+
+let html="";
+
+schools.forEach(function(s,index){
+
+if(s.status==="Pending"){
+
+html+=`
+
+<tr>
+
+<td>${s.name}</td>
+
+<td>${s.principal}</td>
+
+<td>${s.email}</td>
+
+<td>🟡 Pending</td>
+
+<td>
+
+<button onclick="approveSchool(${index})">
+
+Approve
+
+</button>
+
+</td>
+
+</tr>
+
+`;
+
+}
+
+});
+
+if(html===""){
+
+html=`
+
+<tr>
+
+<td colspan="5" style="text-align:center;">
+
+No Pending Schools
+
+</td>
+
+</tr>
+
+`;
+
+}
+
+document.getElementById("pendingSchools").innerHTML=html;
+
+}
+
+// =======================
+// Recent Activities
+// =======================
+
+function addActivity(text){
+
+activities.unshift(text);
+
+let html="";
+
+activities.forEach(function(a){
+
+html+=`<li>${a}</li>`;
+
+});
+
+document.getElementById("activityList").innerHTML=html;
+
+}
+
+// =======================
+// Clear Form
+// =======================
+
+function clearSchoolForm(){
+
+document.getElementById("schoolName").value="";
+
+document.getElementById("principalName").value="";
+
+document.getElementById("schoolEmail").value="";
+
+document.getElementById("schoolPhone").value="";
+
+document.getElementById("schoolAddress").value="";
+
+}
+/* ==========================================
+   VRRITTAM V2
+   PART 3B
+   SCHOOL APPROVAL
+========================================== */
+
+// Approved Schools
+
+let approvedSchools=[];
+
+// School Admin Accounts
+
+let schoolAdmins=[];
+
+// ===================================
+// Approve School
+// ===================================
+
+function approveSchool(index){
+
+schools[index].status="Approved";
+
+approvedSchools.push(schools[index]);
+
+createSchoolAdmin(schools[index]);
+
+updatePendingSchools();
+
+updateApprovedSchools();
+
+updateSchoolAdmins();
+
+addActivity("✅ "+schools[index].name+" approved.");
+
+}
+
+// ===================================
+// Auto School Admin
+// ===================================
+
+function createSchoolAdmin(school){
+
+let loginId=
+
+school.name
+
+.replace(/\s+/g,"")
+
+.toLowerCase()
+
++"admin";
+
+let password="VRR@123";
+
+schoolAdmins.push({
+
+school:school.name,
+
+admin:school.principal,
+
+login:loginId,
+
+password:password,
+
+status:"Active"
+
+});
+
+}
+
+// ===================================
+// Approved Schools Table
+// ===================================
+
+function updateApprovedSchools(){
+
+let html="";
+
+approvedSchools.forEach(function(s){
+
+html+=`
+
+<tr>
+
+<td>${s.name}</td>
+
+<td>${s.principal}</td>
+
+<td>${s.name.replace(/\s+/g,"").toLowerCase()}admin</td>
+
+<td>
+
+🟢 Approved
+
+</td>
+
+<td>
+
+Ready
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+if(html===""){
+
+html=`
+
+<tr>
+
+<td colspan="5"
+
+style="text-align:center;">
+
+No Approved Schools
+
+</td>
+
+</tr>
+
+`;
+
+}
+
+document.getElementById("approvedSchools").innerHTML=html;
+
+}
+
+// ===================================
+// School Admin Table
+// ===================================
+
+function updateSchoolAdmins(){
+
+let html="";
+
+schoolAdmins.forEach(function(a){
+
+html+=`
+
+<tr>
+
+<td>${a.admin}</td>
+
+<td>${a.school}</td>
+
+<td>${a.login}</td>
+
+<td>${a.password}</td>
+
+<td>
+
+🟢 Active
+
+</td>
+
+</tr>
+
+`;
+
+});
+
+if(html===""){
+
+html=`
+
+<tr>
+
+<td colspan="5"
+
+style="text-align:center;">
+
+No School Admin Accounts
+
+</td>
+
+</tr>
+
+`;
+
+}
+
+document.getElementById("schoolAdmins").innerHTML=html;
+
+}
+/* ==========================================
+   VRRITTAM V2
+   PART 3C
+   LOCAL STORAGE + SEARCH + DELETE
+========================================== */
+
+// =====================================
+// Save Data
+// =====================================
+
+function saveData(){
+
+localStorage.setItem("vrrittam_schools",JSON.stringify(schools));
+
+localStorage.setItem("vrrittam_approved",JSON.stringify(approvedSchools));
+
+localStorage.setItem("vrrittam_admins",JSON.stringify(schoolAdmins));
+
+localStorage.setItem("vrrittam_activity",JSON.stringify(activities));
+
+}
+
+// =====================================
+// Load Data
+// =====================================
+
+function loadData(){
+
+schools=JSON.parse(localStorage.getItem("vrrittam_schools"))||[];
+
+approvedSchools=JSON.parse(localStorage.getItem("vrrittam_approved"))||[];
+
+schoolAdmins=JSON.parse(localStorage.getItem("vrrittam_admins"))||[];
+
+activities=JSON.parse(localStorage.getItem("vrrittam_activity"))||[];
+
+updateCounters();
+
+updatePendingSchools();
+
+updateApprovedSchools();
+
+updateSchoolAdmins();
+
+let html="";
+
+activities.forEach(function(a){
+
+html+=`<li>${a}</li>`;
+
+});
+
+document.getElementById("activityList").innerHTML=html;
+
+}
+
+// =====================================
+// Override Register
+// =====================================
+
+const oldRegister=registerSchool;
+
+registerSchool=function(){
+
+oldRegister();
+
+saveData();
+
+}
+
+// =====================================
+// Override Approve
+// =====================================
+
+const oldApprove=approveSchool;
+
+approveSchool=function(index){
+
+oldApprove(index);
+
+saveData();
+
+}
+
+// =====================================
+// Search School
+// =====================================
+
+document.getElementById("searchSchool").addEventListener("keyup",function(){
+
+let key=this.value.toLowerCase();
+
+let rows=document.querySelectorAll("#approvedSchools tr");
+
+rows.forEach(function(r){
+
+if(r.innerText.toLowerCase().indexOf(key)>-1){
+
+r.style.display="";
+
+}else{
+
+r.style.display="none";
+
+}
+
+});
+
+});
+
+// =====================================
+// Delete School
+// =====================================
+
+function deleteSchool(index){
+
+if(confirm("Delete this school?")){
+
+approvedSchools.splice(index,1);
+
+saveData();
+
+updateApprovedSchools();
+
+updateSchoolAdmins();
+
+}
+
+}
+
+// =====================================
+// Load Automatically
+// =====================================
+
+window.onload=function(){
+
+loadData();
+
+}

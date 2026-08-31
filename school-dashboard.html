@@ -1,0 +1,3061 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VRRITTAM | School Admin Dashboard</title>
+
+<style>
+
+/* =====================================================
+   VRRITTAM SCHOOL ADMIN DASHBOARD V2.0
+===================================================== */
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#f4f7fb;
+    color:#1f2937;
+}
+
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.header{
+    height:72px;
+    background:#1769c2;
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 22px;
+    position:sticky;
+    top:0;
+    z-index:1000;
+}
+
+.logo-area{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo-area img{
+    width:46px;
+    height:46px;
+    object-fit:contain;
+    background:white;
+    border-radius:10px;
+    padding:3px;
+}
+
+.logo-title{
+    font-size:21px;
+    font-weight:bold;
+}
+
+.logo-subtitle{
+    font-size:11px;
+    opacity:.9;
+}
+
+.admin-area{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    font-size:13px;
+}
+
+.logout{
+    padding:9px 17px;
+    border:none;
+    border-radius:8px;
+    background:white;
+    color:#1769c2;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.logout:hover{
+    background:#eaf3ff;
+}
+
+
+/* =====================================================
+   LAYOUT
+===================================================== */
+
+.layout{
+    display:flex;
+    min-height:calc(100vh - 72px);
+}
+
+
+/* =====================================================
+   SIDEBAR
+===================================================== */
+
+.sidebar{
+    width:255px;
+    background:white;
+    border-right:1px solid #e2e8f0;
+    padding:18px 12px;
+    position:fixed;
+    top:72px;
+    bottom:0;
+    overflow-y:auto;
+}
+
+.sidebar-title{
+    font-size:11px;
+    color:#94a3b8;
+    font-weight:bold;
+    margin:5px 10px 12px;
+    letter-spacing:.5px;
+}
+
+.menu-item{
+    padding:12px 13px;
+    margin:3px 0;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:14px;
+    font-weight:600;
+    color:#475569;
+    transition:.2s;
+}
+
+.menu-item:hover{
+    background:#eef6ff;
+    color:#1769c2;
+}
+
+.menu-item.active{
+    background:#e1f0ff;
+    color:#1769c2;
+}
+
+.menu-divider{
+    height:1px;
+    background:#edf2f7;
+    margin:15px 8px;
+}
+
+
+/* =====================================================
+   CONTENT
+===================================================== */
+
+.content{
+    margin-left:255px;
+    width:calc(100% - 255px);
+    padding:24px;
+}
+
+.page{
+    display:none;
+}
+
+.page.active{
+    display:block;
+}
+
+.page-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:22px;
+}
+
+.page-header h1{
+    margin:0;
+    font-size:27px;
+    color:#1e3a5f;
+}
+
+.page-header p{
+    margin:6px 0 0;
+    color:#64748b;
+    font-size:13px;
+}
+
+.date-box{
+    background:white;
+    padding:10px 15px;
+    border-radius:8px;
+    box-shadow:0 2px 7px rgba(0,0,0,.06);
+    font-size:13px;
+}
+
+
+/* =====================================================
+   CARDS
+===================================================== */
+
+.card{
+    background:white;
+    border-radius:12px;
+    padding:20px;
+    box-shadow:0 2px 10px rgba(15,23,42,.06);
+    border:1px solid #edf2f7;
+}
+
+.card h3{
+    margin-top:0;
+    color:#334155;
+}
+
+
+/* =====================================================
+   STATISTICS
+===================================================== */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:16px;
+}
+
+.stat-card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    border:1px solid #edf2f7;
+    box-shadow:0 2px 10px rgba(15,23,42,.06);
+}
+
+.stat-icon{
+    font-size:26px;
+}
+
+.stat-title{
+    color:#64748b;
+    font-size:13px;
+    margin-top:10px;
+}
+
+.stat-value{
+    font-size:28px;
+    font-weight:bold;
+    color:#1e3a8a;
+    margin-top:7px;
+}
+
+.stat-note{
+    font-size:11px;
+    color:#94a3b8;
+    margin-top:5px;
+}
+
+
+/* =====================================================
+   GRID
+===================================================== */
+
+.grid-2{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:18px;
+    margin-top:18px;
+}
+
+.grid-3{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+
+/* =====================================================
+   PROGRESS
+===================================================== */
+
+.progress-row{
+    margin-bottom:18px;
+}
+
+.progress-label{
+    display:flex;
+    justify-content:space-between;
+    font-size:13px;
+    margin-bottom:7px;
+}
+
+.progress{
+    height:8px;
+    background:#e8edf3;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    height:100%;
+    background:#1769c2;
+}
+
+
+/* =====================================================
+   BUTTONS
+===================================================== */
+
+.btn{
+    padding:10px 16px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+    font-size:13px;
+}
+
+.btn-primary{
+    background:#1769c2;
+    color:white;
+}
+
+.btn-primary:hover{
+    background:#0d47a1;
+}
+
+.btn-success{
+    background:#16a34a;
+    color:white;
+}
+
+.btn-warning{
+    background:#f59e0b;
+    color:white;
+}
+
+.btn-danger{
+    background:#dc2626;
+    color:white;
+}
+
+.btn-light{
+    background:#eef6ff;
+    color:#1769c2;
+}
+
+
+/* =====================================================
+   TABLE
+===================================================== */
+
+.table-card{
+    margin-top:18px;
+    overflow:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+th{
+    background:#f1f5f9;
+    color:#475569;
+    text-align:left;
+    padding:12px;
+    font-size:13px;
+}
+
+td{
+    padding:12px;
+    border-bottom:1px solid #edf2f7;
+    font-size:13px;
+}
+
+tr:hover{
+    background:#fafcff;
+}
+
+
+/* =====================================================
+   FORM
+===================================================== */
+
+.form-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:15px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+}
+
+.form-group label{
+    font-size:12px;
+    font-weight:bold;
+    color:#475569;
+    margin-bottom:6px;
+}
+
+.form-group input,
+.form-group select{
+    padding:11px;
+    border:1px solid #dbe3ec;
+    border-radius:8px;
+    font-size:14px;
+    outline:none;
+}
+
+.form-group input:focus,
+.form-group select:focus{
+    border-color:#1769c2;
+}
+
+
+/* =====================================================
+   REMINDER
+===================================================== */
+
+.reminder{
+    padding:13px;
+    border-left:4px solid #f59e0b;
+    background:#fffbeb;
+    border-radius:6px;
+    margin-bottom:10px;
+    font-size:13px;
+}
+
+.reminder strong{
+    display:block;
+    margin-bottom:4px;
+}
+
+
+/* =====================================================
+   AI INSIGHT
+===================================================== */
+
+.ai-box{
+    margin-top:18px;
+    padding:18px;
+    background:linear-gradient(135deg,#eef6ff,#f8fbff);
+    border-left:5px solid #1769c2;
+    border-radius:10px;
+}
+
+.ai-box h3{
+    color:#1769c2;
+    margin:0 0 8px;
+}
+
+.ai-box p{
+    margin:0;
+    font-size:13px;
+    line-height:1.7;
+}
+
+
+/* =====================================================
+   QUICK ACTION
+===================================================== */
+
+.quick-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+}
+
+.quick-action{
+    padding:20px;
+    text-align:center;
+    background:#fff;
+    border:1px solid #e2e8f0;
+    border-radius:10px;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.quick-action:hover{
+    transform:translateY(-2px);
+    background:#f8fbff;
+}
+
+.quick-icon{
+    font-size:28px;
+}
+
+.quick-text{
+    margin-top:8px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+
+/* =====================================================
+   CHART
+===================================================== */
+
+.chart{
+    height:220px;
+    display:flex;
+    align-items:flex-end;
+    justify-content:space-around;
+    padding:20px 10px 0;
+    border-bottom:1px solid #dbe3ec;
+}
+
+.bar-wrap{
+    height:100%;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    align-items:center;
+    width:14%;
+}
+
+.bar{
+    width:55%;
+    background:#1769c2;
+    border-radius:6px 6px 0 0;
+}
+
+.bar-label{
+    font-size:11px;
+    color:#64748b;
+    margin-top:7px;
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.55);
+    z-index:2000;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:100%;
+    max-width:650px;
+    max-height:90vh;
+    overflow:auto;
+    background:white;
+    border-radius:15px;
+    padding:25px;
+    box-shadow:0 20px 60px rgba(0,0,0,.25);
+}
+
+.modal-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.modal-header h2{
+    margin:0;
+    color:#1e3a8a;
+}
+
+.close{
+    border:none;
+    background:#f1f5f9;
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:18px;
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+.toast{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    background:#0f172a;
+    color:white;
+    padding:13px 18px;
+    border-radius:8px;
+    display:none;
+    z-index:3000;
+    font-size:13px;
+}
+
+.toast.show{
+    display:block;
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media(max-width:1000px){
+
+    .stats{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .grid-2{
+        grid-template-columns:1fr;
+    }
+
+    .quick-grid{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+}
+
+@media(max-width:700px){
+
+    .sidebar{
+        width:210px;
+    }
+
+    .content{
+        margin-left:210px;
+        width:calc(100% - 210px);
+        padding:14px;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .admin-area{
+        display:none;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="header">
+
+<div class="logo-area">
+
+<img src="assets/vrrittam-logo.png"
+     alt="VRRITTAM Logo">
+
+<div>
+
+<div class="logo-title">
+VRRITTAM
+</div>
+
+<div class="logo-subtitle">
+Education Copilot
+</div>
+
+<div class="logo-subtitle">
+VRRITTAM Demo School
+</div>
+
+</div>
+
+</div>
+
+
+<div class="admin-area">
+
+<div>
+
+<strong>School Administrator</strong><br>
+<span>VRRITTAM Demo School</span>
+
+</div>
+
+<button class="logout"
+        onclick="logout()">
+
+Logout
+
+</button>
+
+</div>
+
+</header>
+
+
+
+<!-- =====================================================
+     LAYOUT
+===================================================== -->
+
+<div class="layout">
+
+
+<!-- =====================================================
+     SIDEBAR
+===================================================== -->
+
+<aside class="sidebar">
+
+<div class="sidebar-title">
+SCHOOL ADMINISTRATION
+</div>
+
+
+<div class="menu-item active"
+     onclick="showPage('dashboard',this)">
+
+🏠 Dashboard
+
+</div>
+
+
+<div class="menu-item"
+     onclick="showPage('school',this)">
+
+🏫 School Profile
+
+</div>
+
+
+<div class="menu-item"
+     onclick="showPage('students',this)">
+
+🎓 Students
+
+</div>
+
+
+<div class="menu-item"
+     onclick="showPage('teachers',this)">
+
+👩‍🏫 Teachers
+
+</div>
+
+
+<div class="menu-item"
+     onclick="showPage('attendance',this)">
+
+📅 Attendance
+
+</div>
+
+
+<div class="menu-item"
+     onclick="showPage('homework',this)">
+
+📚 Homework
+
+</div>
+
+
+<div class="menu-item"
+     onclick="showPage('marks',this)">
+
+📝 Examination & Marks
+
+</div>
+
+
+<div class="menu-item"
+     onclick="showPage('performance',this)">
+
+📈 Performance
+
+</div>
+
+
+<div class="menu-item"
+     onclick="showPage('fees',this)">
+
+💰 Fee Management
+
+</div>
+
+
+<div class="menu-item"
+     onclick="showPage('reports',this)">
+
+📊 Reports & Analytics
+
+</div>
+
+
+<div class="menu-divider"></div>
+
+
+<div class="menu-item"
+     onclick="showPage('settings',this)">
+
+⚙️ School Settings
+
+</div>
+
+
+<div class="menu-item"
+     onclick="showPage('ai',this)">
+
+🤖 VRRITTAM AI Insight
+
+</div>
+
+</aside>
+
+
+
+<!-- =====================================================
+     CONTENT
+===================================================== -->
+
+<main class="content">
+
+
+<!-- =====================================================
+     DASHBOARD
+===================================================== -->
+
+<section id="dashboard"
+         class="page active">
+
+<div class="page-header">
+
+<div>
+
+<h1>School Dashboard</h1>
+
+<p>
+Real-time academic and administrative overview
+</p>
+
+</div>
+
+<div class="date-box"
+     id="currentDate">
+Loading...
+</div>
+
+</div>
+
+
+<div class="stats">
+
+
+<div class="stat-card">
+
+<div class="stat-icon">🎓</div>
+
+<div class="stat-title">
+Students
+</div>
+
+<div class="stat-value"
+     id="studentCount">
+0
+</div>
+
+<div class="stat-note">
+Active students
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-icon">👩‍🏫</div>
+
+<div class="stat-title">
+Teachers
+</div>
+
+<div class="stat-value"
+     id="teacherCount">
+0
+</div>
+
+<div class="stat-note">
+Teaching staff
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-icon">📅</div>
+
+<div class="stat-title">
+Attendance
+</div>
+
+<div class="stat-value">
+92%
+</div>
+
+<div class="stat-note">
+Current average
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-icon">💰</div>
+
+<div class="stat-title">
+Fee Pending
+</div>
+
+<div class="stat-value">
+₹15,000
+</div>
+
+<div class="stat-note">
+Outstanding
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="grid-2">
+
+
+<div class="card">
+
+<h3>
+📊 Academic Health
+</h3>
+
+
+<div class="progress-row">
+
+<div class="progress-label">
+<span>Attendance</span>
+<strong>92%</strong>
+</div>
+
+<div class="progress">
+<div class="progress-bar"
+     style="width:92%">
+</div>
+</div>
+
+</div>
+
+
+<div class="progress-row">
+
+<div class="progress-label">
+<span>Academic Average</span>
+<strong>79%</strong>
+</div>
+
+<div class="progress">
+<div class="progress-bar"
+     style="width:79%">
+</div>
+</div>
+
+</div>
+
+
+<div class="progress-row">
+
+<div class="progress-label">
+<span>Homework Completion</span>
+<strong>75%</strong>
+</div>
+
+<div class="progress">
+<div class="progress-bar"
+     style="width:75%">
+</div>
+</div>
+
+</div>
+
+
+<div class="progress-row">
+
+<div class="progress-label">
+<span>Fee Collection</span>
+<strong>75%</strong>
+</div>
+
+<div class="progress">
+<div class="progress-bar"
+     style="width:75%">
+</div>
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="card">
+
+<h3>🔔 Action Centre</h3>
+
+<div class="reminder">
+
+<strong>Homework Attention</strong>
+
+8 homework submissions need review.
+
+</div>
+
+
+<div class="reminder">
+
+<strong>Fee Collection</strong>
+
+₹15,000 is currently pending.
+
+</div>
+
+
+<div class="reminder">
+
+<strong>Attendance</strong>
+
+Class 8 attendance requires attention.
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="card"
+     style="margin-top:18px;">
+
+<h3>⚡ Quick Actions</h3>
+
+
+<div class="quick-grid">
+
+
+<div class="quick-action"
+     onclick="showPageById('students')">
+
+<div class="quick-icon">🎓</div>
+<div class="quick-text">Manage Students</div>
+
+</div>
+
+
+<div class="quick-action"
+     onclick="showPageById('teachers')">
+
+<div class="quick-icon">👩‍🏫</div>
+<div class="quick-text">Manage Teachers</div>
+
+</div>
+
+
+<div class="quick-action"
+     onclick="showPageById('fees')">
+
+<div class="quick-icon">💰</div>
+<div class="quick-text">Manage Fees</div>
+
+</div>
+
+
+<div class="quick-action"
+     onclick="showPageById('reports')">
+
+<div class="quick-icon">📊</div>
+<div class="quick-text">View Reports</div>
+
+</div>
+
+</div>
+
+</div>
+
+
+
+<div class="ai-box">
+
+<h3>🤖 VRRITTAM AI School Insight</h3>
+
+<p>
+
+VRRITTAM AI has identified three areas requiring
+administrative attention: homework completion,
+fee collection and Class 8 attendance.
+
+The School Administrator can review each area
+and take action from the dashboard.
+
+</p>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SCHOOL PROFILE
+===================================================== -->
+
+<section id="school"
+         class="page">
+
+<div class="page-header">
+
+<div>
+
+<h1>🏫 School Profile</h1>
+
+<p>Manage your institution information</p>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>School Name</label>
+
+<input id="schoolName"
+       value="VRRITTAM Demo School">
+
+</div>
+
+
+<div class="form-group">
+
+<label>School Code</label>
+
+<input id="schoolCode"
+       value="VRR-001">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Principal Name</label>
+
+<input id="principalName"
+       value="Demo Principal">
+
+</div>
+
+
+<div class="form-group">
+
+<label>School Email</label>
+
+<input id="schoolEmail"
+       value="admin@vrrittam.school">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Phone</label>
+
+<input id="schoolPhone"
+       value="+91 98765 43210">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Academic Board</label>
+
+<select id="schoolBoard">
+
+<option>CBSE</option>
+<option>State Board</option>
+<option>ICSE</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<br>
+
+<button class="btn btn-primary"
+        onclick="saveSchoolProfile()">
+
+💾 Save School Profile
+
+</button>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     STUDENTS
+===================================================== -->
+
+<section id="students"
+         class="page">
+
+<div class="page-header">
+
+<div>
+
+<h1>🎓 Student Management</h1>
+
+<p>Manage students and academic records</p>
+
+</div>
+
+<button class="btn btn-primary"
+        onclick="openAddStudentModal()">
+
++ Add Student
+
+</button>
+
+</div>
+
+
+<div class="card">
+
+<input id="studentSearch"
+       placeholder="Search student..."
+       onkeyup="renderStudents()"
+       style="width:100%;padding:12px;border:1px solid #dbe3ec;border-radius:8px;">
+
+</div>
+
+
+<div class="card table-card">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Name</th>
+<th>Class</th>
+<th>Section</th>
+<th>Attendance</th>
+<th>Status</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="studentTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     TEACHERS
+===================================================== -->
+
+<section id="teachers"
+         class="page">
+
+<div class="page-header">
+
+<div>
+
+<h1>👩‍🏫 Teacher Management</h1>
+
+<p>Manage teaching staff and responsibilities</p>
+
+</div>
+
+<button class="btn btn-primary"
+        onclick="openAddTeacherModal()">
+
++ Add Teacher
+
+</button>
+
+</div>
+
+
+<div class="card table-card">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>Name</th>
+<th>Subject</th>
+<th>Type</th>
+<th>Classes</th>
+<th>Status</th>
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody id="teacherTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     ATTENDANCE
+===================================================== -->
+
+<section id="attendance"
+         class="page">
+
+<div class="page-header">
+
+<div>
+
+<h1>📅 Attendance Management</h1>
+
+<p>School-wide attendance monitoring</p>
+
+</div>
+
+</div>
+
+
+<div class="grid-3">
+
+
+<div class="stat-card">
+
+<div class="stat-title">
+Today's Attendance
+</div>
+
+<div class="stat-value">
+92%
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-title">
+Present
+</div>
+
+<div class="stat-value">
+184
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-title">
+Absent
+</div>
+
+<div class="stat-value">
+16
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card"
+     style="margin-top:18px;">
+
+<h3>Class Attendance</h3>
+
+<div class="chart">
+
+<div class="bar-wrap">
+<div class="bar" style="height:90%"></div>
+<div class="bar-label">6</div>
+</div>
+
+<div class="bar-wrap">
+<div class="bar" style="height:84%"></div>
+<div class="bar-label">7</div>
+</div>
+
+<div class="bar-wrap">
+<div class="bar" style="height:70%"></div>
+<div class="bar-label">8</div>
+</div>
+
+<div class="bar-wrap">
+<div class="bar" style="height:93%"></div>
+<div class="bar-label">9</div>
+</div>
+
+<div class="bar-wrap">
+<div class="bar" style="height:88%"></div>
+<div class="bar-label">10</div>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     HOMEWORK
+===================================================== -->
+
+<section id="homework"
+         class="page">
+
+<div class="page-header">
+
+<div>
+
+<h1>📚 Homework Overview</h1>
+
+<p>Monitor homework completion across classes</p>
+
+</div>
+
+</div>
+
+
+<div class="grid-3">
+
+<div class="stat-card">
+
+<div class="stat-title">
+Published
+</div>
+
+<div class="stat-value">
+24
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-title">
+Completed
+</div>
+
+<div class="stat-value">
+75%
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-title">
+Pending Review
+</div>
+
+<div class="stat-value">
+8
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card"
+     style="margin-top:18px;">
+
+<h3>Homework Status</h3>
+
+<div class="progress-row">
+
+<div class="progress-label">
+
+<span>Class 8</span>
+
+<strong>68%</strong>
+
+</div>
+
+<div class="progress">
+
+<div class="progress-bar"
+     style="width:68%">
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="progress-row">
+
+<div class="progress-label">
+
+<span>Class 9</span>
+
+<strong>81%</strong>
+
+</div>
+
+<div class="progress">
+
+<div class="progress-bar"
+     style="width:81%">
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="progress-row">
+
+<div class="progress-label">
+
+<span>Class 10</span>
+
+<strong>76%</strong>
+
+</div>
+
+<div class="progress">
+
+<div class="progress-bar"
+     style="width:76%">
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     MARKS
+===================================================== -->
+
+<section id="marks"
+         class="page">
+
+<div class="page-header">
+
+<div>
+
+<h1>📝 Examination & Marks</h1>
+
+<p>Academic performance overview</p>
+
+</div>
+
+</div>
+
+
+<div class="grid-3">
+
+<div class="stat-card">
+
+<div class="stat-title">
+Average Score
+</div>
+
+<div class="stat-value">
+79%
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-title">
+Top Performing Class
+</div>
+
+<div class="stat-value">
+10-A
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-title">
+Students Requiring Support
+</div>
+
+<div class="stat-value">
+6
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card"
+     style="margin-top:18px;">
+
+<h3>Subject Performance</h3>
+
+<div class="progress-row">
+
+<div class="progress-label">
+<span>Mathematics</span>
+<strong>76%</strong>
+</div>
+
+<div class="progress">
+<div class="progress-bar"
+     style="width:76%">
+</div>
+</div>
+
+</div>
+
+
+<div class="progress-row">
+
+<div class="progress-label">
+<span>Science</span>
+<strong>82%</strong>
+</div>
+
+<div class="progress">
+<div class="progress-bar"
+     style="width:82%">
+</div>
+</div>
+
+</div>
+
+
+<div class="progress-row">
+
+<div class="progress-label">
+<span>English</span>
+<strong>79%</strong>
+</div>
+
+<div class="progress">
+<div class="progress-bar"
+     style="width:79%">
+</div>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     PERFORMANCE
+===================================================== -->
+
+<section id="performance"
+         class="page">
+
+<div class="page-header">
+
+<div>
+
+<h1>📈 School Performance</h1>
+
+<p>Academic intelligence and intervention overview</p>
+
+</div>
+
+</div>
+
+
+<div class="grid-2">
+
+
+<div class="card">
+
+<h3>Academic Performance</h3>
+
+<div class="chart">
+
+<div class="bar-wrap">
+<div class="bar" style="height:65%"></div>
+<div class="bar-label">Term 1</div>
+</div>
+
+<div class="bar-wrap">
+<div class="bar" style="height:72%"></div>
+<div class="bar-label">Term 2</div>
+</div>
+
+<div class="bar-wrap">
+<div class="bar" style="height:79%"></div>
+<div class="bar-label">Term 3</div>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<h3>AI Recommendation</h3>
+
+<p style="font-size:14px;line-height:1.7;">
+
+Class 8 Mathematics shows a learning gap.
+Teachers should provide additional practice
+on fractions and foundational arithmetic.
+
+</p>
+
+<button class="btn btn-primary"
+        onclick="showPageById('ai')">
+
+View AI Action
+
+</button>
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     FEES
+===================================================== -->
+
+<section id="fees"
+         class="page">
+
+<div class="page-header">
+
+<div>
+
+<h1>💰 Fee Management</h1>
+
+<p>Monitor collection and outstanding payments</p>
+
+</div>
+
+</div>
+
+
+<div class="grid-3">
+
+<div class="stat-card">
+
+<div class="stat-title">
+Total Fee
+</div>
+
+<div class="stat-value">
+₹60,000
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-title">
+Collected
+</div>
+
+<div class="stat-value">
+₹45,000
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-title">
+Pending
+</div>
+
+<div class="stat-value">
+₹15,000
+</div>
+
+</div>
+
+</div>
+
+
+<div class="card"
+     style="margin-top:18px;">
+
+<h3>Fee Collection Progress</h3>
+
+<div class="progress">
+
+<div class="progress-bar"
+     style="width:75%">
+
+</div>
+
+</div>
+
+<p style="font-size:13px;">
+75% of the current fee cycle has been collected.
+</p>
+
+<button class="btn btn-primary"
+        onclick="showToast('Fee collection screen ready for demo use.')">
+
+Manage Collection
+
+</button>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     REPORTS
+===================================================== -->
+
+<section id="reports"
+         class="page">
+
+<div class="page-header">
+
+<div>
+
+<h1>📊 Reports & Analytics</h1>
+
+<p>School-wide management intelligence</p>
+
+</div>
+
+</div>
+
+
+<div class="grid-3">
+
+<div class="card">
+
+<h3>Academic Report</h3>
+
+<p>79% school academic average.</p>
+
+<button class="btn btn-primary"
+        onclick="showToast('Academic report generated for demo.')">
+
+Generate
+
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>Attendance Report</h3>
+
+<p>92% current attendance.</p>
+
+<button class="btn btn-primary"
+        onclick="showToast('Attendance report generated for demo.')">
+
+Generate
+
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>Fee Report</h3>
+
+<p>₹15,000 outstanding.</p>
+
+<button class="btn btn-primary"
+        onclick="showToast('Fee report generated for demo.')">
+
+Generate
+
+</button>
+
+</div>
+
+</div>
+
+
+<div class="card"
+     style="margin-top:18px;">
+
+<h3>School KPI Summary</h3>
+
+<table>
+
+<tr>
+<th>KPI</th>
+<th>Current</th>
+<th>Status</th>
+</tr>
+
+<tr>
+<td>Attendance</td>
+<td>92%</td>
+<td>Good</td>
+</tr>
+
+<tr>
+<td>Academic Average</td>
+<td>79%</td>
+<td>Good</td>
+</tr>
+
+<tr>
+<td>Homework</td>
+<td>75%</td>
+<td>Needs Attention</td>
+</tr>
+
+<tr>
+<td>Fee Collection</td>
+<td>75%</td>
+<td>Needs Attention</td>
+</tr>
+
+</table>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SETTINGS
+===================================================== -->
+
+<section id="settings"
+         class="page">
+
+<div class="page-header">
+
+<div>
+
+<h1>⚙️ School Settings</h1>
+
+<p>Configure school operations</p>
+
+</div>
+
+</div>
+
+
+<div class="card">
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>Academic Year</label>
+
+<select id="academicYear">
+
+<option>2026 - 2027</option>
+<option>2027 - 2028</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Default Language</label>
+
+<select id="defaultLanguage">
+
+<option>English</option>
+<option>Tamil</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>School Working Days</label>
+
+<input value="220">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Attendance Threshold %</label>
+
+<input value="75">
+
+</div>
+
+</div>
+
+<br>
+
+<button class="btn btn-primary"
+        onclick="saveSettings()">
+
+💾 Save Settings
+
+</button>
+
+</div>
+
+</section>
+
+
+
+<!-- =====================================================
+     AI
+===================================================== -->
+
+<section id="ai"
+         class="page">
+
+<div class="page-header">
+
+<div>
+
+<h1>🤖 VRRITTAM AI School Intelligence</h1>
+
+<p>Decision-support layer for School Administration</p>
+
+</div>
+
+</div>
+
+
+<div class="grid-3">
+
+<div class="card">
+
+<h3>🔴 Learning Gap</h3>
+
+<p>
+
+Class 8 Mathematics requires additional
+fraction practice.
+
+</p>
+
+<button class="btn btn-primary"
+        onclick="showToast('AI intervention recommendation opened.')">
+
+Review
+
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>🟡 Attendance Alert</h3>
+
+<p>
+
+Class 8 attendance is below the school's
+preferred level.
+
+</p>
+
+<button class="btn btn-primary"
+        onclick="showPageById('attendance')">
+
+Review
+
+</button>
+
+</div>
+
+
+<div class="card">
+
+<h3>🟠 Homework Alert</h3>
+
+<p>
+
+Homework completion needs administrative
+attention.
+
+</p>
+
+<button class="btn btn-primary"
+        onclick="showPageById('homework')">
+
+Review
+
+</button>
+
+</div>
+
+</div>
+
+
+<div class="ai-box">
+
+<h3>VRRITTAM AI Recommendation</h3>
+
+<p>
+
+Based on the current school-level demo data,
+VRRITTAM recommends:
+
+<br><br>
+
+<strong>1.</strong> Provide additional Class 8
+fraction practice.
+
+<br>
+
+<strong>2.</strong> Review Class 8 attendance.
+
+<br>
+
+<strong>3.</strong> Follow up on pending homework.
+
+<br>
+
+<strong>4.</strong> Review pending fee collection.
+
+</p>
+
+</div>
+
+</section>
+
+
+</main>
+
+</div>
+
+
+
+<!-- =====================================================
+     ADD STUDENT MODAL
+===================================================== -->
+
+<div id="studentModal"
+     class="modal">
+
+<div class="modal-box">
+
+<div class="modal-header">
+
+<h2>Add Student</h2>
+
+<button class="close"
+        onclick="closeModal('studentModal')">
+
+×
+
+</button>
+
+</div>
+
+<br>
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>Student Name</label>
+
+<input id="newStudentName">
+
+</div>
+
+<div class="form-group">
+
+<label>Class</label>
+
+<select id="newStudentClass">
+
+<option>6</option>
+<option>7</option>
+<option>8</option>
+<option>9</option>
+<option>10</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Section</label>
+
+<input id="newStudentSection"
+       value="A">
+
+</div>
+
+<div class="form-group">
+
+<label>Attendance</label>
+
+<input id="newStudentAttendance"
+       value="92">
+
+</div>
+
+</div>
+
+<br>
+
+<button class="btn btn-primary"
+        onclick="addStudent()">
+
+Save Student
+
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- =====================================================
+     ADD TEACHER MODAL
+===================================================== -->
+
+<div id="teacherModal"
+     class="modal">
+
+<div class="modal-box">
+
+<div class="modal-header">
+
+<h2>Add Teacher</h2>
+
+<button class="close"
+        onclick="closeModal('teacherModal')">
+
+×
+
+</button>
+
+</div>
+
+<br>
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>Teacher Name</label>
+
+<input id="newTeacherName">
+
+</div>
+
+<div class="form-group">
+
+<label>Subject</label>
+
+<input id="newTeacherSubject"
+       value="Mathematics">
+
+</div>
+
+<div class="form-group">
+
+<label>Teacher Type</label>
+
+<select id="newTeacherType">
+
+<option>Permanent</option>
+<option>Temporary</option>
+<option>Deputation</option>
+
+</select>
+
+</div>
+
+<div class="form-group">
+
+<label>Classes</label>
+
+<input id="newTeacherClasses"
+       value="8">
+
+</div>
+
+</div>
+
+<br>
+
+<button class="btn btn-primary"
+        onclick="addTeacher()">
+
+Save Teacher
+
+</button>
+
+</div>
+
+</div>
+
+
+
+<div id="toast"
+     class="toast">
+
+</div>
+
+
+
+<script>
+
+/* =====================================================
+   DEMO DATABASE
+   localStorage = browser demo backend
+===================================================== */
+
+let students =
+JSON.parse(
+localStorage.getItem("vrrittamStudents")
+) || [
+
+{
+name:"Arun Kumar",
+className:"8",
+section:"A",
+attendance:92,
+status:"Active"
+}
+
+];
+
+
+let teachers =
+JSON.parse(
+localStorage.getItem("vrrittamTeachers")
+) || [
+
+{
+name:"WinjoSys Teacher",
+subject:"Mathematics",
+type:"Permanent",
+classes:"8",
+status:"Active"
+},
+
+{
+name:"Demo Science Teacher",
+subject:"Science",
+type:"Permanent",
+classes:"8,9",
+status:"Active"
+},
+
+{
+name:"English Teacher",
+subject:"English",
+type:"Permanent",
+classes:"8,10",
+status:"Active"
+},
+
+{
+name:"Social Science Teacher",
+subject:"Social Science",
+type:"Temporary",
+classes:"8",
+status:"Active"
+}
+
+];
+
+
+/* =====================================================
+   PAGE NAVIGATION
+===================================================== */
+
+function showPage(id,element){
+
+    document
+    .querySelectorAll(".page")
+    .forEach(
+        p => p.classList.remove("active")
+    );
+
+    const page =
+        document.getElementById(id);
+
+    if(page){
+        page.classList.add("active");
+    }
+
+
+    document
+    .querySelectorAll(".menu-item")
+    .forEach(
+        m => m.classList.remove("active")
+    );
+
+    if(element){
+        element.classList.add("active");
+    }
+
+
+    if(id === "students"){
+        renderStudents();
+    }
+
+    if(id === "teachers"){
+        renderTeachers();
+    }
+
+    window.scrollTo({
+        top:0,
+        behavior:"smooth"
+    });
+
+}
+
+
+function showPageById(id){
+
+    const menuItems =
+        document.querySelectorAll(".menu-item");
+
+    let target = null;
+
+    menuItems.forEach(item => {
+
+        const text =
+            item.textContent.toLowerCase();
+
+        if(
+            (id==="students" && text.includes("students")) ||
+            (id==="teachers" && text.includes("teachers")) ||
+            (id==="attendance" && text.includes("attendance")) ||
+            (id==="homework" && text.includes("homework")) ||
+            (id==="marks" && text.includes("marks")) ||
+            (id==="performance" && text.includes("performance")) ||
+            (id==="fees" && text.includes("fee management")) ||
+            (id==="reports" && text.includes("reports")) ||
+            (id==="ai" && text.includes("ai insight")) ||
+            (id==="settings" && text.includes("settings"))
+        ){
+            target = item;
+        }
+
+    });
+
+    showPage(id,target);
+
+}
+
+
+/* =====================================================
+   STUDENTS
+===================================================== */
+
+function renderStudents(){
+
+    const table =
+        document.getElementById("studentTable");
+
+    const search =
+        document
+        .getElementById("studentSearch")
+        ?.value
+        .toLowerCase() || "";
+
+
+    table.innerHTML = "";
+
+
+    students
+    .filter(
+        s =>
+        s.name.toLowerCase()
+        .includes(search)
+    )
+    .forEach(
+        (student,index) => {
+
+        table.innerHTML += `
+
+        <tr>
+
+        <td>
+        <strong>${student.name}</strong>
+        </td>
+
+        <td>
+        ${student.className}
+        </td>
+
+        <td>
+        ${student.section}
+        </td>
+
+        <td>
+        ${student.attendance}%
+        </td>
+
+        <td>
+        <span style="color:#16a34a;font-weight:bold;">
+        ${student.status}
+        </span>
+        </td>
+
+        <td>
+
+        <button
+        class="btn btn-light"
+        onclick="viewStudent(${index})">
+
+        View
+
+        </button>
+
+        </td>
+
+        </tr>
+
+        `;
+
+    });
+
+
+    document
+    .getElementById("studentCount")
+    .textContent =
+    students.length;
+
+}
+
+
+function openAddStudentModal(){
+
+    document
+    .getElementById("studentModal")
+    .classList.add("show");
+
+}
+
+
+function addStudent(){
+
+    const name =
+        document
+        .getElementById("newStudentName")
+        .value
+        .trim();
+
+    if(!name){
+
+        showToast(
+            "Please enter student name."
+        );
+
+        return;
+
+    }
+
+
+    students.push({
+
+        name:name,
+
+        className:
+        document
+        .getElementById("newStudentClass")
+        .value,
+
+        section:
+        document
+        .getElementById("newStudentSection")
+        .value,
+
+        attendance:
+        document
+        .getElementById("newStudentAttendance")
+        .value,
+
+        status:"Active"
+
+    });
+
+
+    localStorage.setItem(
+        "vrrittamStudents",
+        JSON.stringify(students)
+    );
+
+
+    closeModal("studentModal");
+
+    renderStudents();
+
+    showToast(
+        "Student added successfully."
+    );
+
+}
+
+
+function viewStudent(index){
+
+    const student =
+        students[index];
+
+    showToast(
+        student.name
+        + " | Class "
+        + student.className
+        + " | Attendance "
+        + student.attendance
+        + "%"
+    );
+
+}
+
+
+/* =====================================================
+   TEACHERS
+===================================================== */
+
+function renderTeachers(){
+
+    const table =
+        document.getElementById("teacherTable");
+
+    table.innerHTML = "";
+
+
+    teachers.forEach(
+        (teacher,index) => {
+
+        table.innerHTML += `
+
+        <tr>
+
+        <td>
+        <strong>${teacher.name}</strong>
+        </td>
+
+        <td>
+        ${teacher.subject}
+        </td>
+
+        <td>
+        ${teacher.type}
+        </td>
+
+        <td>
+        ${teacher.classes}
+        </td>
+
+        <td>
+        <span style="color:#16a34a;font-weight:bold;">
+        ${teacher.status}
+        </span>
+        </td>
+
+        <td>
+
+        <button
+        class="btn btn-light"
+        onclick="viewTeacher(${index})">
+
+        View
+
+        </button>
+
+        </td>
+
+        </tr>
+
+        `;
+
+    });
+
+
+    document
+    .getElementById("teacherCount")
+    .textContent =
+    teachers.length;
+
+}
+
+
+function openAddTeacherModal(){
+
+    document
+    .getElementById("teacherModal")
+    .classList.add("show");
+
+}
+
+
+function addTeacher(){
+
+    const name =
+        document
+        .getElementById("newTeacherName")
+        .value
+        .trim();
+
+
+    if(!name){
+
+        showToast(
+            "Please enter teacher name."
+        );
+
+        return;
+
+    }
+
+
+    teachers.push({
+
+        name:name,
+
+        subject:
+        document
+        .getElementById("newTeacherSubject")
+        .value,
+
+        type:
+        document
+        .getElementById("newTeacherType")
+        .value,
+
+        classes:
+        document
+        .getElementById("newTeacherClasses")
+        .value,
+
+        status:"Active"
+
+    });
+
+
+    localStorage.setItem(
+        "vrrittamTeachers",
+        JSON.stringify(teachers)
+    );
+
+
+    closeModal("teacherModal");
+
+    renderTeachers();
+
+    showToast(
+        "Teacher added successfully."
+    );
+
+}
+
+
+function viewTeacher(index){
+
+    const teacher =
+        teachers[index];
+
+    showToast(
+        teacher.name
+        + " | "
+        + teacher.subject
+        + " | "
+        + teacher.type
+    );
+
+}
+
+
+/* =====================================================
+   SCHOOL PROFILE
+===================================================== */
+
+function saveSchoolProfile(){
+
+    const data = {
+
+        name:
+        document
+        .getElementById("schoolName")
+        .value,
+
+        code:
+        document
+        .getElementById("schoolCode")
+        .value,
+
+        principal:
+        document
+        .getElementById("principalName")
+        .value,
+
+        email:
+        document
+        .getElementById("schoolEmail")
+        .value,
+
+        phone:
+        document
+        .getElementById("schoolPhone")
+        .value,
+
+        board:
+        document
+        .getElementById("schoolBoard")
+        .value
+
+    };
+
+
+    localStorage.setItem(
+        "vrrittamSchoolProfile",
+        JSON.stringify(data)
+    );
+
+
+    showToast(
+        "School profile saved successfully."
+    );
+
+}
+
+
+/* =====================================================
+   SETTINGS
+===================================================== */
+
+function saveSettings(){
+
+    const settings = {
+
+        academicYear:
+        document
+        .getElementById("academicYear")
+        .value,
+
+        language:
+        document
+        .getElementById("defaultLanguage")
+        .value
+
+    };
+
+
+    localStorage.setItem(
+        "vrrittamSettings",
+        JSON.stringify(settings)
+    );
+
+
+    showToast(
+        "School settings saved successfully."
+    );
+
+}
+
+
+/* =====================================================
+   MODAL
+===================================================== */
+
+function closeModal(id){
+
+    document
+    .getElementById(id)
+    .classList.remove("show");
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+function showToast(message){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent =
+        message;
+
+    toast.classList.add("show");
+
+
+    setTimeout(
+        function(){
+
+            toast.classList.remove("show");
+
+        },
+        2500
+    );
+
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+function logout(){
+
+    if(
+        confirm(
+            "Are you sure you want to logout?"
+        )
+    ){
+
+        window.location.href =
+            "login.html";
+
+    }
+
+}
+
+
+/* =====================================================
+   DATE
+===================================================== */
+
+function showDate(){
+
+    const date =
+        new Date();
+
+    document
+    .getElementById("currentDate")
+    .textContent =
+    date.toLocaleDateString(
+        "en-IN",
+        {
+            day:"2-digit",
+            month:"short",
+            year:"numeric"
+        }
+    );
+
+}
+
+
+/* =====================================================
+   STARTUP
+===================================================== */
+
+showDate();
+
+renderStudents();
+
+renderTeachers();
+
+console.log(
+    "VRRITTAM School Admin Dashboard V2.0 Ready"
+);
+
+</script>
+
+
+</body>
+
+</html>

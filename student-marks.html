@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="ta">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Marks</title>
+
+
+<style>
+
+body{
+font-family:Arial,sans-serif;
+background:#eef5ff;
+margin:0;
+}
+
+header{
+background:#1565C0;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.container{
+padding:30px;
+}
+
+.card{
+background:white;
+padding:25px;
+border-radius:12px;
+box-shadow:0 4px 10px rgba(0,0,0,.15);
+max-width:700px;
+margin:auto;
+}
+
+table{
+width:100%;
+border-collapse:collapse;
+margin-top:20px;
+}
+
+table,th,td{
+border:1px solid #ccc;
+}
+
+th{
+background:#1565C0;
+color:white;
+}
+
+th,td{
+padding:12px;
+text-align:center;
+}
+
+button{
+margin-top:20px;
+padding:12px 20px;
+background:#1565C0;
+color:white;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-size:16px;
+}
+
+button:hover{
+background:#0D47A1;
+}
+
+.average{
+margin-top:20px;
+padding:15px;
+background:#f5f9ff;
+border-radius:8px;
+text-align:center;
+font-weight:bold;
+color:#003366;
+}
+
+.ai-box{
+margin-top:20px;
+padding:15px;
+background:#f5f9ff;
+border-left:5px solid #1565C0;
+border-radius:8px;
+}
+
+.ai-box h3{
+color:#1565C0;
+margin-top:0;
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<h1>
+📊 Marks
+</h1>
+
+<p>
+VRRITTAM Student Portal
+</p>
+
+</header>
+
+
+<div class="container">
+
+
+<div class="card">
+
+
+<h2>
+Term Examination Results
+</h2>
+
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>
+Subject
+</th>
+
+<th>
+Marks
+</th>
+
+</tr>
+
+</thead>
+
+
+<tbody id="marksTable">
+
+</tbody>
+
+</table>
+
+
+<div
+class="average"
+id="average">
+
+Average: Loading...
+
+</div>
+
+
+<div class="ai-box">
+
+<h3>
+🤖 AI Marks Insight
+</h3>
+
+<p id="aiInsight">
+Analysing marks...
+</p>
+
+</div>
+
+
+<button
+onclick="window.location.href='student-dashboard.html'">
+
+⬅ Back to Dashboard
+
+</button>
+
+
+</div>
+
+</div>
+
+
+
+<!-- SHARED DATA -->
+
+<script src="vrrittam-data.js"></script>
+
+
+<script>
+
+
+/* =====================================
+   LOAD SHARED VRRITTAM DATA
+===================================== */
+
+const data =
+loadVRRITTAMData();
+
+
+/* =====================================
+   GET ARUN KUMAR MARKS
+===================================== */
+
+let marks = {};
+
+
+/*
+   Teacher Marks saves Arun's marks
+   here:
+
+   studentMarks.Arunc
+*/
+
+if(
+data.studentMarks &&
+data.studentMarks.Arunc
+){
+
+marks =
+data.studentMarks.Arunc;
+
+}
+
+
+/*
+   Fallback:
+   If no teacher marks have been saved,
+   use the default shared marks.
+*/
+
+if(
+Object.keys(marks).length === 0
+){
+
+marks =
+data.marks;
+
+}
+
+
+/* =====================================
+   DISPLAY MARKS
+===================================== */
+
+const table =
+document.getElementById(
+"marksTable"
+);
+
+
+let total = 0;
+
+let count = 0;
+
+
+for(
+const subject in marks
+){
+
+const mark =
+Number(marks[subject]);
+
+
+const row =
+document.createElement("tr");
+
+
+row.innerHTML =
+
+"<td>" +
+subject +
+"</td>" +
+
+"<td>" +
+mark +
+"</td>";
+
+
+table.appendChild(row);
+
+
+total += mark;
+
+count++;
+
+}
+
+
+/* =====================================
+   CALCULATE AVERAGE
+===================================== */
+
+let average = 0;
+
+
+if(count > 0){
+
+average =
+Math.round(
+total / count
+);
+
+}
+
+
+document.getElementById(
+"average"
+).innerText =
+
+"Average: " +
+average +
+"%";
+
+
+/* =====================================
+   AI INSIGHT
+===================================== */
+
+let insight = "";
+
+
+if(average >= 90){
+
+insight =
+
+"Excellent performance! " +
+"Your current average is " +
+average +
+"%. Keep up the excellent work.";
+
+}
+
+else if(average >= 75){
+
+insight =
+
+"Good performance. " +
+"Your current average is " +
+average +
+"%. Continue regular revision to improve further.";
+
+}
+
+else if(average >= 50){
+
+insight =
+
+"Your current average is " +
+average +
+"%. Focus more on subjects with lower marks.";
+
+}
+
+else{
+
+insight =
+
+"Your current average is " +
+average +
+"%. More practice and academic support are recommended.";
+
+}
+
+
+document.getElementById(
+"aiInsight"
+).innerText =
+insight;
+
+
+</script>
+
+
+</body>
+
+</html>

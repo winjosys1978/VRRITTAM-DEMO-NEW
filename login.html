@@ -1,0 +1,1481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<!-- Firebase Core -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+
+<!-- Firebase Authentication -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-auth-compat.js"></script>
+
+<!-- Firebase Firestore -->
+<script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+<script>
+    
+    // =========================================
+    // VRRITTAM FIREBASE CONFIGURATION
+    // =========================================
+
+    const firebaseConfig = {
+        apiKey: "AIzaSyD42wAshGRCofV6-WJvI5gNr9m3zlsMhFQ",
+        authDomain: "vrrittam-c9878.firebaseapp.com",
+        databaseURL: "https://vrrittam-c9878.firebaseio.com",
+        projectId: "vrrittam-c9878",
+        storageBucket: "vrrittam-c9878.firebasestorage.app",
+        messagingSenderId: "725733451228",
+        appId: "1:725733451228:web:ddb67e015ac35d012e5b19",
+        measurementId: "G-8WLP9R7XG2"
+    };
+
+    // Initialize Firebase
+    if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+    }
+
+    console.log("VRRITTAM Firebase initialized:", !!firebase.app());
+    console.log("VRRITTAM Firebase Project:", firebase.app().options.projectId);
+    console.log("VRRITTAM Firebase Auth initialized:", !!firebase.auth());
+</script>
+
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>VRRITTAM | Secure Login</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+html,body{
+    margin:0;
+    padding:0;
+    min-height:100%;
+    font-family:Arial,sans-serif;
+}
+
+body{
+
+    min-height:100vh;
+
+    background:
+    linear-gradient(
+        135deg,
+        #1565C0,
+        #42A5F5,
+        #E3F2FD
+    );
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    padding:25px;
+}
+
+
+/* =========================================
+   MAIN
+========================================= */
+
+.login-container{
+
+    width:100%;
+    max-width:1100px;
+
+    display:grid;
+
+    grid-template-columns:
+    1fr 1fr;
+
+    gap:25px;
+}
+
+
+/* =========================================
+   BRAND
+========================================= */
+
+.brand-section{
+
+    color:white;
+
+    padding:40px 30px;
+
+    display:flex;
+    flex-direction:column;
+
+    justify-content:center;
+    align-items:center;
+
+    text-align:center;
+}
+
+.brand-logo{
+
+    width:125px;
+    height:125px;
+
+    object-fit:contain;
+
+    margin-bottom:20px;
+}
+
+.brand-section h1{
+
+    font-size:48px;
+
+    margin:0 0 12px;
+}
+
+.brand-section h2{
+
+    font-size:23px;
+
+    margin:0 0 20px;
+
+    line-height:1.5;
+}
+
+.brand-section p{
+
+    font-size:17px;
+
+    line-height:1.7;
+
+    max-width:480px;
+}
+
+
+/* =========================================
+   LOGIN CARD
+========================================= */
+
+.login-card{
+
+    background:
+    rgba(255,255,255,.97);
+
+    border-radius:22px;
+
+    padding:35px;
+
+    box-shadow:
+    0 15px 45px
+    rgba(0,0,0,.20);
+}
+
+.login-title{
+
+    text-align:center;
+
+    color:#003366;
+
+    font-size:30px;
+
+    margin:
+    0 0 25px;
+}
+
+
+/* =========================================
+   BACK
+========================================= */
+
+.back-btn{
+
+    display:inline-block;
+
+    text-decoration:none;
+
+    color:#1565C0;
+
+    font-weight:bold;
+
+    margin-bottom:20px;
+}
+
+.back-btn:hover{
+
+    color:#003366;
+}
+
+
+/* =========================================
+   LABELS
+========================================= */
+
+.form-label{
+
+    display:block;
+
+    margin-bottom:7px;
+
+    color:#334155;
+
+    font-weight:bold;
+}
+
+
+/* =========================================
+   SELECT / INPUT
+========================================= */
+
+.role-select,
+.language-select,
+.input-box{
+
+    width:100%;
+
+    padding:14px;
+
+    margin-bottom:18px;
+
+    border:
+    1px solid #d1d5db;
+
+    border-radius:10px;
+
+    font-size:16px;
+
+    background:white;
+
+    outline:none;
+}
+
+.input-box:focus,
+.role-select:focus,
+.language-select:focus{
+
+    border-color:#1565C0;
+
+    box-shadow:
+    0 0 0 3px
+    rgba(21,101,192,.12);
+}
+
+
+/* =========================================
+   OPTIONS
+========================================= */
+
+.option-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:20px;
+
+    font-size:14px;
+}
+
+.show-password{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:7px;
+}
+
+.show-password input{
+
+    width:16px;
+    height:16px;
+}
+
+.forgot-link{
+
+    color:#1565C0;
+
+    text-decoration:none;
+
+    font-weight:bold;
+}
+
+
+/* =========================================
+   QUICK LOGIN
+========================================= */
+
+.quick-title{
+
+    text-align:center;
+
+    color:#003366;
+
+    margin:
+    28px 0 15px;
+}
+
+.quick-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(2,1fr);
+
+    gap:10px;
+}
+
+.quick-btn{
+
+    border:
+    1px solid #90CAF9;
+
+    padding:13px 8px;
+
+    border-radius:10px;
+
+    background:#E3F2FD;
+
+    color:#003366;
+
+    font-weight:bold;
+
+    font-size:14px;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.quick-btn:hover{
+
+    background:#BBDEFB;
+
+    transform:translateY(-2px);
+}
+
+
+/* =========================================
+   LOGIN BUTTON
+========================================= */
+
+.login-btn{
+
+    width:100%;
+
+    padding:15px;
+
+    margin-top:18px;
+
+    border:none;
+
+    border-radius:10px;
+
+    background:#1565C0;
+
+    color:white;
+
+    font-size:18px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+}
+
+.login-btn:hover{
+
+    background:#003366;
+}
+
+
+/* =========================================
+   MESSAGE
+========================================= */
+
+.login-message{
+
+    min-height:24px;
+
+    text-align:center;
+
+    margin-top:15px;
+
+    font-weight:bold;
+}
+
+
+/* =========================================
+   POWERED BY
+========================================= */
+
+.powered-section{
+
+    margin-top:25px;
+
+    text-align:center;
+
+    padding-top:18px;
+
+    border-top:
+    1px solid #e5e7eb;
+}
+
+.powered-logo{
+
+    height:45px;
+
+    width:auto;
+
+    object-fit:contain;
+
+    margin-bottom:7px;
+}
+
+.powered-text{
+
+    color:#475569;
+
+    font-size:13px;
+
+    line-height:1.5;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media(max-width:800px){
+
+    body{
+
+        align-items:flex-start;
+    }
+
+    .login-container{
+
+        grid-template-columns:1fr;
+
+        max-width:600px;
+    }
+
+    .brand-section{
+
+        padding:
+        20px
+        15px
+        5px;
+    }
+
+    .brand-logo{
+
+        width:90px;
+        height:90px;
+    }
+
+    .brand-section h1{
+
+        font-size:36px;
+    }
+
+    .brand-section h2{
+
+        font-size:20px;
+    }
+}
+
+
+@media(max-width:430px){
+
+    body{
+
+        padding:12px;
+    }
+
+    .login-card{
+
+        padding:
+        22px
+        18px;
+    }
+
+    .quick-grid{
+
+        grid-template-columns:1fr;
+    }
+
+    .option-row{
+
+        align-items:flex-start;
+
+        flex-direction:column;
+
+        gap:10px;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="login-container">
+
+
+<!-- =========================================
+     BRAND SECTION
+========================================= -->
+
+<section class="brand-section">
+
+<img
+src="assets/vrrittam-logo.png"
+class="brand-logo"
+alt="VRRITTAM Logo">
+
+<h1>
+VRRITTAM
+</h1>
+
+<h2 id="tagline">
+
+கற்க கசடற, வளர்க அதற்குத் தக.
+
+</h2>
+
+<p id="brandDescription">
+
+AI Powered Education Copilot
+for Students, Teachers,
+Parents, Schools and Institutions.
+
+</p>
+
+</section>
+
+
+
+<!-- =========================================
+     LOGIN CARD
+========================================= -->
+
+<section class="login-card">
+
+
+<a
+href="index.html"
+class="back-btn"
+id="backHome">
+
+← Back to Home
+
+</a>
+
+
+<h2
+class="login-title"
+id="loginTitle">
+
+Secure Login
+
+</h2>
+
+
+<!-- =========================================
+     ROLE
+========================================= -->
+
+<label
+class="form-label"
+for="userRole"
+id="roleLabel">
+
+Select Login Role
+
+</label>
+
+
+<select
+id="userRole"
+class="role-select">
+
+
+<option value="student">
+
+🎓 Student
+
+</option>
+
+
+<option value="aicopilot">
+
+🤖 AI Copilot
+
+</option>
+
+
+<option value="parent">
+
+👨‍👩‍👧 Parent
+
+</option>
+
+
+<option value="teacher">
+
+👨‍🏫 Teacher
+
+</option>
+
+
+<option value="schooladmin">
+
+🏫 School Admin
+
+</option>
+
+
+<option value="superadmin">
+
+👑 Super Admin
+
+</option>
+
+
+</select>
+
+
+
+<!-- =========================================
+     LANGUAGE
+========================================= -->
+
+<label
+class="form-label"
+for="language"
+id="languageLabel">
+
+Select Language
+
+</label>
+
+
+<select
+id="language"
+class="language-select">
+
+<option value="en">
+English
+</option>
+
+<option value="ta">
+தமிழ்
+</option>
+
+</select>
+
+
+
+<!-- =========================================
+     USERNAME
+========================================= -->
+
+<input
+id="username"
+class="input-box"
+type="text"
+placeholder="Username"
+autocomplete="username">
+
+
+
+<!-- =========================================
+     PASSWORD
+========================================= -->
+
+<input
+id="password"
+class="input-box"
+type="password"
+placeholder="Password"
+autocomplete="current-password">
+
+
+
+<!-- =========================================
+     OPTIONS
+========================================= -->
+
+<div class="option-row">
+
+<label class="show-password">
+
+<input
+id="showPassword"
+type="checkbox">
+
+<span id="showPasswordText">
+Show Password
+</span>
+
+</label>
+
+
+<a
+href="#"
+class="forgot-link"
+id="forgotLink"
+onclick="forgotPassword(event)">
+
+Forgot Password?
+
+</a>
+
+</div>
+
+
+
+<!-- =========================================
+     QUICK LOGIN
+========================================= -->
+
+<h3
+class="quick-title"
+id="quickTitle">
+
+Quick Login
+
+</h3>
+
+
+<div class="quick-grid">
+
+
+<button
+type="button"
+class="quick-btn"
+onclick="quickLogin('student')">
+
+🎓 Student
+
+</button>
+
+
+<button
+type="button"
+class="quick-btn"
+onclick="quickLogin('aicopilot')">
+
+🤖 AI Copilot
+
+</button>
+
+
+<button
+type="button"
+class="quick-btn"
+onclick="quickLogin('parent')">
+
+👨‍👩‍👧 Parent
+
+</button>
+
+
+<button
+type="button"
+class="quick-btn"
+onclick="quickLogin('teacher')">
+
+👨‍🏫 Teacher
+
+</button>
+
+
+<button
+type="button"
+class="quick-btn"
+onclick="quickLogin('schooladmin')">
+
+🏫 School Admin
+
+</button>
+
+
+<button
+type="button"
+class="quick-btn"
+onclick="quickLogin('superadmin')">
+
+👑 Super Admin
+
+</button>
+
+
+</div>
+
+
+
+<!-- =========================================
+     LOGIN BUTTON
+========================================= -->
+
+<button
+type="button"
+class="login-btn"
+onclick="loginUser()"
+id="loginButton">
+
+Login
+
+</button>
+
+
+<div
+id="loginMessage"
+class="login-message">
+
+</div>
+
+
+
+<!-- =========================================
+     POWERED BY
+========================================= -->
+
+<div class="powered-section">
+
+<img
+src="assets/winjosys-logo.png"
+class="powered-logo"
+alt="WinjoSys Technologies">
+
+
+<div
+class="powered-text"
+id="poweredText">
+
+Powered by<br>
+
+<strong>
+WinjoSys Technologies
+Private Limited
+</strong>
+
+</div>
+
+</div>
+
+
+</section>
+
+</div>
+
+
+
+<script>
+
+/* =========================================
+   VRRITTAM LOGIN CONFIGURATION
+========================================= */
+
+const loginUsers = {
+
+    student: {
+
+        username:"student",
+
+        password:"123",
+
+        roleName:"Student",
+
+        dashboard:
+        "student-dashboard.html"
+
+    },
+
+
+    aicopilot: {
+
+        username:"aicopilot",
+
+        password:"123",
+
+        roleName:"AI Copilot",
+
+        dashboard:
+        "ai-copilot.html"
+
+    },
+
+
+    parent: {
+
+        username:"parent",
+
+        password:"123",
+
+        roleName:"Parent",
+
+        dashboard:
+        "parent-dashboard.html"
+
+    },
+
+
+    teacher: {
+
+        username:"teacher",
+
+        password:"123",
+
+        roleName:"Teacher",
+
+        dashboard:
+        "teacher-dashboard.html"
+
+    },
+
+schooladmin: {
+    username:"schooladmin",
+    password:"123",
+    roleName:"School Admin",
+    dashboard:"VRRITTAM-Smart-School-Dashboard.html"
+},
+
+
+   superadmin: {
+
+    username:"winjosys@gmail.com",
+
+    password:"",
+
+    roleName:"Super Admin",
+
+    dashboard:
+    "super-admin-dashboard-v2.html"
+
+    }
+};
+
+/* =========================================
+   QUICK LOGIN
+========================================= */
+
+function quickLogin(role){
+
+    const account =
+        loginUsers[role];
+
+    if(!account){
+
+        return;
+    }
+
+
+    document.getElementById(
+        "userRole"
+    ).value = role;
+
+
+    document.getElementById(
+        "username"
+    ).value =
+        account.username;
+
+
+    document.getElementById(
+        "password"
+    ).value =
+        account.password;
+
+
+    const message =
+        document.getElementById(
+            "loginMessage"
+        );
+
+
+    message.style.color =
+        "#1565C0";
+
+
+    message.textContent =
+        account.roleName +
+        " selected. Click Login.";
+
+}
+
+
+/* =========================================
+   LOGIN
+========================================= */
+
+async function loginUser(){
+
+    const role =
+        document.getElementById("userRole").value;
+
+    const username =
+        document.getElementById("username").value.trim();
+
+    const password =
+        document.getElementById("password").value;
+
+    const message =
+        document.getElementById("loginMessage");
+
+    if(username === "" || password === ""){
+
+        message.style.color = "#dc2626";
+
+        message.textContent =
+            currentLanguage === "ta"
+            ? "பயனர்பெயர் மற்றும் கடவுச்சொல்லை உள்ளிடவும்."
+            : "Please enter username and password.";
+
+        return;
+    }
+
+    try{
+
+        const userCredential =
+            await firebase.auth().signInWithEmailAndPassword(
+                username,
+                password
+            );
+
+        const user =
+            userCredential.user;
+
+        console.log(
+            "VRRITTAM Firebase Login Success:",
+            user.email
+        );
+
+        sessionStorage.setItem(
+            "vrrittamLoggedIn",
+            "true"
+        );
+
+        sessionStorage.setItem(
+            "vrrittamRole",
+            role
+        );
+
+        sessionStorage.setItem(
+            "vrrittamUsername",
+            user.email
+        );
+
+        message.style.color = "#15803d";
+
+        message.textContent =
+            currentLanguage === "ta"
+            ? "உள்நுழைவு வெற்றிகரமாக முடிந்தது."
+            : "Login successful.";
+
+        const account = loginUsers[role];
+
+        if(!account){
+
+            console.error(
+                "VRRITTAM Role configuration missing:",
+                role
+            );
+
+            message.style.color = "#dc2626";
+
+            message.textContent =
+                "Role configuration not found.";
+
+            return;
+        }
+
+        sessionStorage.setItem(
+            "vrrittamRoleName",
+            account.roleName
+        );
+
+        setTimeout(function(){
+
+            window.location.href =
+                account.dashboard;
+
+        }, 400);
+
+    }
+    catch(error){
+
+        console.error(
+            "VRRITTAM Firebase Login Error:",
+            error
+        );
+
+        message.style.color = "#dc2626";
+
+        if(error.code === "auth/invalid-credential"){
+
+            message.textContent =
+                currentLanguage === "ta"
+                ? "தவறான Email அல்லது Password."
+                : "Invalid email or password.";
+
+        }
+        else if(error.code === "auth/user-not-found"){
+
+            message.textContent =
+                currentLanguage === "ta"
+                ? "இந்த Email-க்கு பயனர் கிடைக்கவில்லை."
+                : "User not found.";
+
+        }
+        else if(error.code === "auth/wrong-password"){
+
+            message.textContent =
+                currentLanguage === "ta"
+                ? "தவறான Password."
+                : "Incorrect password.";
+
+        }
+        else{
+
+            message.textContent =
+                currentLanguage === "ta"
+                ? "Login தோல்வியடைந்தது. Console-ஐ பார்க்கவும்."
+                : "Login failed. Check the Console.";
+
+        }
+    }
+}
+
+/* =========================================
+   SHOW PASSWORD
+========================================= */
+
+document
+.getElementById("showPassword")
+.addEventListener(
+    "change",
+    function(){
+
+        const password =
+            document.getElementById(
+                "password"
+            );
+
+
+        password.type =
+            this.checked
+            ? "text"
+            : "password";
+
+    }
+);
+
+
+/* =========================================
+   FORGOT PASSWORD
+========================================= */
+
+function forgotPassword(event){
+
+    event.preventDefault();
+
+
+    const role =
+        document.getElementById(
+            "userRole"
+        ).value;
+
+
+    const message =
+        document.getElementById(
+            "loginMessage"
+        );
+
+
+    const account =
+        loginUsers[role];
+
+
+    message.style.color =
+        "#1565C0";
+
+
+    message.textContent =
+        currentLanguage === "ta"
+        ? account.roleName +
+          " க்கான கடவுச்சொல் மீட்பு வசதி விரைவில் வரும்."
+        : "Password reset assistance for " +
+          account.roleName +
+          " will be available soon.";
+
+}
+
+
+/* =========================================
+   LANGUAGE
+========================================= */
+
+let currentLanguage = "en";
+
+
+const translations = {
+
+    en: {
+
+        back:
+        "← Back to Home",
+
+        login:
+        "Secure Login",
+
+        role:
+        "Select Login Role",
+
+        language:
+        "Select Language",
+
+        username:
+        "Username",
+
+        password:
+        "Password",
+
+        show:
+        "Show Password",
+
+        forgot:
+        "Forgot Password?",
+
+        quick:
+        "Quick Login",
+
+        loginButton:
+        "Login",
+
+        description:
+        "AI Powered Education Copilot for Students, Teachers, Parents, Schools and Institutions.",
+
+        selected:
+        " selected. Click Login.",
+
+        selectedLanguage:
+        "English selected."
+
+    },
+
+
+    ta: {
+
+        back:
+        "← முகப்புக்குத் திரும்பு",
+
+        login:
+        "பாதுகாப்பான உள்நுழைவு",
+
+        role:
+        "உள்நுழைவு வகையைத் தேர்ந்தெடுக்கவும்",
+
+        language:
+        "மொழியைத் தேர்ந்தெடுக்கவும்",
+
+        username:
+        "பயனர்பெயர்",
+
+        password:
+        "கடவுச்சொல்",
+
+        show:
+        "கடவுச்சொல்லைக் காண்பி",
+
+        forgot:
+        "கடவுச்சொல் மறந்துவிட்டதா?",
+
+        quick:
+        "விரைவு உள்நுழைவு",
+
+        loginButton:
+        "உள்நுழைவு",
+
+        description:
+        "மாணவர்கள், ஆசிரியர்கள், பெற்றோர், பள்ளிகள் மற்றும் கல்வி நிறுவனங்களுக்கான AI சார்ந்த Education Copilot.",
+
+        selected:
+        " தேர்ந்தெடுக்கப்பட்டது. உள்நுழைவை அழுத்தவும்.",
+
+        selectedLanguage:
+        "தமிழ் மொழி தேர்ந்தெடுக்கப்பட்டது."
+
+    }
+
+};
+
+
+function changeLanguage(){
+
+    const language =
+        document.getElementById(
+            "language"
+        ).value;
+
+
+    currentLanguage =
+        language;
+
+
+    const t =
+        translations[language];
+
+
+    document.getElementById(
+        "backHome"
+    ).textContent =
+        t.back;
+
+
+    document.getElementById(
+        "loginTitle"
+    ).textContent =
+        t.login;
+
+
+    document.getElementById(
+        "roleLabel"
+    ).textContent =
+        t.role;
+
+
+    document.getElementById(
+        "languageLabel"
+    ).textContent =
+        t.language;
+
+
+    document.getElementById(
+        "username"
+    ).placeholder =
+        t.username;
+
+
+    document.getElementById(
+        "password"
+    ).placeholder =
+        t.password;
+
+
+    document.getElementById(
+        "showPasswordText"
+    ).textContent =
+        t.show;
+
+
+    document.getElementById(
+        "forgotLink"
+    ).textContent =
+        t.forgot;
+
+
+    document.getElementById(
+        "quickTitle"
+    ).textContent =
+        t.quick;
+
+
+    document.getElementById(
+        "loginButton"
+    ).textContent =
+        t.loginButton;
+
+
+    document.getElementById(
+        "brandDescription"
+    ).textContent =
+        t.description;
+
+
+    const message =
+        document.getElementById(
+            "loginMessage"
+        );
+
+
+    message.style.color =
+        "#1565C0";
+
+
+    message.textContent =
+        t.selectedLanguage;
+
+}
+
+
+document
+.getElementById("language")
+.addEventListener(
+    "change",
+    changeLanguage
+);
+
+
+/* =========================================
+   ENTER KEY
+========================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key === "Enter"){
+
+            loginUser();
+
+        }
+
+    }
+);
+
+
+/* =========================================
+   STARTUP
+========================================= */
+
+console.log(
+    "VRRITTAM Secure Dynamic Login Ready"
+);
+
+console.log(
+    "Student → student-dashboard.html"
+);
+
+console.log(
+    "AI Copilot → ai-copilot.html"
+);
+
+console.log(
+    "Parent → parent-dashboard.html"
+);
+
+console.log(
+    "Teacher → teacher-dashboard.html"
+);
+
+console.log(
+    "School Admin → VRRITTAM-Smart-School-Dashboard.html"
+);
+
+console.log(
+    "Super Admin → super-admin-dashboard-v2.html"
+);
+
+</script>
+
+
+</body>
+
+</html>

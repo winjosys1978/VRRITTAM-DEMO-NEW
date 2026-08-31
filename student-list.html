@@ -1,0 +1,2864 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>VRRITTAM - Student Management</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#f4f7fb;
+    color:#1e293b;
+}
+
+/* HEADER */
+
+.header{
+    height:72px;
+    background:#123f6d;
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 24px;
+}
+
+.logo-area{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo{
+    width:45px;
+    height:45px;
+    object-fit:contain;
+}
+
+.brand-title{
+    font-size:21px;
+    font-weight:bold;
+}
+
+.brand-subtitle{
+    font-size:11px;
+    opacity:.9;
+}
+
+.admin-area{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    font-size:13px;
+}
+
+.logout-btn{
+    background:white;
+    color:#123f6d;
+    border:none;
+    padding:9px 16px;
+    border-radius:7px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+/* MAIN */
+
+.container{
+    max-width:1450px;
+    margin:auto;
+    padding:25px;
+}
+
+/* PAGE HEADER */
+
+.page-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    margin-bottom:22px;
+}
+
+.page-title h1{
+    margin:0;
+    font-size:27px;
+    color:#172554;
+}
+
+.page-title p{
+    margin:6px 0 0;
+    color:#64748b;
+    font-size:13px;
+}
+
+.header-actions{
+    display:flex;
+    gap:10px;
+}
+
+.btn{
+    border:none;
+    padding:11px 17px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.btn-primary{
+    background:#1769c2;
+    color:white;
+}
+
+.btn-primary:hover{
+    background:#1255a0;
+}
+
+.btn-secondary{
+    background:white;
+    color:#1769c2;
+    border:1px solid #cbd5e1;
+}
+
+/* STATISTICS */
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-bottom:22px;
+}
+
+.stat-card{
+    background:white;
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    padding:18px;
+    box-shadow:0 2px 8px rgba(0,0,0,.05);
+}
+
+.stat-label{
+    color:#64748b;
+    font-size:13px;
+}
+
+.stat-value{
+    margin-top:8px;
+    font-size:28px;
+    font-weight:bold;
+    color:#172554;
+}
+
+.stat-note{
+    margin-top:5px;
+    font-size:11px;
+    color:#94a3b8;
+}
+
+/* DIRECTORY */
+
+.directory{
+    background:white;
+    border-radius:12px;
+    border:1px solid #e5e7eb;
+    box-shadow:0 2px 10px rgba(0,0,0,.05);
+    overflow:hidden;
+}
+
+.directory-header{
+    padding:18px;
+    border-bottom:1px solid #e5e7eb;
+}
+
+.directory-header h2{
+    margin:0 0 14px;
+    font-size:17px;
+    color:#172554;
+}
+
+.filters{
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr;
+    gap:10px;
+}
+
+.input,
+.select{
+    width:100%;
+    padding:11px 12px;
+    border:1px solid #cbd5e1;
+    border-radius:8px;
+    font-size:13px;
+    outline:none;
+    background:white;
+}
+
+.input:focus,
+.select:focus{
+    border-color:#1769c2;
+    box-shadow:0 0 0 3px rgba(23,105,194,.1);
+}
+
+/* TABLE */
+
+.table-wrapper{
+    overflow-x:auto;
+}
+
+table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:1050px;
+}
+
+thead{
+    background:#f8fafc;
+}
+
+th{
+    text-align:left;
+    padding:13px;
+    font-size:11px;
+    color:#64748b;
+    border-bottom:1px solid #e5e7eb;
+}
+
+td{
+    padding:13px;
+    font-size:13px;
+    border-bottom:1px solid #eef2f7;
+}
+
+tbody tr:hover{
+    background:#f8fbff;
+}
+
+.student-cell{
+    display:flex;
+    align-items:center;
+    gap:10px;
+}
+
+.avatar{
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    background:#dbeafe;
+    color:#1d4ed8;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:bold;
+}
+
+.student-name{
+    font-weight:bold;
+    color:#1e293b;
+}
+
+.student-id{
+    font-size:10px;
+    color:#94a3b8;
+    margin-top:3px;
+}
+
+/* STATUS */
+
+.status{
+    display:inline-block;
+    padding:5px 10px;
+    border-radius:20px;
+    font-size:10px;
+    font-weight:bold;
+}
+
+.active{
+    background:#dcfce7;
+    color:#15803d;
+}
+
+.inactive{
+    background:#fee2e2;
+    color:#b91c1c;
+}
+
+/* PERFORMANCE */
+
+.good{
+    color:#15803d;
+    font-weight:bold;
+}
+
+.average{
+    color:#d97706;
+    font-weight:bold;
+}
+
+.low{
+    color:#dc2626;
+    font-weight:bold;
+}
+
+/* ATTENDANCE */
+
+.attendance-good{
+    color:#15803d;
+    font-weight:bold;
+}
+
+.attendance-warning{
+    color:#d97706;
+    font-weight:bold;
+}
+
+.attendance-low{
+    color:#dc2626;
+    font-weight:bold;
+}
+
+/* ACTIONS */
+
+.actions{
+    display:flex;
+    gap:6px;
+}
+
+.action-btn{
+    border:none;
+    padding:7px 9px;
+    border-radius:6px;
+    cursor:pointer;
+    font-size:11px;
+    font-weight:bold;
+}
+
+.view{
+    background:#e0f2fe;
+    color:#0369a1;
+}
+
+.edit{
+    background:#fef3c7;
+    color:#92400e;
+}
+
+.delete{
+    background:#fee2e2;
+    color:#b91c1c;
+}
+
+/* EMPTY */
+
+.empty{
+    display:none;
+    text-align:center;
+    padding:50px;
+    color:#64748b;
+}
+
+/* MODAL */
+
+.modal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.62);
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:1000;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-card{
+    width:100%;
+    max-width:760px;
+    max-height:92vh;
+    overflow:auto;
+    background:white;
+    border-radius:15px;
+    box-shadow:0 25px 60px rgba(0,0,0,.25);
+}
+
+.modal-header{
+    padding:18px 22px;
+    border-bottom:1px solid #e5e7eb;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.modal-header h2{
+    margin:0;
+    font-size:20px;
+    color:#172554;
+}
+
+.close{
+    width:34px;
+    height:34px;
+    border:none;
+    border-radius:50%;
+    background:#f1f5f9;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.modal-body{
+    padding:22px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.form-group{
+    display:flex;
+    flex-direction:column;
+}
+
+.form-group.full{
+    grid-column:1/-1;
+}
+
+.form-group label{
+    font-size:12px;
+    font-weight:bold;
+    color:#475569;
+    margin-bottom:6px;
+}
+
+.form-control{
+    width:100%;
+    padding:10px 12px;
+    border:1px solid #cbd5e1;
+    border-radius:7px;
+    outline:none;
+    font-size:13px;
+}
+
+.form-control:focus{
+    border-color:#1769c2;
+}
+
+.modal-footer{
+    padding:15px 22px;
+    border-top:1px solid #e5e7eb;
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+}
+
+/* PROFILE */
+
+.profile-top{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    padding-bottom:18px;
+    border-bottom:1px solid #e5e7eb;
+}
+
+.profile-avatar{
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    background:#dbeafe;
+    color:#1d4ed8;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.profile-top h2{
+    margin:0;
+    color:#172554;
+}
+
+.profile-top p{
+    margin:5px 0 0;
+    color:#64748b;
+    font-size:12px;
+}
+
+.profile-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:12px;
+    margin-top:20px;
+}
+
+.profile-box{
+    background:#f8fafc;
+    padding:13px;
+    border-radius:8px;
+}
+
+.profile-box span{
+    display:block;
+    font-size:10px;
+    color:#64748b;
+    margin-bottom:5px;
+}
+
+.profile-box strong{
+    font-size:13px;
+    color:#1e293b;
+}
+
+/* TOAST */
+
+.toast{
+    position:fixed;
+    right:25px;
+    bottom:25px;
+    background:#166534;
+    color:white;
+    padding:13px 18px;
+    border-radius:8px;
+    display:none;
+    z-index:3000;
+    box-shadow:0 8px 25px rgba(0,0,0,.2);
+    font-size:13px;
+}
+
+/* FOOTER */
+
+.footer{
+    text-align:center;
+    margin:25px 0 10px;
+    color:#94a3b8;
+    font-size:11px;
+}
+
+/* MOBILE */
+
+@media(max-width:950px){
+
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
+
+    .filters{
+        grid-template-columns:1fr 1fr;
+    }
+
+}
+
+@media(max-width:650px){
+
+    .header{
+        padding:10px 14px;
+    }
+
+    .admin-area{
+        display:none;
+    }
+
+    .container{
+        padding:14px;
+    }
+
+    .page-header{
+        flex-direction:column;
+        align-items:flex-start;
+    }
+
+    .stats{
+        grid-template-columns:1fr;
+    }
+
+    .filters{
+        grid-template-columns:1fr;
+    }
+
+    .form-grid,
+    .profile-grid{
+        grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+        grid-column:auto;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- HEADER -->
+
+<header class="header">
+
+<div class="logo-area">
+
+<img
+src="assets/vrrittam-logo.png"
+class="logo"
+alt="VRRITTAM">
+
+<div>
+
+<div class="brand-title">
+VRRITTAM
+</div>
+
+<div class="brand-subtitle">
+Education Copilot
+</div>
+
+<div class="brand-subtitle">
+VRRITTAM Demo School
+</div>
+
+</div>
+
+</div>
+
+
+<div class="admin-area">
+
+<div>
+
+<strong>School Administrator</strong>
+<br>
+School Admin
+
+</div>
+
+<button
+class="logout-btn"
+onclick="logout()">
+
+Logout
+
+</button>
+
+</div>
+
+</header>
+
+
+<main class="container">
+
+
+<!-- PAGE HEADER -->
+
+<div class="page-header">
+
+<div class="page-title">
+
+<h1>🎓 Student Management</h1>
+
+<p>
+Manage enrolment, student information,
+attendance and academic performance.
+</p>
+
+</div>
+
+
+<div class="header-actions">
+
+<button
+class="btn btn-secondary"
+onclick="goDashboard()">
+
+← Dashboard
+
+</button>
+
+
+<button
+class="btn btn-primary"
+onclick="openAddStudent()">
+
+＋ Add Student
+
+</button>
+
+</div>
+
+</div>
+
+
+<!-- STATISTICS -->
+
+<section class="stats">
+
+<div class="stat-card">
+
+<div class="stat-label">
+Total Students
+</div>
+
+<div
+class="stat-value"
+id="totalStudents">
+0
+</div>
+
+<div class="stat-note">
+Registered students
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-label">
+Active Students
+</div>
+
+<div
+class="stat-value"
+id="activeStudents">
+0
+</div>
+
+<div class="stat-note">
+Currently enrolled
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-label">
+New Admissions
+</div>
+
+<div
+class="stat-value"
+id="newAdmissions">
+0
+</div>
+
+<div class="stat-note">
+Academic year 2026
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-label">
+Attention Needed
+</div>
+
+<div
+class="stat-value"
+id="attentionStudents">
+0
+</div>
+
+<div class="stat-note">
+Attendance below 75%
+</div>
+
+</div>
+
+</section>
+
+
+<!-- DIRECTORY -->
+
+<section class="directory">
+
+<div class="directory-header">
+
+<h2>
+Student Directory
+</h2>
+
+
+<div class="filters">
+
+<input
+id="searchInput"
+class="input"
+placeholder="🔎 Search name, admission number or parent..."
+oninput="renderStudents()">
+
+
+<select
+id="classFilter"
+class="select"
+onchange="renderStudents()">
+
+<option value="">
+All Classes
+</option>
+
+<option value="6">Class 6</option>
+<option value="7">Class 7</option>
+<option value="8">Class 8</option>
+<option value="9">Class 9</option>
+<option value="10">Class 10</option>
+<option value="11">Class 11</option>
+<option value="12">Class 12</option>
+
+</select>
+
+
+<select
+id="sectionFilter"
+class="select"
+onchange="renderStudents()">
+
+<option value="">
+All Sections
+</option>
+
+<option value="A">Section A</option>
+<option value="B">Section B</option>
+<option value="C">Section C</option>
+<option value="D">Section D</option>
+
+</select>
+
+
+<select
+id="statusFilter"
+class="select"
+onchange="renderStudents()">
+
+<option value="">
+All Status
+</option>
+
+<option value="Active">
+Active
+</option>
+
+<option value="Inactive">
+Inactive
+</option>
+
+</select>
+
+</div>
+
+</div>
+
+
+<div class="table-wrapper">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>STUDENT</th>
+<th>CLASS</th>
+<th>SECTION</th>
+<th>PARENT / GUARDIAN</th>
+<th>PHONE</th>
+<th>ATTENDANCE</th>
+<th>PERFORMANCE</th>
+<th>STATUS</th>
+<th>ACTIONS</th>
+
+</tr>
+
+</thead>
+
+<tbody id="studentTable">
+</tbody>
+
+</table>
+
+</div>
+
+
+<div
+id="emptyMessage"
+class="empty">
+
+🎓 No students found.
+
+</div>
+
+</section>
+
+
+<div class="footer">
+
+© 2026 VRRITTAM |
+Powered by WinjoSys Technologies Pvt Ltd
+
+</div>
+
+</main>
+
+
+<!-- ADD / EDIT MODAL -->
+
+<div
+id="studentModal"
+class="modal">
+
+<div class="modal-card">
+
+
+<div class="modal-header">
+
+<h2 id="modalTitle">
+Add Student
+</h2>
+
+<button
+class="close"
+onclick="closeStudentModal()">
+
+×
+</button>
+
+</div>
+
+
+<div class="modal-body">
+
+<div class="form-grid">
+
+
+<div class="form-group">
+
+<label>Student Name *</label>
+
+<input
+id="formName"
+class="form-control"
+placeholder="Enter full name">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Admission Number *</label>
+
+<input
+id="formAdmission"
+class="form-control"
+placeholder="VRR-1005">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Date of Birth</label>
+
+<input
+id="formDOB"
+type="date"
+class="form-control">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Gender</label>
+
+<select
+id="formGender"
+class="form-control">
+
+<option value="">Select</option>
+<option>Male</option>
+<option>Female</option>
+<option>Other</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Class *</label>
+
+<select
+id="formClass"
+class="form-control">
+
+<option value="6">Class 6</option>
+<option value="7">Class 7</option>
+<option value="8" selected>Class 8</option>
+<option value="9">Class 9</option>
+<option value="10">Class 10</option>
+<option value="11">Class 11</option>
+<option value="12">Class 12</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Section *</label>
+
+<select
+id="formSection"
+class="form-control">
+
+<option>A</option>
+<option>B</option>
+<option>C</option>
+<option>D</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group">
+
+<label>Parent / Guardian *</label>
+
+<input
+id="formParent"
+class="form-control"
+placeholder="Parent / Guardian name">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Parent Phone *</label>
+
+<input
+id="formPhone"
+class="form-control"
+type="tel"
+placeholder="10 digit mobile number">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Parent Email</label>
+
+<input
+id="formEmail"
+class="form-control"
+type="email"
+placeholder="parent@example.com">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Admission Year</label>
+
+<input
+id="formYear"
+class="form-control"
+value="2026">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Attendance %</label>
+
+<input
+id="formAttendance"
+class="form-control"
+type="number"
+min="0"
+max="100"
+value="92">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Academic Performance %</label>
+
+<input
+id="formPerformance"
+class="form-control"
+type="number"
+min="0"
+max="100"
+value="75">
+
+</div>
+
+
+<div class="form-group">
+
+<label>Status</label>
+
+<select
+id="formStatus"
+class="form-control">
+
+<option value="Active">
+Active
+</option>
+
+<option value="Inactive">
+Inactive
+</option>
+
+</select>
+
+</div>
+
+
+<div class="form-group full">
+
+<label>Address</label>
+
+<input
+id="formAddress"
+class="form-control"
+placeholder="Residential address">
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<div class="modal-footer">
+
+<button
+class="btn btn-secondary"
+onclick="closeStudentModal()">
+
+Cancel
+
+</button>
+
+
+<button
+class="btn btn-primary"
+onclick="saveStudent()">
+
+Save Student
+
+</button>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<!-- PROFILE MODAL -->
+
+<div
+id="profileModal"
+class="modal">
+
+<div class="modal-card">
+
+<div class="modal-header">
+
+<h2>
+Student Profile
+</h2>
+
+<button
+class="close"
+onclick="closeProfile()">
+
+×
+</button>
+
+</div>
+
+
+<div
+id="profileContent"
+class="modal-body">
+</div>
+
+
+<div class="modal-footer">
+
+<button
+class="btn btn-primary"
+onclick="closeProfile()">
+
+Close
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+
+<!-- TOAST -->
+
+<div
+id="toast"
+class="toast">
+</div>
+
+
+<script>
+
+/* =====================================================
+   VRRITTAM STUDENT DATA
+===================================================== */
+
+const STUDENT_KEY =
+    "VRRITTAM_STUDENTS";
+
+
+/* =====================================================
+   DEFAULT DEMO DATA
+===================================================== */
+
+const defaultStudents = [
+
+{
+    id:"VRR-1001",
+    name:"Arun Kumar",
+    dob:"2012-05-14",
+    gender:"Male",
+    className:"8",
+    section:"A",
+    parentName:"Kumar",
+    phone:"9876543210",
+    email:"kumar@example.com",
+    address:"Chennai",
+    attendance:92,
+    performance:84,
+    status:"Active",
+    year:"2026"
+},
+
+{
+    id:"VRR-1002",
+    name:"Priya Sharma",
+    dob:"2012-08-21",
+    gender:"Female",
+    className:"8",
+    section:"A",
+    parentName:"Rajesh Sharma",
+    phone:"9876543211",
+    email:"rajesh@example.com",
+    address:"Chennai",
+    attendance:88,
+    performance:79,
+    status:"Active",
+    year:"2026"
+},
+
+{
+    id:"VRR-1003",
+    name:"Rahul Kumar",
+    dob:"2013-02-10",
+    gender:"Male",
+    className:"7",
+    section:"B",
+    parentName:"Suresh Kumar",
+    phone:"9876543212",
+    email:"",
+    address:"Chennai",
+    attendance:71,
+    performance:68,
+    status:"Active",
+    year:"2026"
+},
+
+{
+    id:"VRR-1004",
+    name:"Ananya Devi",
+    dob:"2011-11-05",
+    gender:"Female",
+    className:"9",
+    section:"A",
+    parentName:"Mohan Devi",
+    phone:"9876543213",
+    email:"",
+    address:"Chennai",
+    attendance:95,
+    performance:91,
+    status:"Active",
+    year:"2026"
+}
+
+];
+
+
+/* =====================================================
+   LOAD STUDENTS
+===================================================== */
+
+function getStudents(){
+
+    let saved =
+        localStorage.getItem(
+            STUDENT_KEY
+        );
+
+
+    /* OLD KEY MIGRATION */
+
+    if(!saved){
+
+        const old =
+            localStorage.getItem(
+                "vrrittamStudents"
+            );
+
+
+        if(old){
+
+            try{
+
+                const oldData =
+                    JSON.parse(old);
+
+
+                const converted =
+                    oldData.map(
+                        function(s){
+
+                            return {
+
+                                id:s.id,
+
+                                name:s.name,
+
+                                dob:s.dob || "",
+
+                                gender:s.gender || "",
+
+                                className:
+                                    s.class ||
+                                    s.className ||
+                                    "8",
+
+                                section:
+                                    s.section ||
+                                    "A",
+
+                                parentName:
+                                    s.parent ||
+                                    s.parentName ||
+                                    "",
+
+                                phone:
+                                    s.phone ||
+                                    "",
+
+                                email:
+                                    s.email ||
+                                    "",
+
+                                address:
+                                    s.address ||
+                                    "",
+
+                                attendance:
+                                    Number(
+                                        s.attendance || 0
+                                    ),
+
+                                performance:
+                                    Number(
+                                        s.performance || 0
+                                    ),
+
+                                status:
+                                    s.status ||
+                                    "Active",
+
+                                year:
+                                    s.year ||
+                                    "2026"
+
+                            };
+
+                        }
+                    );
+
+
+                localStorage.setItem(
+                    STUDENT_KEY,
+                    JSON.stringify(converted)
+                );
+
+
+                return converted;
+
+            }
+
+            catch(error){
+
+                console.log(
+                    "Old student data migration failed"
+                );
+
+            }
+
+        }
+
+    }
+
+
+    if(saved){
+
+        try{
+
+            const data =
+                JSON.parse(saved);
+
+
+            if(Array.isArray(data)){
+
+                return data;
+
+            }
+
+        }
+
+        catch(error){
+
+            console.log(
+                "Student data error"
+            );
+
+        }
+
+    }
+
+
+    localStorage.setItem(
+
+        STUDENT_KEY,
+
+        JSON.stringify(
+            defaultStudents
+        )
+
+    );
+
+
+    return defaultStudents;
+
+}
+
+
+/* =====================================================
+   SAVE STUDENTS
+===================================================== */
+
+function saveStudents(students){
+
+    localStorage.setItem(
+
+        STUDENT_KEY,
+
+        JSON.stringify(
+            students
+        )
+
+    );
+
+}
+
+
+/* =====================================================
+   EDITING
+===================================================== */
+
+let editingId = null;
+
+
+/* =====================================================
+   RENDER
+===================================================== */
+
+function renderStudents(){
+
+    const students =
+        getStudents();
+
+
+    const search =
+        document.getElementById(
+            "searchInput"
+        ).value
+        .toLowerCase()
+        .trim();
+
+
+    const classFilter =
+        document.getElementById(
+            "classFilter"
+        ).value;
+
+
+    const sectionFilter =
+        document.getElementById(
+            "sectionFilter"
+        ).value;
+
+
+    const statusFilter =
+        document.getElementById(
+            "statusFilter"
+        ).value;
+
+
+    const filtered =
+        students.filter(
+            function(student){
+
+                const text =
+                    (
+                        student.name +
+                        " " +
+                        student.id +
+                        " " +
+                        student.parentName
+                    )
+                    .toLowerCase();
+
+
+                return (
+
+                    text.includes(search)
+
+                    &&
+
+                    (
+                        !classFilter ||
+                        student.className ===
+                        classFilter
+                    )
+
+                    &&
+
+                    (
+                        !sectionFilter ||
+                        student.section ===
+                        sectionFilter
+                    )
+
+                    &&
+
+                    (
+                        !statusFilter ||
+                        student.status ===
+                        statusFilter
+                    )
+
+                );
+
+            }
+        );
+
+
+    const table =
+        document.getElementById(
+            "studentTable"
+        );
+
+
+    table.innerHTML = "";
+
+
+    filtered.forEach(
+        function(student){
+
+            const initials =
+                student.name
+                .split(" ")
+                .map(
+                    function(word){
+                        return word.charAt(0);
+                    }
+                )
+                .join("")
+                .substring(0,2)
+                .toUpperCase();
+
+
+            const attendance =
+                Number(
+                    student.attendance || 0
+                );
+
+
+            const performance =
+                Number(
+                    student.performance || 0
+                );
+
+
+            let attendanceClass =
+                "attendance-good";
+
+
+            if(attendance < 75){
+
+                attendanceClass =
+                    "attendance-low";
+
+            }
+
+            else if(attendance < 85){
+
+                attendanceClass =
+                    "attendance-warning";
+
+            }
+
+
+            let performanceClass =
+                "good";
+
+
+            if(performance < 60){
+
+                performanceClass =
+                    "low";
+
+            }
+
+            else if(performance < 75){
+
+                performanceClass =
+                    "average";
+
+            }
+
+
+            const statusClass =
+                student.status === "Active"
+                ? "active"
+                : "inactive";
+
+
+            const row =
+                document.createElement("tr");
+
+
+            row.innerHTML = `
+
+                <td>
+
+                    <div class="student-cell">
+
+                        <div class="avatar">
+                            ${initials}
+                        </div>
+
+                        <div>
+
+                            <div class="student-name">
+                                ${escapeHTML(student.name)}
+                            </div>
+
+                            <div class="student-id">
+                                ${escapeHTML(student.id)}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </td>
+
+
+                <td>
+                    Class ${escapeHTML(student.className)}
+                </td>
+
+
+                <td>
+                    ${escapeHTML(student.section)}
+                </td>
+
+
+                <td>
+                    ${escapeHTML(student.parentName)}
+                </td>
+
+
+                <td>
+                    ${escapeHTML(student.phone || "-")}
+                </td>
+
+
+                <td>
+
+                    <span class="${attendanceClass}">
+                        ${attendance}%
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    <span class="${performanceClass}">
+                        ${performance}%
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    <span
+                    class="status ${statusClass}">
+
+                        ${escapeHTML(student.status)}
+
+                    </span>
+
+                </td>
+
+
+                <td>
+
+                    <div class="actions">
+
+                        <button
+                        class="action-btn view"
+                        onclick="viewStudent('${student.id}')">
+
+                            View
+
+                        </button>
+
+
+                        <button
+                        class="action-btn edit"
+                        onclick="editStudent('${student.id}')">
+
+                            Edit
+
+                        </button>
+
+
+                        <button
+                        class="action-btn delete"
+                        onclick="deleteStudent('${student.id}')">
+
+                            Delete
+
+                        </button>
+
+                    </div>
+
+                </td>
+
+            `;
+
+
+            table.appendChild(row);
+
+        }
+    );
+
+
+    document.getElementById(
+        "emptyMessage"
+    ).style.display =
+        filtered.length === 0
+        ? "block"
+        : "none";
+
+
+    updateStats(students);
+
+}
+
+
+/* =====================================================
+   STATISTICS
+===================================================== */
+
+function updateStats(students){
+
+    const total =
+        students.length;
+
+
+    const active =
+        students.filter(
+            s =>
+            s.status === "Active"
+        ).length;
+
+
+    const admissions =
+        students.filter(
+            s =>
+            String(s.year) === "2026"
+        ).length;
+
+
+    const attention =
+        students.filter(
+            s =>
+            Number(
+                s.attendance || 0
+            ) < 75
+        ).length;
+
+
+    document.getElementById(
+        "totalStudents"
+    ).textContent =
+        total;
+
+
+    document.getElementById(
+        "activeStudents"
+    ).textContent =
+        active;
+
+
+    document.getElementById(
+        "newAdmissions"
+    ).textContent =
+        admissions;
+
+
+    document.getElementById(
+        "attentionStudents"
+    ).textContent =
+        attention;
+
+}
+
+
+/* =====================================================
+   ADD STUDENT
+===================================================== */
+
+function openAddStudent(){
+
+    editingId = null;
+
+
+    document.getElementById(
+        "modalTitle"
+    ).textContent =
+        "Add New Student";
+
+
+    clearForm();
+
+
+    document.getElementById(
+        "studentModal"
+    ).classList.add("show");
+
+}
+
+
+/* =====================================================
+   CLEAR FORM
+===================================================== */
+
+function clearForm(){
+
+    document.getElementById(
+        "formName"
+    ).value = "";
+
+
+    document.getElementById(
+        "formAdmission"
+    ).value = "";
+
+
+    document.getElementById(
+        "formDOB"
+    ).value = "";
+
+
+    document.getElementById(
+        "formGender"
+    ).value = "";
+
+
+    document.getElementById(
+        "formClass"
+    ).value = "8";
+
+
+    document.getElementById(
+        "formSection"
+    ).value = "A";
+
+
+    document.getElementById(
+        "formParent"
+    ).value = "";
+
+
+    document.getElementById(
+        "formPhone"
+    ).value = "";
+
+
+    document.getElementById(
+        "formEmail"
+    ).value = "";
+
+
+    document.getElementById(
+        "formAddress"
+    ).value = "";
+
+
+    document.getElementById(
+        "formAttendance"
+    ).value = "92";
+
+
+    document.getElementById(
+        "formPerformance"
+    ).value = "75";
+
+
+    document.getElementById(
+        "formStatus"
+    ).value = "Active";
+
+
+    document.getElementById(
+        "formYear"
+    ).value = "2026";
+
+}
+
+
+/* =====================================================
+   SAVE STUDENT
+===================================================== */
+
+function saveStudent(){
+
+    const name =
+        document.getElementById(
+            "formName"
+        ).value.trim();
+
+
+    const admission =
+        document.getElementById(
+            "formAdmission"
+        ).value.trim();
+
+
+    const parent =
+        document.getElementById(
+            "formParent"
+        ).value.trim();
+
+
+    const phone =
+        document.getElementById(
+            "formPhone"
+        ).value.trim();
+
+
+    if(!name){
+
+        alert(
+            "Please enter Student Name."
+        );
+
+        return;
+
+    }
+
+
+    if(!admission){
+
+        alert(
+            "Please enter Admission Number."
+        );
+
+        return;
+
+    }
+
+
+    if(!parent){
+
+        alert(
+            "Please enter Parent / Guardian Name."
+        );
+
+        return;
+
+    }
+
+
+    if(!phone){
+
+        alert(
+            "Please enter Parent Phone."
+        );
+
+        return;
+
+    }
+
+
+    const attendance =
+        Number(
+            document.getElementById(
+                "formAttendance"
+            ).value
+        );
+
+
+    const performance =
+        Number(
+            document.getElementById(
+                "formPerformance"
+            ).value
+        );
+
+
+    if(
+        attendance < 0 ||
+        attendance > 100
+    ){
+
+        alert(
+            "Attendance must be between 0 and 100."
+        );
+
+        return;
+
+    }
+
+
+    if(
+        performance < 0 ||
+        performance > 100
+    ){
+
+        alert(
+            "Performance must be between 0 and 100."
+        );
+
+        return;
+
+    }
+
+
+    const students =
+        getStudents();
+
+
+    /* =================================================
+       DUPLICATE ADMISSION NUMBER ONLY
+       Parent phone duplication is allowed.
+    ================================================= */
+
+    const duplicate =
+        students.some(
+            function(student){
+
+                return (
+
+                    student.id
+                    .toLowerCase()
+                    ===
+                    admission.toLowerCase()
+
+                    &&
+
+                    student.id
+                    !==
+                    editingId
+
+                );
+
+            }
+        );
+
+
+    if(duplicate){
+
+        alert(
+            "Admission number already exists. Please use a unique admission number."
+        );
+
+        return;
+
+    }
+
+
+    const studentData = {
+
+        id:admission,
+
+        name:name,
+
+        dob:
+            document.getElementById(
+                "formDOB"
+            ).value,
+
+        gender:
+            document.getElementById(
+                "formGender"
+            ).value,
+
+        className:
+            document.getElementById(
+                "formClass"
+            ).value,
+
+        section:
+            document.getElementById(
+                "formSection"
+            ).value,
+
+        parentName:parent,
+
+        phone:phone,
+
+        email:
+            document.getElementById(
+                "formEmail"
+            ).value.trim(),
+
+        address:
+            document.getElementById(
+                "formAddress"
+            ).value.trim(),
+
+        attendance:attendance,
+
+        performance:performance,
+
+        status:
+            document.getElementById(
+                "formStatus"
+            ).value,
+
+        year:
+            document.getElementById(
+                "formYear"
+            ).value
+
+    };
+
+
+    /* EDIT */
+
+    if(editingId){
+
+        const index =
+            students.findIndex(
+                s =>
+                s.id === editingId
+            );
+
+
+        if(index !== -1){
+
+            students[index] =
+                studentData;
+
+        }
+
+        showToast(
+            "Student updated successfully."
+        );
+
+    }
+
+
+    /* ADD */
+
+    else{
+
+        students.push(
+            studentData
+        );
+
+        showToast(
+            "Student added successfully."
+        );
+
+    }
+
+
+    /* =================================================
+       SAVE TO SAME STORAGE
+    ================================================= */
+
+    saveStudents(
+        students
+    );
+
+
+    /* ALSO KEEP OLD KEY IN SYNC */
+
+    localStorage.setItem(
+        "vrrittamStudents",
+        JSON.stringify(
+            students.map(
+                function(s){
+
+                    return {
+
+                        id:s.id,
+                        name:s.name,
+                        class:s.className,
+                        section:s.section,
+                        parent:s.parentName,
+                        phone:s.phone,
+                        attendance:s.attendance,
+                        performance:s.performance,
+                        status:s.status,
+                        year:s.year,
+                        email:s.email,
+                        address:s.address
+
+                    };
+
+                }
+            )
+        )
+    );
+
+
+    closeStudentModal();
+
+
+    renderStudents();
+
+}
+
+
+/* =====================================================
+   EDIT
+===================================================== */
+
+function editStudent(id){
+
+    const students =
+        getStudents();
+
+
+    const student =
+        students.find(
+            s =>
+            s.id === id
+        );
+
+
+    if(!student){
+
+        return;
+
+    }
+
+
+    editingId = id;
+
+
+    document.getElementById(
+        "modalTitle"
+    ).textContent =
+        "Edit Student";
+
+
+    document.getElementById(
+        "formName"
+    ).value =
+        student.name || "";
+
+
+    document.getElementById(
+        "formAdmission"
+    ).value =
+        student.id || "";
+
+
+    document.getElementById(
+        "formDOB"
+    ).value =
+        student.dob || "";
+
+
+    document.getElementById(
+        "formGender"
+    ).value =
+        student.gender || "";
+
+
+    document.getElementById(
+        "formClass"
+    ).value =
+        student.className || "8";
+
+
+    document.getElementById(
+        "formSection"
+    ).value =
+        student.section || "A";
+
+
+    document.getElementById(
+        "formParent"
+    ).value =
+        student.parentName || "";
+
+
+    document.getElementById(
+        "formPhone"
+    ).value =
+        student.phone || "";
+
+
+    document.getElementById(
+        "formEmail"
+    ).value =
+        student.email || "";
+
+
+    document.getElementById(
+        "formAddress"
+    ).value =
+        student.address || "";
+
+
+    document.getElementById(
+        "formAttendance"
+    ).value =
+        student.attendance || 0;
+
+
+    document.getElementById(
+        "formPerformance"
+    ).value =
+        student.performance || 0;
+
+
+    document.getElementById(
+        "formStatus"
+    ).value =
+        student.status || "Active";
+
+
+    document.getElementById(
+        "formYear"
+    ).value =
+        student.year || "2026";
+
+
+    document.getElementById(
+        "studentModal"
+    ).classList.add("show");
+
+}
+
+
+/* =====================================================
+   VIEW PROFILE
+===================================================== */
+
+function viewStudent(id){
+
+    const students =
+        getStudents();
+
+
+    const student =
+        students.find(
+            s =>
+            s.id === id
+        );
+
+
+    if(!student){
+
+        return;
+
+    }
+
+
+    const initials =
+        student.name
+        .split(" ")
+        .map(
+            function(word){
+                return word.charAt(0);
+            }
+        )
+        .join("")
+        .substring(0,2)
+        .toUpperCase();
+
+
+    let learningStatus =
+        "✅ On Track";
+
+
+    if(
+        Number(student.attendance)
+        < 75
+    ){
+
+        learningStatus =
+            "⚠️ Requires Attention";
+
+    }
+
+
+    document.getElementById(
+        "profileContent"
+    ).innerHTML = `
+
+        <div class="profile-top">
+
+            <div class="profile-avatar">
+                ${initials}
+            </div>
+
+            <div>
+
+                <h2>
+                    ${escapeHTML(student.name)}
+                </h2>
+
+                <p>
+                    Admission No:
+                    ${escapeHTML(student.id)}
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="profile-grid">
+
+            <div class="profile-box">
+
+                <span>Class & Section</span>
+
+                <strong>
+                    Class ${escapeHTML(student.className)}
+                    - Section ${escapeHTML(student.section)}
+                </strong>
+
+            </div>
+
+
+            <div class="profile-box">
+
+                <span>Status</span>
+
+                <strong>
+                    ${escapeHTML(student.status)}
+                </strong>
+
+            </div>
+
+
+            <div class="profile-box">
+
+                <span>Date of Birth</span>
+
+                <strong>
+                    ${student.dob || "Not provided"}
+                </strong>
+
+            </div>
+
+
+            <div class="profile-box">
+
+                <span>Gender</span>
+
+                <strong>
+                    ${student.gender || "Not provided"}
+                </strong>
+
+            </div>
+
+
+            <div class="profile-box">
+
+                <span>Parent / Guardian</span>
+
+                <strong>
+                    ${escapeHTML(student.parentName)}
+                </strong>
+
+            </div>
+
+
+            <div class="profile-box">
+
+                <span>Parent Phone</span>
+
+                <strong>
+                    ${escapeHTML(student.phone || "-")}
+                </strong>
+
+            </div>
+
+
+            <div class="profile-box">
+
+                <span>Parent Email</span>
+
+                <strong>
+                    ${escapeHTML(student.email || "-")}
+                </strong>
+
+            </div>
+
+
+            <div class="profile-box">
+
+                <span>Admission Year</span>
+
+                <strong>
+                    ${escapeHTML(student.year)}
+                </strong>
+
+            </div>
+
+
+            <div class="profile-box">
+
+                <span>Attendance</span>
+
+                <strong>
+                    ${student.attendance}%
+                </strong>
+
+            </div>
+
+
+            <div class="profile-box">
+
+                <span>Academic Performance</span>
+
+                <strong>
+                    ${student.performance}%
+                </strong>
+
+            </div>
+
+
+            <div class="profile-box">
+
+                <span>Learning Status</span>
+
+                <strong>
+                    ${learningStatus}
+                </strong>
+
+            </div>
+
+
+            <div class="profile-box">
+
+                <span>Address</span>
+
+                <strong>
+                    ${escapeHTML(student.address || "-")}
+                </strong>
+
+            </div>
+
+        </div>
+
+    `;
+
+
+    document.getElementById(
+        "profileModal"
+    ).classList.add("show");
+
+}
+
+
+/* =====================================================
+   DELETE
+===================================================== */
+
+function deleteStudent(id){
+
+    const students =
+        getStudents();
+
+
+    const student =
+        students.find(
+            s =>
+            s.id === id
+        );
+
+
+    if(!student){
+
+        return;
+
+    }
+
+
+    const confirmed =
+        confirm(
+
+            "Delete " +
+            student.name +
+            " from the student directory?"
+
+        );
+
+
+    if(!confirmed){
+
+        return;
+
+    }
+
+
+    const updated =
+        students.filter(
+            s =>
+            s.id !== id
+        );
+
+
+    saveStudents(
+        updated
+    );
+
+
+    localStorage.setItem(
+        "vrrittamStudents",
+        JSON.stringify(
+            updated.map(
+                function(s){
+
+                    return {
+
+                        id:s.id,
+                        name:s.name,
+                        class:s.className,
+                        section:s.section,
+                        parent:s.parentName,
+                        phone:s.phone,
+                        attendance:s.attendance,
+                        performance:s.performance,
+                        status:s.status,
+                        year:s.year
+
+                    };
+
+                }
+            )
+        )
+    );
+
+
+    renderStudents();
+
+
+    showToast(
+        "Student deleted successfully."
+    );
+
+}
+
+
+/* =====================================================
+   CLOSE MODALS
+===================================================== */
+
+function closeStudentModal(){
+
+    document.getElementById(
+        "studentModal"
+    ).classList.remove("show");
+
+}
+
+
+function closeProfile(){
+
+    document.getElementById(
+        "profileModal"
+    ).classList.remove("show");
+
+}
+
+
+/* =====================================================
+   TOAST
+===================================================== */
+
+function showToast(message){
+
+    const toast =
+        document.getElementById(
+            "toast"
+        );
+
+
+    toast.textContent =
+        message;
+
+
+    toast.style.display =
+        "block";
+
+
+    setTimeout(
+        function(){
+
+            toast.style.display =
+                "none";
+
+        },
+        2200
+    );
+
+}
+
+
+/* =====================================================
+   ESCAPE HTML
+===================================================== */
+
+function escapeHTML(value){
+
+    return String(
+        value || ""
+    )
+    .replace(
+        /&/g,
+        "&amp;"
+    )
+    .replace(
+        /</g,
+        "&lt;"
+    )
+    .replace(
+        />/g,
+        "&gt;"
+    )
+    .replace(
+        /"/g,
+        "&quot;"
+    )
+    .replace(
+        /'/g,
+        "&#039;"
+    );
+
+}
+
+
+/* =====================================================
+   DASHBOARD
+===================================================== */
+
+function goDashboard(){
+
+    window.location.href =
+        "school-dashboard.html";
+
+}
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+function logout(){
+
+    const confirmed =
+        confirm(
+            "Are you sure you want to logout?"
+        );
+
+
+    if(confirmed){
+
+        window.location.href =
+            "login.html";
+
+    }
+
+}
+
+
+/* =====================================================
+   START
+===================================================== */
+
+renderStudents();
+
+
+console.log(
+    "VRRITTAM Student Management - ACTIVE"
+);
+
+</script>
+
+</body>
+
+</html>

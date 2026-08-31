@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>VRRITTAM - Guided Practice</title>
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7fb;
+    color:#1f2937;
+}
+
+.header{
+    background:#123b6d;
+    color:white;
+    padding:15px 25px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.header-left{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.logo{
+    width:55px;
+    height:55px;
+    object-fit:contain;
+}
+
+.header h1{
+    margin:0;
+    font-size:22px;
+}
+
+.header p{
+    margin:4px 0 0;
+    font-size:13px;
+    opacity:.9;
+}
+
+.company-logo{
+    width:120px;
+    max-height:50px;
+    object-fit:contain;
+}
+
+.container{
+    max-width:900px;
+    margin:25px auto;
+    padding:0 18px;
+}
+
+.navigation{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:20px;
+}
+
+.nav-btn{
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:15px;
+    background:#e5e7eb;
+}
+
+.nav-btn:hover{
+    background:#d1d5db;
+}
+
+.practice-card{
+    background:white;
+    border-radius:14px;
+    padding:25px;
+    box-shadow:0 4px 15px rgba(0,0,0,.08);
+}
+
+.practice-title{
+    color:#123b6d;
+    margin-top:0;
+}
+
+.practice-info{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:12px;
+    margin:20px 0;
+}
+
+.info-box{
+    background:#f1f5f9;
+    padding:15px;
+    border-radius:10px;
+}
+
+.info-box strong{
+    display:block;
+    margin-top:5px;
+}
+
+.question-card{
+    margin-top:25px;
+    padding:20px;
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+}
+
+.question{
+    font-size:20px;
+    font-weight:bold;
+    margin-bottom:20px;
+}
+
+.options{
+    display:grid;
+    gap:10px;
+}
+
+.option-btn{
+    text-align:left;
+    padding:13px;
+    border:1px solid #d1d5db;
+    background:white;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.option-btn:hover{
+    background:#eff6ff;
+}
+
+.option-btn:disabled{
+    cursor:not-allowed;
+    opacity:1;
+}
+
+.correct{
+    background:#dcfce7 !important;
+    border-color:#16a34a !important;
+}
+
+.wrong{
+    background:#fee2e2 !important;
+    border-color:#dc2626 !important;
+}
+
+.feedback{
+    margin-top:15px;
+    font-weight:bold;
+}
+
+.next-btn{
+    margin-top:20px;
+    padding:12px 22px;
+    border:none;
+    border-radius:8px;
+    background:#123b6d;
+    color:white;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.next-btn:hover{
+    background:#0f3159;
+}
+
+.progress{
+    margin-top:20px;
+    background:#e5e7eb;
+    height:10px;
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.progress-bar{
+    height:100%;
+    width:0%;
+    background:#16a34a;
+    transition:.3s;
+}
+
+.result{
+    display:none;
+    text-align:center;
+    padding:25px;
+}
+
+.result h2{
+    color:#15803d;
+}
+
+.ai-note{
+    margin-top:20px;
+    padding:15px;
+    background:#eff6ff;
+    border-left:5px solid #2563eb;
+    border-radius:8px;
+}
+
+.footer{
+    text-align:center;
+    margin:30px 0;
+    color:#6b7280;
+    font-size:13px;
+}
+
+@media(max-width:650px){
+
+    .header{
+        flex-direction:column;
+        gap:10px;
+        text-align:center;
+    }
+
+    .practice-info{
+        grid-template-columns:1fr;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     HEADER
+========================================= -->
+
+<header class="header">
+
+    <div class="header-left">
+
+        <img
+        src="assets/VRRITTAM-logo.png"
+        class="logo">
+
+        <div>
+
+            <h1>VRRITTAM</h1>
+
+            <p>
+                AI Guided Practice
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <img
+    src="assets/winjosys-logo.png"
+    class="company-logo">
+
+</header>
+
+
+
+<!-- =========================================
+     MAIN
+========================================= -->
+
+<div class="container">
+
+
+    <!-- NAVIGATION -->
+
+    <div class="navigation">
+
+        <button
+        type="button"
+        class="nav-btn"
+        onclick="goBack()">
+
+            ← Back
+
+        </button>
+
+
+        <button
+        type="button"
+        class="nav-btn"
+        onclick="openDashboard()">
+
+            🏠 Dashboard
+
+        </button>
+
+    </div>
+
+
+
+    <!-- PRACTICE CARD -->
+
+    <div
+    id="practiceCard"
+    class="practice-card">
+
+        <h2 class="practice-title">
+
+            📘 Today's AI Guided Practice
+
+        </h2>
+
+
+        <p>
+
+            VRRITTAM has selected a short practice
+            session based on your learning progress.
+
+        </p>
+
+
+        <!-- PRACTICE INFO -->
+
+        <div class="practice-info">
+
+            <div class="info-box">
+
+                Subject
+
+                <strong id="practiceSubject">
+                    Loading...
+                </strong>
+
+            </div>
+
+
+            <div class="info-box">
+
+                Class
+
+                <strong id="practiceClass">
+                    Loading...
+                </strong>
+
+            </div>
+
+
+            <div class="info-box">
+
+                Topic
+
+                <strong id="practiceTopic">
+                    Loading...
+                </strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- QUESTION AREA -->
+
+        <div id="questionArea">
+
+        </div>
+
+
+
+        <!-- PROGRESS -->
+
+        <div class="progress">
+
+            <div
+            id="progressBar"
+            class="progress-bar">
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- RESULT -->
+
+    <div
+    id="resultBox"
+    class="practice-card result">
+
+        <h2>
+            🎉 Practice Completed
+        </h2>
+
+        <p id="resultText"></p>
+
+
+        <div class="ai-note">
+
+            💡 <strong>VRRITTAM AI Insight</strong>
+
+            <br><br>
+
+            Keep practising step by step.
+            Consistent learning helps improve
+            topic mastery.
+
+        </div>
+
+
+        <br>
+
+
+        <button
+        type="button"
+        class="next-btn"
+        onclick="openDashboard()">
+
+            Return to Dashboard
+
+        </button>
+
+    </div>
+
+
+
+    <div class="footer">
+
+        © 2026 VRRITTAM |
+        Powered by WinjoSys Technologies Pvt Ltd
+
+    </div>
+
+</div>
+
+
+
+<script>
+
+/* =====================================================
+   1. READ AI PRACTICE SESSION
+===================================================== */
+
+let practiceSession = null;
+
+
+try{
+
+    const savedSession =
+        localStorage.getItem(
+            "vrrittamPracticeSession"
+        );
+
+
+    if(savedSession){
+
+        practiceSession =
+            JSON.parse(savedSession);
+
+    }
+
+}
+catch(error){
+
+    console.warn(
+        "VRRITTAM: Could not read practice session.",
+        error
+    );
+
+}
+
+
+/* =====================================================
+   2. SAFE PRACTICE SESSION DEFAULT
+===================================================== */
+
+if(!practiceSession){
+
+    practiceSession = {
+
+        subject:
+            "Mathematics",
+
+        topic:
+            "Algebra",
+
+        duration:
+            "15 Minutes",
+
+        status:
+            "Ready"
+
+    };
+
+}
+
+
+/* =====================================================
+   3. NORMALIZE PRACTICE DATA
+===================================================== */
+
+const practiceSubject =
+    practiceSession.subject ||
+    "Mathematics";
+
+
+const practiceTopic =
+    practiceSession.topic ||
+    "Algebra";
+
+
+const practiceDuration =
+    practiceSession.duration ||
+    "15 Minutes";
+
+
+/* =====================================================
+   4. DISPLAY PRACTICE INFORMATION
+===================================================== */
+
+document.getElementById(
+    "practiceSubject"
+).textContent =
+    practiceSubject;
+
+
+document.getElementById(
+    "practiceClass"
+).textContent =
+    "8th Standard";
+
+
+document.getElementById(
+    "practiceTopic"
+).textContent =
+    practiceTopic;
+
+
+/* =====================================================
+   5. APPROVED PRACTICE QUESTIONS
+===================================================== */
+
+const practiceQuestionBank = {
+
+
+    /* =================================================
+       ALGEBRA
+    ================================================= */
+
+    "Algebra": [
+
+        {
+            question:
+                "If x + 5 = 12, what is the value of x?",
+
+            options:[
+                "5",
+                "6",
+                "7",
+                "8"
+            ],
+
+            answer:2
+        },
+
+
+        {
+            question:
+                "Simplify: 3x + 2x",
+
+            options:[
+                "5",
+                "5x",
+                "6x",
+                "x"
+            ],
+
+            answer:1
+        },
+
+
+        {
+            question:
+                "If x = 4, what is 2x + 3?",
+
+            options:[
+                "7",
+                "9",
+                "11",
+                "12"
+            ],
+
+            answer:2
+        },
+
+
+        {
+            question:
+                "Which expression represents 'a number increased by 6'?",
+
+            options:[
+                "x - 6",
+                "x + 6",
+                "6x",
+                "x ÷ 6"
+            ],
+
+            answer:1
+        },
+
+
+        {
+            question:
+                "Simplify: 7x - 3x",
+
+            options:[
+                "4",
+                "4x",
+                "10x",
+                "21x"
+            ],
+
+            answer:1
+        }
+
+    ],
+
+
+
+    /* =================================================
+       FRACTIONS
+       Kept as an approved alternative.
+    ================================================= */
+
+    "Fractions": [
+
+        {
+            question:
+                "What is 1/2 + 1/4?",
+
+            options:[
+                "2/6",
+                "3/4",
+                "1/6",
+                "2/4"
+            ],
+
+            answer:1
+        },
+
+
+        {
+            question:
+                "What is 2/3 + 1/3?",
+
+            options:[
+                "1",
+                "2/6",
+                "3/6",
+                "1/3"
+            ],
+
+            answer:0
+        },
+
+
+        {
+            question:
+                "What is 3/4 + 1/4?",
+
+            options:[
+                "1/2",
+                "3/8",
+                "1",
+                "4/8"
+            ],
+
+            answer:2
+        },
+
+
+        {
+            question:
+                "What is 1/3 + 1/6?",
+
+            options:[
+                "1/2",
+                "2/9",
+                "1/9",
+                "2/6"
+            ],
+
+            answer:0
+        },
+
+
+        {
+            question:
+                "What is 2/5 + 1/5?",
+
+            options:[
+                "3/10",
+                "3/5",
+                "2/10",
+                "1/5"
+            ],
+
+            answer:1
+        }
+
+    ]
+
+};
+
+
+/* =====================================================
+   6. SELECT QUESTIONS FROM AI TOPIC
+===================================================== */
+
+let questions =
+    practiceQuestionBank[
+        practiceTopic
+    ];
+
+
+/*
+   If AI sends an unsupported topic,
+   safely use Algebra for this demo.
+*/
+
+if(
+    !Array.isArray(questions) ||
+    questions.length === 0
+){
+
+    console.warn(
+        "VRRITTAM: Topic not available in demo question bank:",
+        practiceTopic
+    );
+
+
+    questions =
+        practiceQuestionBank["Algebra"];
+
+}
+
+
+/* =====================================================
+   7. PRACTICE VARIABLES
+===================================================== */
+
+let currentQuestion = 0;
+
+let score = 0;
+
+let answered = false;
+
+
+/* =====================================================
+   8. DISPLAY QUESTION
+===================================================== */
+
+function showQuestion(){
+
+    const area =
+        document.getElementById(
+            "questionArea"
+        );
+
+
+    if(!area){
+        return;
+    }
+
+
+    if(
+        currentQuestion >=
+        questions.length
+    ){
+
+        finishPractice();
+
+        return;
+
+    }
+
+
+    answered = false;
+
+
+    const q =
+        questions[
+            currentQuestion
+        ];
+
+
+    let html = `
+
+        <div class="question-card">
+
+            <div class="question">
+
+                Question
+                ${currentQuestion + 1}
+                of
+                ${questions.length}
+
+                <br><br>
+
+                ${q.question}
+
+            </div>
+
+
+            <div class="options">
+
+    `;
+
+
+    q.options.forEach(
+        function(option,index){
+
+            html += `
+
+                <button
+                type="button"
+                class="option-btn"
+                onclick="checkAnswer(
+                    ${index},
+                    this
+                )">
+
+                    ${option}
+
+                </button>
+
+            `;
+
+        }
+    );
+
+
+    html += `
+
+            </div>
+
+
+            <div
+            id="feedback"
+            class="feedback">
+            </div>
+
+
+            <button
+            type="button"
+            id="nextButton"
+            class="next-btn"
+            style="display:none"
+            onclick="nextQuestion()">
+
+                Next Question →
+
+            </button>
+
+        </div>
+
+    `;
+
+
+    area.innerHTML =
+        html;
+
+
+    updateProgress();
+
+}
+
+
+/* =====================================================
+   9. CHECK ANSWER
+===================================================== */
+
+function checkAnswer(
+    selected,
+    button
+){
+
+    if(answered){
+        return;
+    }
+
+
+    answered = true;
+
+
+    const question =
+        questions[
+            currentQuestion
+        ];
+
+
+    const buttons =
+        document.querySelectorAll(
+            ".option-btn"
+        );
+
+
+    buttons.forEach(
+        function(btn){
+
+            btn.disabled = true;
+
+        }
+    );
+
+
+    const feedback =
+        document.getElementById(
+            "feedback"
+        );
+
+
+    if(
+        selected ===
+        question.answer
+    ){
+
+        button.classList.add(
+            "correct"
+        );
+
+
+        feedback.innerHTML =
+            "✅ Correct! Well done.";
+
+
+        score++;
+
+    }
+    else{
+
+        button.classList.add(
+            "wrong"
+        );
+
+
+        buttons[
+            question.answer
+        ].classList.add(
+            "correct"
+        );
+
+
+        feedback.innerHTML =
+            "❌ Not quite. The correct answer is highlighted.";
+
+    }
+
+
+    const nextButton =
+        document.getElementById(
+            "nextButton"
+        );
+
+
+    if(nextButton){
+
+        nextButton.style.display =
+            "inline-block";
+
+    }
+
+}
+
+
+/* =====================================================
+   10. NEXT QUESTION
+===================================================== */
+
+function nextQuestion(){
+
+    currentQuestion++;
+
+    showQuestion();
+
+}
+
+
+/* =====================================================
+   11. PROGRESS BAR
+===================================================== */
+
+function updateProgress(){
+
+    const progressBar =
+        document.getElementById(
+            "progressBar"
+        );
+
+
+    if(!progressBar){
+        return;
+    }
+
+
+    const percentage =
+        (
+            currentQuestion /
+            questions.length
+        ) * 100;
+
+
+    progressBar.style.width =
+        percentage + "%";
+
+}
+
+
+/* =====================================================
+   12. FINISH PRACTICE
+===================================================== */
+
+function finishPractice(){
+
+    const practiceCard =
+        document.getElementById(
+            "practiceCard"
+        );
+
+
+    if(practiceCard){
+
+        practiceCard.style.display =
+            "none";
+
+    }
+
+
+    const resultBox =
+        document.getElementById(
+            "resultBox"
+        );
+
+
+    if(resultBox){
+
+        resultBox.style.display =
+            "block";
+
+    }
+
+
+    const percentage =
+        Math.round(
+            (
+                score /
+                questions.length
+            ) * 100
+        );
+
+
+    const resultText =
+        document.getElementById(
+            "resultText"
+        );
+
+
+    if(resultText){
+
+        resultText.innerHTML =
+
+            "You scored <strong>" +
+
+            score +
+
+            " / " +
+
+            questions.length +
+
+            "</strong> (" +
+
+            percentage +
+
+            "%) in <strong>" +
+
+            practiceTopic +
+
+            "</strong>.";
+
+    }
+
+
+    /* =============================================
+       SAVE PRACTICE RESULT
+    ============================================= */
+
+    try{
+
+        localStorage.setItem(
+
+            "vrrittamPracticeResult",
+
+            JSON.stringify({
+
+                subject:
+                    practiceSubject,
+
+                topic:
+                    practiceTopic,
+
+                duration:
+                    practiceDuration,
+
+                score:
+                    score,
+
+                total:
+                    questions.length,
+
+                percentage:
+                    percentage,
+
+                completedAt:
+                    new Date().toISOString()
+
+            })
+
+        );
+
+    }
+    catch(error){
+
+        console.warn(
+            "VRRITTAM: Could not save practice result.",
+            error
+        );
+
+    }
+
+
+    console.log(
+        "VRRITTAM Practice Completed",
+        {
+            subject:
+                practiceSubject,
+
+            topic:
+                practiceTopic,
+
+            score:
+                score,
+
+            total:
+                questions.length,
+
+            percentage:
+                percentage
+        }
+    );
+
+}
+
+
+/* =====================================================
+   13. BACK BUTTON
+===================================================== */
+
+function goBack(){
+
+    /*
+       If this page was opened from AI Copilot,
+       return there.
+    */
+
+    if(
+        document.referrer &&
+        document.referrer.includes(
+            "ai-copilot.html"
+        )
+    ){
+
+        window.location.href =
+            "ai-copilot.html";
+
+        return;
+
+    }
+
+
+    /*
+       Otherwise use browser history.
+    */
+
+    if(
+        window.history.length > 1
+    ){
+
+        window.history.back();
+
+        return;
+
+    }
+
+
+    /*
+       Final safe fallback.
+    */
+
+    window.location.href =
+        "ai-copilot.html";
+
+}
+
+
+/* =====================================================
+   14. DASHBOARD
+===================================================== */
+
+function openDashboard(){
+
+    window.location.href =
+        "student-dashboard.html";
+
+}
+
+
+/* =====================================================
+   15. PAGE START
+===================================================== */
+
+showQuestion();
+
+
+/* =====================================================
+   16. DEBUG INFORMATION
+===================================================== */
+
+console.log(
+    "=========================================="
+);
+
+console.log(
+    "VRRITTAM AI GUIDED PRACTICE"
+);
+
+console.log(
+    "=========================================="
+);
+
+console.log(
+    "Subject:",
+    practiceSubject
+);
+
+console.log(
+    "Class:",
+    "8th Standard"
+);
+
+console.log(
+    "Topic:",
+    practiceTopic
+);
+
+console.log(
+    "Duration:",
+    practiceDuration
+);
+
+console.log(
+    "Questions:",
+    questions.length
+);
+
+console.log(
+    "=========================================="
+);
+
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>Add Student - VRRITTAM</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7fb;
+    color:#1f2937;
+}
+
+/* HEADER */
+
+.header{
+
+    background:#173f67;
+    color:white;
+
+    padding:18px 25px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+}
+
+.header h1{
+    margin:0;
+    font-size:24px;
+}
+
+.header p{
+    margin:5px 0 0;
+    font-size:13px;
+    opacity:.9;
+}
+
+.back-btn{
+
+    border:none;
+    background:white;
+    color:#173f67;
+
+    padding:10px 18px;
+
+    border-radius:7px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+/* MAIN */
+
+.main{
+
+    max-width:950px;
+
+    margin:30px auto;
+
+    padding:0 20px;
+
+}
+
+/* CARD */
+
+.card{
+
+    background:white;
+
+    border-radius:14px;
+
+    padding:30px;
+
+    box-shadow:
+    0 4px 15px rgba(0,0,0,.08);
+
+}
+
+.card-header{
+
+    border-bottom:1px solid #e5e7eb;
+
+    padding-bottom:15px;
+
+    margin-bottom:25px;
+
+}
+
+.card-header h2{
+
+    margin:0;
+
+    color:#173f67;
+
+}
+
+.card-header p{
+
+    margin:6px 0 0;
+
+    color:#64748b;
+
+    font-size:14px;
+
+}
+
+/* FORM */
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr 1fr;
+
+    gap:20px;
+
+}
+
+.form-group{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.full{
+
+    grid-column:1/-1;
+
+}
+
+label{
+
+    font-weight:bold;
+
+    font-size:14px;
+
+    margin-bottom:7px;
+
+}
+
+input,
+select,
+textarea{
+
+    width:100%;
+
+    padding:12px;
+
+    border:1px solid #cbd5e1;
+
+    border-radius:8px;
+
+    font-size:14px;
+
+    outline:none;
+
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+
+    border-color:#1769c2;
+
+    box-shadow:
+    0 0 0 3px rgba(23,105,194,.10);
+
+}
+
+textarea{
+
+    min-height:90px;
+
+    resize:vertical;
+
+}
+
+/* BUTTONS */
+
+.button-row{
+
+    margin-top:28px;
+
+    display:flex;
+
+    justify-content:flex-end;
+
+    gap:12px;
+
+}
+
+.cancel-btn{
+
+    border:none;
+
+    background:#e5e7eb;
+
+    color:#374151;
+
+    padding:12px 24px;
+
+    border-radius:8px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+.save-btn{
+
+    border:none;
+
+    background:#1769c2;
+
+    color:white;
+
+    padding:12px 28px;
+
+    border-radius:8px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+}
+
+.save-btn:hover{
+
+    background:#12559d;
+
+}
+
+/* MESSAGE */
+
+.message{
+
+    display:none;
+
+    margin-top:20px;
+
+    padding:15px;
+
+    border-radius:8px;
+
+    font-weight:bold;
+
+}
+
+.success{
+
+    background:#dcfce7;
+
+    color:#166534;
+
+}
+
+.error{
+
+    background:#fee2e2;
+
+    color:#991b1b;
+
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+    .form-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .full{
+
+        grid-column:auto;
+
+    }
+
+    .button-row{
+
+        flex-direction:column;
+
+    }
+
+    .cancel-btn,
+    .save-btn{
+
+        width:100%;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+<!-- HEADER -->
+
+<header class="header">
+
+<div>
+
+<h1>🎓 Add Student</h1>
+
+<p>
+VRRITTAM School Administration
+</p>
+
+</div>
+
+<button
+class="back-btn"
+onclick="goBack()">
+
+← Student List
+
+</button>
+
+</header>
+
+
+
+<!-- MAIN -->
+
+<main class="main">
+
+<div class="card">
+
+
+<div class="card-header">
+
+<h2>
+Student Registration
+</h2>
+
+<p>
+Add a new student to VRRITTAM Demo School.
+</p>
+
+</div>
+
+
+
+<form
+id="studentForm"
+onsubmit="saveStudent(event)">
+
+
+<div class="form-grid">
+
+
+<!-- NAME -->
+
+<div class="form-group">
+
+<label>
+Student Name *
+</label>
+
+<input
+id="studentName"
+type="text"
+placeholder="Enter student name"
+required>
+
+</div>
+
+
+
+<!-- DOB -->
+
+<div class="form-group">
+
+<label>
+Date of Birth
+</label>
+
+<input
+id="dateOfBirth"
+type="date">
+
+</div>
+
+
+
+<!-- GENDER -->
+
+<div class="form-group">
+
+<label>
+Gender
+</label>
+
+<select id="gender">
+
+<option value="">
+Select Gender
+</option>
+
+<option value="Male">
+Male
+</option>
+
+<option value="Female">
+Female
+</option>
+
+<option value="Other">
+Other
+</option>
+
+</select>
+
+</div>
+
+
+
+<!-- CLASS -->
+
+<div class="form-group">
+
+<label>
+Class *
+</label>
+
+<select
+id="studentClass"
+required>
+
+<option value="">
+Select Class
+</option>
+
+<option value="6">
+Class 6
+</option>
+
+<option value="7">
+Class 7
+</option>
+
+<option value="8">
+Class 8
+</option>
+
+<option value="9">
+Class 9
+</option>
+
+<option value="10">
+Class 10
+</option>
+
+<option value="11">
+Class 11
+</option>
+
+<option value="12">
+Class 12
+</option>
+
+</select>
+
+</div>
+
+
+
+<!-- SECTION -->
+
+<div class="form-group">
+
+<label>
+Section
+</label>
+
+<select id="section">
+
+<option value="">
+Select Section
+</option>
+
+<option value="A">
+A
+</option>
+
+<option value="B">
+B
+</option>
+
+<option value="C">
+C
+</option>
+
+<option value="D">
+D
+</option>
+
+</select>
+
+</div>
+
+
+
+<!-- PARENT -->
+
+<div class="form-group">
+
+<label>
+Parent / Guardian Name *
+</label>
+
+<input
+id="parentName"
+type="text"
+placeholder="Enter parent name"
+required>
+
+</div>
+
+
+
+<!-- PHONE -->
+
+<div class="form-group">
+
+<label>
+Parent Phone *
+</label>
+
+<input
+id="parentPhone"
+type="tel"
+placeholder="Enter parent phone number"
+required>
+
+</div>
+
+
+
+<!-- EMAIL -->
+
+<div class="form-group">
+
+<label>
+Parent Email
+</label>
+
+<input
+id="parentEmail"
+type="email"
+placeholder="Enter parent email">
+
+</div>
+
+
+
+<!-- ADDRESS -->
+
+<div class="form-group full">
+
+<label>
+Address
+</label>
+
+<textarea
+id="studentAddress"
+placeholder="Enter residential address">
+</textarea>
+
+</div>
+
+
+</div>
+
+
+
+<!-- BUTTONS -->
+
+<div class="button-row">
+
+
+<button
+type="button"
+class="cancel-btn"
+onclick="goBack()">
+
+Cancel
+
+</button>
+
+
+<button
+type="submit"
+class="save-btn">
+
+Save Student
+
+</button>
+
+
+</div>
+
+
+</form>
+
+
+
+<div
+id="message"
+class="message">
+
+</div>
+
+
+</div>
+
+</main>
+
+
+
+<script>
+
+/* ==========================================
+   BACK
+========================================== */
+
+function goBack(){
+
+    window.location.href =
+        "student-list.html";
+
+}
+
+
+/* ==========================================
+   LOAD STUDENTS
+========================================== */
+
+function getStudents(){
+
+    const saved =
+        localStorage.getItem(
+            "VRRITTAM_STUDENTS"
+        );
+
+    if(!saved){
+
+        return [];
+
+    }
+
+    try{
+
+        const students =
+            JSON.parse(saved);
+
+        if(Array.isArray(students)){
+
+            return students;
+
+        }
+
+    }
+    catch(error){
+
+        console.log(
+            "Student data read error",
+            error
+        );
+
+    }
+
+    return [];
+
+}
+
+
+/* ==========================================
+   SAVE STUDENT
+========================================== */
+
+function saveStudent(event){
+
+    event.preventDefault();
+
+
+    /* GET VALUES */
+
+    const name =
+        document
+        .getElementById("studentName")
+        .value
+        .trim();
+
+
+    const dob =
+        document
+        .getElementById("dateOfBirth")
+        .value;
+
+
+    const gender =
+        document
+        .getElementById("gender")
+        .value;
+
+
+    const className =
+        document
+        .getElementById("studentClass")
+        .value;
+
+
+    const section =
+        document
+        .getElementById("section")
+        .value;
+
+
+    const parentName =
+        document
+        .getElementById("parentName")
+        .value
+        .trim();
+
+
+    const parentPhone =
+        document
+        .getElementById("parentPhone")
+        .value
+        .trim();
+
+
+    const parentEmail =
+        document
+        .getElementById("parentEmail")
+        .value
+        .trim();
+
+
+    const address =
+        document
+        .getElementById("studentAddress")
+        .value
+        .trim();
+
+
+
+    /* VALIDATION */
+
+    if(
+        name === "" ||
+        className === "" ||
+        parentName === "" ||
+        parentPhone === ""
+    ){
+
+        showMessage(
+            "Please complete all required fields.",
+            "error"
+        );
+
+        return;
+
+    }
+
+
+
+    /*
+       IMPORTANT:
+
+       Same parent phone number is ALLOWED.
+
+       One parent can have:
+       Child 1
+       Child 2
+       Child 3
+
+       Therefore we do NOT block
+       duplicate phone numbers.
+    */
+
+
+
+    /* LOAD EXISTING DATA */
+
+    let students =
+        getStudents();
+
+
+
+    /* CREATE STUDENT */
+
+    const student = {
+
+        id:
+            "STU-" +
+            Date.now(),
+
+        name:
+            name,
+
+        dateOfBirth:
+            dob,
+
+        gender:
+            gender,
+
+        className:
+            className,
+
+        section:
+            section,
+
+        parentName:
+            parentName,
+
+        parentPhone:
+            parentPhone,
+
+        parentEmail:
+            parentEmail,
+
+        address:
+            address,
+
+        status:
+            "Active",
+
+        createdAt:
+            new Date()
+            .toISOString()
+
+    };
+
+
+
+    /* ADD */
+
+    students.push(student);
+
+
+
+    /* SAVE MAIN STUDENT DATABASE */
+
+    localStorage.setItem(
+
+        "VRRITTAM_STUDENTS",
+
+        JSON.stringify(
+            students
+        )
+
+    );
+
+
+
+    /* ==========================================
+       UPDATE VRRITTAM MASTER DATA
+    ========================================== */
+
+    let data = {};
+
+    const existingData =
+        localStorage.getItem(
+            "VRRITTAM_DATA"
+        );
+
+
+    if(existingData){
+
+        try{
+
+            data =
+                JSON.parse(
+                    existingData
+                );
+
+        }
+        catch(error){
+
+            data = {};
+
+        }
+
+    }
+
+
+
+    if(!data.school){
+
+        data.school = {};
+
+    }
+
+
+    if(!data.school.students){
+
+        data.school.students = {};
+
+    }
+
+
+
+    data.school.students.total =
+        students.length;
+
+
+    data.school.students.active =
+        students.filter(
+            function(item){
+
+                return item.status === "Active";
+
+            }
+        ).length;
+
+
+
+    /* SAVE MASTER DATA */
+
+    localStorage.setItem(
+
+        "VRRITTAM_DATA",
+
+        JSON.stringify(
+            data
+        )
+
+    );
+
+
+
+    /* ==========================================
+       SUCCESS
+    ========================================== */
+
+    showMessage(
+
+        "✅ Student saved successfully. Student ID: "
+        + student.id,
+
+        "success"
+
+    );
+
+
+
+    /* RESET FORM */
+
+    document
+    .getElementById(
+        "studentForm"
+    )
+    .reset();
+
+
+
+    /*
+       RETURN TO STUDENT LIST
+       AFTER 1 SECOND
+    */
+
+    setTimeout(
+
+        function(){
+
+            window.location.href =
+                "student-list.html";
+
+        },
+
+        1000
+
+    );
+
+}
+
+
+/* ==========================================
+   MESSAGE
+========================================== */
+
+function showMessage(
+    text,
+    type
+){
+
+    const box =
+        document.getElementById(
+            "message"
+        );
+
+
+    box.className =
+        "message " +
+        type;
+
+
+    box.textContent =
+        text;
+
+
+    box.style.display =
+        "block";
+
+}
+
+</script>
+
+
+</body>
+
+</html>

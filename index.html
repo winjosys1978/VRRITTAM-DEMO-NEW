@@ -1,0 +1,2349 @@
+<!DOCTYPE html>
+<html lang="ta">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>VRRITTAM | Education Copilot</title>
+
+
+<style>
+
+/* =================================================
+   GLOBAL
+================================================= */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#f5f9fd;
+    color:#222;
+}
+
+
+/* =================================================
+   NAVIGATION
+================================================= */
+
+nav{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:12px 50px;
+
+    background:rgba(255,255,255,.96);
+
+    box-shadow:
+        0 3px 15px rgba(0,0,0,.10);
+
+    position:sticky;
+    top:0;
+    z-index:9999;
+}
+
+.logo{
+    height:65px;
+}
+
+.menu{
+    display:flex;
+    align-items:center;
+    gap:28px;
+}
+
+.menu a{
+    text-decoration:none;
+    color:#003366;
+    font-size:17px;
+    font-weight:bold;
+    transition:.3s;
+}
+
+.menu a:hover{
+    color:#1565C0;
+}
+
+
+/* =================================================
+   HERO
+================================================= */
+
+.hero{
+    position:relative;
+
+    min-height:720px;
+
+    display:flex;
+    align-items:center;
+
+    overflow:hidden;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0,51,102,.96) 0%,
+            rgba(0,51,102,.82) 42%,
+            rgba(0,51,102,.25) 100%
+        ),
+        url("assets/student-learning.jpg")
+        center/cover no-repeat;
+}
+
+
+/* watermark */
+
+.hero::after{
+
+    content:"VRRITTAM";
+
+    position:absolute;
+
+    right:-80px;
+    bottom:-50px;
+
+    font-size:180px;
+
+    font-weight:bold;
+
+    color:rgba(255,255,255,.045);
+
+    transform:rotate(-15deg);
+
+    pointer-events:none;
+}
+
+
+.hero-content{
+
+    position:relative;
+
+    z-index:2;
+
+    width:100%;
+
+    max-width:1200px;
+
+    margin:auto;
+
+    padding:70px 35px;
+
+    color:white;
+}
+
+
+/* =================================================
+   MADE IN INDIA
+================================================= */
+
+.india-banner{
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    margin-bottom:25px;
+
+    padding:8px 18px;
+
+    border-radius:30px;
+
+    background:rgba(255,255,255,.13);
+
+    backdrop-filter:blur(8px);
+
+    border:1px solid
+    rgba(255,255,255,.25);
+}
+
+.india-banner img{
+    width:38px;
+    border-radius:4px;
+}
+
+.india-banner h3{
+    color:#ffb000;
+    font-size:18px;
+}
+
+
+/* =================================================
+   HERO TEXT
+================================================= */
+
+.hero h1{
+
+    font-size:72px;
+
+    margin-bottom:10px;
+
+    letter-spacing:2px;
+}
+
+.hero h2{
+
+    font-size:30px;
+
+    color:#ffcf55;
+
+    margin-bottom:25px;
+}
+
+.hero p{
+
+    max-width:720px;
+
+    font-size:20px;
+
+    line-height:1.8;
+
+    color:#f2f6fa;
+}
+
+
+/* =================================================
+   BUTTON
+================================================= */
+
+.btn{
+
+    display:inline-block;
+
+    margin-top:35px;
+
+    padding:15px 40px;
+
+    background:#1565C0;
+
+    color:white;
+
+    text-decoration:none;
+
+    border-radius:40px;
+
+    font-size:19px;
+
+    font-weight:bold;
+
+    box-shadow:
+        0 8px 20px
+        rgba(0,0,0,.25);
+
+    transition:.3s;
+}
+
+.btn:hover{
+
+    background:#ff9800;
+
+    transform:translateY(-3px);
+}
+
+
+/* =================================================
+   INTRO STRIP
+================================================= */
+
+.intro-strip{
+
+    background:white;
+
+    padding:55px 30px;
+
+    text-align:center;
+
+    position:relative;
+}
+
+.intro-strip h2{
+
+    color:#003366;
+
+    font-size:38px;
+
+    margin-bottom:15px;
+}
+
+.intro-strip p{
+
+    max-width:900px;
+
+    margin:auto;
+
+    color:#555;
+
+    font-size:19px;
+
+    line-height:1.8;
+}
+
+
+/* =================================================
+   VISUAL ROLE SECTION
+================================================= */
+
+.visual-section{
+
+    padding:80px 6%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #eef7ff,
+            #ffffff
+        );
+
+    position:relative;
+}
+
+.visual-section::before{
+
+    content:"VRRITTAM";
+
+    position:absolute;
+
+    left:-100px;
+    top:150px;
+
+    font-size:150px;
+
+    font-weight:bold;
+
+    color:rgba(21,101,192,.035);
+
+    transform:rotate(-90deg);
+
+    pointer-events:none;
+}
+
+
+.section-title{
+
+    text-align:center;
+
+    color:#003366;
+
+    font-size:46px;
+
+    margin-bottom:12px;
+
+    position:relative;
+    z-index:2;
+}
+
+.section-subtitle{
+
+    text-align:center;
+
+    color:#666;
+
+    font-size:20px;
+
+    margin-bottom:55px;
+
+    position:relative;
+    z-index:2;
+}
+
+
+.visual-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:35px;
+
+    max-width:1250px;
+
+    margin:auto;
+
+    position:relative;
+
+    z-index:2;
+}
+
+
+.visual-card{
+
+    position:relative;
+
+    min-height:430px;
+
+    border-radius:24px;
+
+    overflow:hidden;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,.14);
+
+    background:white;
+
+    transition:.35s;
+}
+
+.visual-card:hover{
+
+    transform:
+        translateY(-8px);
+
+    box-shadow:
+        0 18px 35px
+        rgba(0,0,0,.20);
+}
+
+
+.visual-card img{
+
+    width:100%;
+
+    height:430px;
+
+    object-fit:cover;
+
+    display:block;
+}
+
+
+.visual-overlay{
+
+    position:absolute;
+
+    left:0;
+    right:0;
+    bottom:0;
+
+    padding:35px;
+
+    color:white;
+
+    background:
+        linear-gradient(
+            transparent,
+            rgba(0,35,70,.95)
+        );
+}
+
+
+.visual-overlay h3{
+
+    font-size:29px;
+
+    margin-bottom:10px;
+}
+
+.visual-overlay p{
+
+    font-size:17px;
+
+    line-height:1.6;
+}
+
+
+/* =================================================
+   ABOUT
+================================================= */
+
+.about-section{
+
+    padding:90px 7%;
+
+    background:white;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+
+.about-section::after{
+
+    content:"VRRITTAM";
+
+    position:absolute;
+
+    right:-100px;
+    top:100px;
+
+    font-size:160px;
+
+    font-weight:bold;
+
+    color:rgba(0,51,102,.035);
+
+    transform:rotate(90deg);
+
+    pointer-events:none;
+}
+
+
+.about-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(auto-fit,minmax(300px,1fr));
+
+    gap:30px;
+
+    max-width:1200px;
+
+    margin:auto;
+
+    position:relative;
+
+    z-index:2;
+}
+
+
+.about-card{
+
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #f3f8fd
+        );
+
+    border-radius:20px;
+
+    padding:32px;
+
+    border:1px solid #e1ebf5;
+
+    box-shadow:
+        0 8px 22px
+        rgba(0,0,0,.07);
+
+    transition:.3s;
+}
+
+.about-card:hover{
+
+    transform:translateY(-5px);
+
+    box-shadow:
+        0 15px 30px
+        rgba(0,0,0,.12);
+}
+
+
+.about-card h3{
+
+    color:#003366;
+
+    font-size:25px;
+
+    margin-bottom:18px;
+}
+
+.about-card p{
+
+    color:#555;
+
+    font-size:17px;
+
+    line-height:1.8;
+}
+
+.about-card ul{
+
+    padding-left:20px;
+
+    color:#555;
+}
+
+.about-card li{
+
+    margin-bottom:13px;
+
+    line-height:1.6;
+}
+
+
+/* =================================================
+   SHIFT
+================================================= */
+
+.shift-section{
+
+    padding:90px 7%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #003366,
+            #1565C0
+        );
+
+    color:white;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.shift-section::after{
+
+    content:"AI";
+
+    position:absolute;
+
+    right:40px;
+    bottom:-70px;
+
+    font-size:300px;
+
+    font-weight:bold;
+
+    color:rgba(255,255,255,.035);
+}
+
+.shift-container{
+
+    max-width:1150px;
+
+    margin:auto;
+
+    position:relative;
+
+    z-index:2;
+}
+
+.shift-title{
+
+    font-size:48px;
+
+    margin-bottom:15px;
+}
+
+.shift-subtitle{
+
+    font-size:23px;
+
+    color:#ffcf55;
+
+    margin-bottom:30px;
+}
+
+.shift-text{
+
+    font-size:18px;
+
+    line-height:1.9;
+
+    max-width:1000px;
+}
+
+
+/* =================================================
+   TWO COLUMNS
+================================================= */
+
+.two-column{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:30px;
+
+    margin-top:50px;
+}
+
+.info-box{
+
+    background:
+        rgba(255,255,255,.10);
+
+    border:
+        1px solid
+        rgba(255,255,255,.20);
+
+    padding:32px;
+
+    border-radius:20px;
+
+    backdrop-filter:blur(8px);
+}
+
+.info-box h3{
+
+    color:#ffcf55;
+
+    font-size:26px;
+
+    margin-bottom:20px;
+}
+
+.info-box ul{
+
+    padding-left:22px;
+}
+
+.info-box li{
+
+    margin-bottom:13px;
+
+    line-height:1.6;
+}
+
+
+/* =================================================
+   PRINCIPLES
+================================================= */
+
+.principles{
+
+    padding:90px 7%;
+
+    background:#f4f8fc;
+}
+
+.principles-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(5,1fr);
+
+    gap:18px;
+
+    max-width:1200px;
+
+    margin:45px auto 0;
+}
+
+.principle{
+
+    background:white;
+
+    padding:28px 20px;
+
+    border-radius:18px;
+
+    text-align:center;
+
+    box-shadow:
+        0 7px 20px
+        rgba(0,0,0,.08);
+}
+
+.principle-number{
+
+    color:#ff9800;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    margin-bottom:12px;
+}
+
+.principle h4{
+
+    color:#003366;
+
+    font-size:20px;
+
+    margin-bottom:13px;
+}
+
+.principle p{
+
+    color:#666;
+
+    line-height:1.6;
+}
+
+
+/* =================================================
+   FOUNDER'S DESK
+================================================= */
+
+.founder-section{
+
+    padding:90px 7%;
+
+    background:#ffffff;
+
+    position:relative;
+
+    overflow:hidden;
+}
+.founder-watermark{
+    position:absolute;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    width:500px;
+
+    z-index:1;
+
+    pointer-events:none;
+
+    opacity:0.48;
+}
+
+.founder-watermark img{
+    width:100%;
+    height:auto;
+    display:block;
+}
+
+/* FOUNDER CONTENT */
+
+.founder-container{
+
+    max-width:1050px;
+
+    margin:auto;
+
+    position:relative;
+
+    z-index:2;
+}
+
+
+.founder-content{
+
+    background:
+        rgba(255,255,255,0.82);
+
+    border-radius:24px;
+
+    padding:45px;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0,0,0,.10);
+
+    border-left:
+        6px solid #1565C0;
+
+    position:relative;
+
+    z-index:2;
+
+    backdrop-filter:blur(2px);
+}
+
+
+.founder-content p{
+
+    color:#444;
+
+    font-size:18px;
+
+    line-height:1.9;
+
+    margin-bottom:18px;
+
+}
+
+
+.founder-highlight{
+
+    margin:30px 0;
+
+    padding:25px;
+
+    background:#fff8e8;
+
+    border-radius:14px;
+
+    border-left:
+        5px solid #ffb000;
+
+}
+
+
+.founder-highlight p{
+
+    color:#003366;
+
+    font-size:23px;
+
+    font-style:italic;
+
+    margin:0;
+
+}
+
+
+.founder-name{
+
+    margin-top:30px;
+
+    color:#003366;
+
+}
+
+
+.founder-name strong{
+
+    font-size:25px;
+
+}
+
+
+.founder-name span{
+
+    display:block;
+
+    color:#666;
+
+    margin-top:6px;
+
+}
+
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+    .founder-section{
+
+        padding:60px 20px;
+
+    }
+
+    .founder-section::before{
+
+        width:320px;
+        height:320px;
+
+        opacity:0.035;
+
+    }
+
+    .founder-content{
+
+        padding:27px;
+
+    }
+
+    .founder-content p{
+
+        font-size:17px;
+
+        line-height:1.8;
+
+    }
+
+    .founder-highlight p{
+
+        font-size:19px;
+
+    }
+
+}
+
+/* =================================================
+   QUOTE
+================================================= */
+
+.quote-section{
+
+    padding:75px 25px;
+
+    text-align:center;
+
+    background:
+        linear-gradient(
+            135deg,
+            #001f3f,
+            #003366
+        );
+
+    color:white;
+}
+
+.quote-section p{
+
+    max-width:950px;
+
+    margin:auto;
+
+    font-size:28px;
+
+    line-height:1.7;
+
+    font-style:italic;
+}
+
+.quote-section strong{
+
+    color:#ffcf55;
+}
+
+/* =================================================
+   PROFESSIONAL CONTACT SECTION
+================================================= */
+
+.contact{
+    padding:90px 7%;
+    background:
+        linear-gradient(
+            135deg,
+            #eef7ff,
+            #ffffff
+        );
+    position:relative;
+    overflow:hidden;
+}
+
+.contact::before{
+    content:"VRRITTAM";
+
+    position:absolute;
+    right:-90px;
+    top:60px;
+
+    font-size:150px;
+    font-weight:bold;
+
+    color:rgba(0,51,102,.035);
+
+    transform:rotate(90deg);
+
+    pointer-events:none;
+}
+
+.contact-container{
+    max-width:1150px;
+    margin:auto;
+
+    position:relative;
+    z-index:2;
+}
+
+.contact-header{
+    text-align:center;
+    margin-bottom:50px;
+}
+
+.contact-header h2{
+    color:#003366;
+    font-size:44px;
+    margin-bottom:15px;
+}
+
+.contact-header p{
+    color:#666;
+    font-size:19px;
+    line-height:1.7;
+}
+
+.contact-grid{
+    display:grid;
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:25px;
+}
+
+.contact-card{
+    background:white;
+
+    padding:35px 25px;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    border:1px solid #e1ebf5;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0,0,0,.08);
+
+    transition:.3s;
+}
+
+.contact-card:hover{
+    transform:translateY(-7px);
+
+    box-shadow:
+        0 16px 32px
+        rgba(0,0,0,.14);
+}
+
+.contact-icon{
+    font-size:42px;
+    margin-bottom:18px;
+}
+
+.contact-card h3{
+    color:#003366;
+    font-size:23px;
+    margin-bottom:12px;
+}
+
+.contact-card p{
+    color:#666;
+    font-size:16px;
+    line-height:1.7;
+}
+
+.contact-cta{
+    margin-top:45px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #003366,
+            #1565C0
+        );
+
+    color:white;
+
+    padding:35px;
+
+    border-radius:22px;
+
+    text-align:center;
+
+    box-shadow:
+        0 10px 30px
+        rgba(0,51,102,.20);
+}
+
+.contact-cta h3{
+    font-size:28px;
+    margin-bottom:12px;
+}
+
+.contact-cta p{
+    font-size:18px;
+    line-height:1.7;
+    margin-bottom:22px;
+}
+
+.contact-btn{
+    display:inline-block;
+
+    padding:14px 32px;
+
+    background:#ffb000;
+
+    color:#003366;
+
+    text-decoration:none;
+
+    font-size:17px;
+
+    font-weight:bold;
+
+    border-radius:30px;
+
+    transition:.3s;
+}
+
+.contact-btn:hover{
+    background:#ffffff;
+
+    transform:translateY(-2px);
+}
+
+
+/* CONTACT MOBILE */
+
+@media(max-width:800px){
+
+    .contact-grid{
+        grid-template-columns:1fr;
+    }
+
+    .contact-header h2{
+        font-size:36px;
+    }
+
+}
+
+@media(max-width:700px){
+
+    .contact{
+        padding:65px 20px;
+    }
+
+    .contact-card{
+        padding:30px 22px;
+    }
+
+    .contact-cta{
+        padding:28px 20px;
+    }
+
+    .contact-cta h3{
+        font-size:24px;
+    }
+
+}
+
+/* =================================================
+   FOOTER
+================================================= */
+
+footer{
+
+    background:#003366;
+
+    color:white;
+
+    text-align:center;
+
+    padding:40px 20px;
+}
+
+footer img{
+
+    height:60px;
+
+    margin-bottom:12px;
+}
+
+footer h2{
+
+    font-size:22px;
+
+    margin-bottom:8px;
+}
+
+footer h3{
+
+    font-size:27px;
+
+    margin-bottom:12px;
+}
+
+footer p{
+
+    font-size:15px;
+
+    line-height:1.6;
+}
+
+
+/* =================================================
+   MOBILE
+================================================= */
+
+@media(max-width:900px){
+
+    .visual-grid{
+        grid-template-columns:1fr;
+    }
+
+    .two-column{
+        grid-template-columns:1fr;
+    }
+
+    .principles-grid{
+        grid-template-columns:
+            repeat(2,1fr);
+    }
+
+}
+
+
+@media(max-width:700px){
+
+    nav{
+
+        padding:10px 15px;
+
+        flex-wrap:wrap;
+
+        gap:10px;
+    }
+
+    .logo{
+        height:48px;
+    }
+
+    .menu{
+
+        width:100%;
+
+        justify-content:center;
+
+        gap:14px;
+
+        flex-wrap:wrap;
+    }
+
+    .menu a{
+        font-size:14px;
+    }
+
+
+    .hero{
+        min-height:650px;
+    }
+
+    .hero h1{
+        font-size:45px;
+    }
+
+    .hero h2{
+        font-size:22px;
+    }
+
+    .hero p{
+        font-size:17px;
+    }
+
+
+    .section-title{
+        font-size:34px;
+    }
+
+    .shift-title{
+        font-size:36px;
+    }
+
+
+    .principles-grid{
+        grid-template-columns:1fr;
+    }
+
+
+    .founder-content{
+        padding:27px;
+    }
+
+    .founder-highlight p{
+        font-size:19px;
+    }
+
+
+    .quote-section p{
+        font-size:21px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =================================================
+     NAVIGATION
+================================================= -->
+
+<nav>
+
+<img
+    src="assets/vrrittam-logo.png"
+    class="logo"
+    alt="VRRITTAM Logo"
+>
+
+<div class="menu">
+
+<a href="#home">
+Home
+</a>
+
+<a href="#about">
+About
+</a>
+
+<a href="courses.html">
+Courses
+</a>
+
+<a href="#contact">
+Contact
+</a>
+
+<a href="login.html">
+Login
+</a>
+
+</div>
+
+<img
+    src="assets/winjosys-logo.png"
+    class="logo"
+    alt="WinjoSys Logo"
+>
+
+</nav>
+
+
+
+<!-- =================================================
+     HERO
+================================================= -->
+
+<section
+    class="hero"
+    id="home"
+>
+
+<div class="hero-content">
+
+
+<div class="india-banner">
+
+<img
+    src="assets/national-flag.png"
+    alt="India"
+>
+
+<h3>
+Made in India
+</h3>
+
+</div>
+
+
+<h1>
+VRRITTAM
+</h1>
+
+
+<h2>
+கற்க கசடற, வளர்க அதற்குத் தக.
+</h2>
+
+
+<p>
+
+AI Powered Education Copilot for
+Students, Teachers, Parents and Schools.
+
+Learning made smarter, faster and easier
+through technology.
+
+</p>
+
+
+<a
+    href="login.html"
+    class="btn"
+>
+
+Get Started
+
+</a>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =================================================
+     INTRO
+================================================= -->
+
+<section class="intro-strip">
+
+<h2>
+Education. Intelligence. Connection.
+</h2>
+
+<p>
+
+VRRITTAM brings students, teachers, parents
+and educational institutions together through
+an intelligent and connected education ecosystem.
+
+</p>
+
+</section>
+
+
+
+<!-- =================================================
+     VISUAL STORIES
+================================================= -->
+
+<section class="visual-section">
+
+
+<h2 class="section-title">
+One Ecosystem. Four Experiences.
+</h2>
+
+
+<p class="section-subtitle">
+Technology that connects the entire education journey.
+</p>
+
+
+<div class="visual-grid">
+
+
+<!-- STUDENTS -->
+
+<div class="visual-card">
+
+<img
+    src="assets/student-learning.jpg"
+    alt="Students learning"
+>
+
+<div class="visual-overlay">
+
+<h3>
+🎓 Students
+</h3>
+
+<p>
+Learn smarter with personalised guidance,
+AI Education Copilot and connected academic support.
+</p>
+
+</div>
+
+</div>
+
+
+
+<!-- TEACHERS -->
+
+<div class="visual-card">
+
+<img
+    src="assets/teacher-classroom.jpg"
+    alt="Teacher teaching students"
+>
+
+<div class="visual-overlay">
+
+<h3>
+👨‍🏫 Teachers
+</h3>
+
+<p>
+Spend more time teaching and less time
+managing repetitive administrative work.
+</p>
+
+</div>
+
+</div>
+
+
+
+<!-- PARENTS -->
+
+<div class="visual-card">
+
+<img
+    src="assets/parent-mobile.jpg"
+    alt="Parent using education app"
+>
+
+<div class="visual-overlay">
+
+<h3>
+👨‍👩‍👧 Parents
+</h3>
+
+<p>
+Stay connected with attendance, homework,
+marks and important school updates.
+</p>
+
+</div>
+
+</div>
+
+
+
+<!-- SCHOOL -->
+
+<div class="visual-card">
+
+<img
+    src="assets/school-admin.jpg"
+    alt="School administration"
+>
+
+<div class="visual-overlay">
+
+<h3>
+🏫 Schools
+</h3>
+
+<p>
+Operate with connected data, AI insights
+and intelligent school management.
+</p>
+
+</div>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =================================================
+     ABOUT
+================================================= -->
+
+<section
+    class="about-section"
+    id="about"
+>
+
+
+<h2 class="section-title">
+About VRRITTAM
+</h2>
+
+
+<p class="section-subtitle">
+Building the Intelligence Layer for the Future of Education
+</p>
+
+
+<div class="about-grid">
+
+
+<div class="about-card">
+
+<h3>
+01 — Who We Are
+</h3>
+
+<p>
+
+VRRITTAM is an Artificial Intelligence-powered
+education technology platform developed by
+WinjoSys Technologies Private Limited.
+
+</p>
+
+<br>
+
+<p>
+
+We are building a next-generation digital platform
+that empowers educational institutions to operate
+with intelligence, transparency, efficiency and
+meaningful collaboration.
+
+</p>
+
+</div>
+
+
+
+<div class="about-card">
+
+<h3>
+02 — Why We Exist
+</h3>
+
+<p>
+
+Education is one of the world's most important
+systems, yet students, parents, teachers and
+institutions continue to face disconnected
+experiences, fragmented communication and
+administrative complexity.
+
+</p>
+
+<br>
+
+<p>
+
+VRRITTAM was created to bridge these gaps through
+intelligent technology that is simple, scalable
+and human-centered.
+
+</p>
+
+</div>
+
+
+
+<div class="about-card">
+
+<h3>
+03 — What Makes VRRITTAM Different
+</h3>
+
+<ul>
+
+<li>
+AI-First Architecture
+</li>
+
+<li>
+Human-Centered Design
+</li>
+
+<li>
+Connected Education Ecosystem
+</li>
+
+<li>
+Scalable Platform
+</li>
+
+<li>
+Built for India. Designed for the World.
+</li>
+
+</ul>
+
+</div>
+
+
+
+<div class="about-card">
+
+<h3>
+04 — Why Now
+</h3>
+
+<p>
+
+Every major industry has already been transformed
+by intelligence.
+
+Banking evolved.
+
+Healthcare evolved.
+
+Commerce evolved.
+
+Manufacturing evolved.
+
+</p>
+
+<br>
+
+<p>
+
+Education is the next global transformation.
+
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =================================================
+     THE SHIFT
+================================================= -->
+
+<section class="shift-section">
+
+
+<div class="shift-container">
+
+
+<h2 class="shift-title">
+The Shift Has Begun
+</h2>
+
+
+<p class="shift-subtitle">
+Every industry has been transformed by intelligence.
+Education is next.
+</p>
+
+
+<p class="shift-text">
+
+Every major industry has already been transformed
+by intelligence.
+
+Banking evolved. Healthcare evolved.
+Commerce evolved. Manufacturing evolved.
+
+Education is the next global transformation.
+
+The institutions that embrace intelligence today
+will define how the next generation learns tomorrow.
+
+</p>
+
+
+<div class="two-column">
+
+
+<div class="info-box">
+
+<h3>
+Today's Reality
+</h3>
+
+<ul>
+
+<li>
+Disconnected school software systems.
+</li>
+
+<li>
+Teachers spending valuable time on administration.
+</li>
+
+<li>
+Incomplete or delayed parent communication.
+</li>
+
+<li>
+Students lacking continuous academic guidance.
+</li>
+
+<li>
+Administrators struggling with fragmented data.
+</li>
+
+</ul>
+
+</div>
+
+
+
+<div class="info-box">
+
+<h3>
+Our Observation
+</h3>
+
+<ul>
+
+<li>
+Technology should never replace educators.
+</li>
+
+<li>
+Technology should remove complexity.
+</li>
+
+<li>
+Technology should strengthen relationships.
+</li>
+
+<li>
+Technology should empower better decisions.
+</li>
+
+<li>
+Technology should make education more human.
+</li>
+
+</ul>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =================================================
+     FIVE PRINCIPLES
+================================================= -->
+
+<section class="principles">
+
+
+<h2 class="section-title">
+Five Strategic Principles
+</h2>
+
+
+<div class="principles-grid">
+
+
+<div class="principle">
+
+<div class="principle-number">
+01
+</div>
+
+<h4>
+Intelligent Institutions
+</h4>
+
+<p>
+Schools that continuously learn,
+adapt and improve.
+</p>
+
+</div>
+
+
+
+<div class="principle">
+
+<div class="principle-number">
+02
+</div>
+
+<h4>
+Connected Decisions
+</h4>
+
+<p>
+Every stakeholder works from
+one source of truth.
+</p>
+
+</div>
+
+
+
+<div class="principle">
+
+<div class="principle-number">
+03
+</div>
+
+<h4>
+Predictive Operations
+</h4>
+
+<p>
+Identify risks early and
+act before challenges grow.
+</p>
+
+</div>
+
+
+
+<div class="principle">
+
+<div class="principle-number">
+04
+</div>
+
+<h4>
+Human-Centered Intelligence
+</h4>
+
+<p>
+Technology that amplifies
+educators and learners.
+</p>
+
+</div>
+
+
+
+<div class="principle">
+
+<div class="principle-number">
+05
+</div>
+
+<h4>
+Continuous Evolution
+</h4>
+
+<p>
+A platform designed to evolve
+with education.
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- =================================================
+     FOUNDER
+================================================= -->
+
+<section class="founder-section">
+    <div class="founder-watermark">
+
+    <img
+        src="assets/vrrittam-logo.png"
+        alt=""
+    >
+
+</div>
+
+
+<div class="founder-container">
+
+
+<h2 class="section-title">
+From the Founder's Desk
+</h2>
+
+
+<div class="founder-content">
+
+
+<p>
+Dear Partners and Investors,
+</p>
+
+
+<p>
+
+In 2017, an idea took root —
+not in a boardroom, but in my own life as a father.
+
+</p>
+
+
+<p>
+
+Like every parent, I wanted to stay connected
+to my children's learning journey.
+
+Yet I found myself facing the same challenge
+experienced by millions of families:
+a communication gap between parents,
+teachers, students and school administration.
+
+</p>
+
+
+<p>
+
+Important information was fragmented.
+Meaningful collaboration was difficult.
+
+Technology existed, but it wasn't truly bringing
+people together.
+
+</p>
+
+
+<p>
+
+That personal experience became the foundation
+of <strong>VRRITTAM.</strong>
+
+</p>
+
+
+<div class="founder-highlight">
+
+<p>
+
+VRRITTAM was born not from a business opportunity,
+but from a father's responsibility.
+
+</p>
+
+</div>
+
+
+<p>
+
+VRRITTAM was never created simply to build
+another educational application.
+
+It was created to bridge relationships,
+simplify communication and enable every
+stakeholder in education to work together
+with clarity and confidence.
+
+</p>
+
+
+<p>
+
+Our vision is bold.
+
+If a person owns a smartphone,
+VRRITTAM should become one of the applications
+they trust every day for education.
+
+</p>
+
+
+<p>
+
+Not because it is mandatory.
+
+But because it makes education simpler,
+smarter and more connected.
+
+</p>
+
+
+<p>
+
+This is only the beginning of our journey.
+
+</p>
+
+
+<div class="founder-name">
+
+<strong>
+CR. Sathish Kumar
+</strong>
+
+<span>
+Founder & Managing Director<br>
+WinjoSys Technologies Private Limited
+</span>
+
+</div>
+
+
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- =================================================
+     QUOTE
+================================================= -->
+
+<section class="quote-section">
+
+<p>
+
+VRRITTAM is not creating another education
+application.
+
+<strong>
+We are building the digital intelligence
+infrastructure that can power the next generation
+of education.
+</strong>
+
+</p>
+
+</section>
+
+
+<!-- =================================================
+     PROFESSIONAL CONTACT
+================================================= -->
+
+<section
+    class="contact"
+    id="contact"
+>
+
+<div class="contact-container">
+
+    <div class="contact-header">
+
+        <h2>
+            Contact Us
+        </h2>
+
+        <p>
+            Let us connect, collaborate and build
+            the future of intelligent education.
+        </p>
+
+    </div>
+
+
+    <div class="contact-grid">
+
+
+        <!-- COMPANY -->
+
+        <div class="contact-card">
+
+            <div class="contact-icon">
+                🏢
+            </div>
+
+            <h3>
+                WinjoSys Technologies
+            </h3>
+
+            <p>
+                WinjoSys Technologies Private Limited
+            </p>
+
+            <p>
+                Building intelligent technology
+                for the future of education.
+            </p>
+
+        </div>
+
+
+        <!-- PARTNERSHIPS -->
+
+        <div class="contact-card">
+
+            <div class="contact-icon">
+                🤝
+            </div>
+
+            <h3>
+                Partnerships
+            </h3>
+
+            <p>
+                Schools, educational institutions,
+                technology partners and organisations
+                interested in collaborating with VRRITTAM.
+            </p>
+
+        </div>
+
+
+        <!-- INVESTORS -->
+
+        <div class="contact-card">
+
+            <div class="contact-icon">
+                💼
+            </div>
+
+            <h3>
+                Investor Enquiries
+            </h3>
+
+            <p>
+                For investor discussions, strategic
+                partnerships and opportunities to build
+                the future of education technology.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- CTA -->
+
+    <div class="contact-cta">
+
+        <h3>
+            Let's Build the Future of Education Kingdom Together
+        </h3>
+
+        <p>
+            VRRITTAM is building an intelligent,
+            connected education ecosystem for
+            students, teachers, parents and schools.
+        </p>
+
+        <a
+            href="mailto:info@winjosys.com"
+            class="contact-btn"
+        >
+            Contact WinjoSys: winjosys@gmail.com
+        </a>
+
+    </div>
+
+</div>
+
+</section>
+
+<!-- =================================================
+     PREMIUM CORPORATE FOOTER
+================================================= -->
+
+<footer class="premium-footer">
+
+    <div class="footer-glow"></div>
+
+    <div class="footer-container">
+
+    
+
+        <!-- POWERED BY -->
+        <div class="footer-company">
+
+            <p class="powered-label">
+                POWERED BY
+            </p>
+
+            <img
+                src="assets/winjosys-logo.png"
+                class="footer-winjosys-logo"
+                alt="WinjoSys Technologies"
+            >
+
+            <h3>
+                WinjoSys Technologies
+                Private Limited
+            </h3>
+
+            <p>
+                Innovate &nbsp; | &nbsp;
+                Transform &nbsp; | &nbsp;
+                Elevate
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- FOOTER BOTTOM -->
+
+    <div class="footer-divider"></div>
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 WinjoSys Technologies Private Limited.
+            All Rights Reserved.
+        </p>
+
+        <p class="footer-built">
+            Building the future of intelligent education.
+        </p>
+
+    </div>
+
+</footer>

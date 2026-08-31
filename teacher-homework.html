@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Teacher Homework - VRRITTAM</title>
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<style>
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f4f7fb;
+}
+
+.header{
+
+    background:#1a237e;
+    color:white;
+    padding:20px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+}
+
+.header h2{
+    margin:0;
+}
+
+.back-btn{
+
+    background:white;
+    color:#1a237e;
+    border:none;
+    padding:10px 18px;
+    border-radius:20px;
+    cursor:pointer;
+
+}
+
+.container{
+
+    padding:20px;
+
+}
+
+.card{
+
+    background:white;
+    padding:20px;
+
+    border-radius:15px;
+
+    box-shadow:0 2px 8px #ccc;
+
+    margin-bottom:20px;
+
+}
+
+input,
+textarea,
+select{
+
+    width:100%;
+
+    padding:12px;
+
+    margin-top:10px;
+
+    border-radius:8px;
+
+    border:1px solid #ccc;
+
+    box-sizing:border-box;
+
+}
+
+textarea{
+
+    height:120px;
+
+}
+
+.publish-btn{
+
+    width:100%;
+
+    background:#3949ab;
+
+    color:white;
+
+    border:none;
+
+    padding:15px;
+
+    border-radius:25px;
+
+    font-size:16px;
+
+    cursor:pointer;
+
+}
+
+.success{
+
+    display:none;
+
+    background:#e8f5e9;
+
+    color:#2e7d32;
+
+    padding:12px;
+
+    margin-top:15px;
+
+    border-radius:8px;
+
+    text-align:center;
+
+    font-weight:bold;
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<div class="header">
+
+<h2>
+📚 Create Homework
+</h2>
+
+<button
+class="back-btn"
+onclick="goBack()">
+
+Back
+
+</button>
+
+</div>
+
+
+
+<div class="container">
+
+
+<div class="card">
+
+
+<h3>
+Select Class
+</h3>
+
+<select id="homeworkClass">
+
+<option value="Class 10 - A">
+Class 10 - A
+</option>
+
+<option value="Class 10 - B">
+Class 10 - B
+</option>
+
+<option value="Class 9 - A">
+Class 9 - A
+</option>
+
+</select>
+
+
+
+<h3>
+Select Subject
+</h3>
+
+<select id="homeworkSubject">
+
+<option value="Mathematics">
+Mathematics
+</option>
+
+<option value="Science">
+Science
+</option>
+
+<option value="English">
+English
+</option>
+
+</select>
+
+
+
+<h3>
+Homework Title
+</h3>
+
+<input
+type="text"
+id="homeworkTitle"
+placeholder="Enter homework title">
+
+
+
+<h3>
+Homework Description
+</h3>
+
+<textarea
+id="homeworkDescription"
+placeholder="Write homework details"></textarea>
+
+
+
+<h3>
+Submission Date
+</h3>
+
+<input
+type="date"
+id="submissionDate">
+
+
+
+<h3>
+Attach File (Demo)
+</h3>
+
+<input
+type="file"
+id="homeworkFile">
+
+
+</div>
+
+
+
+<button
+class="publish-btn"
+onclick="publishHomework()">
+
+Publish Homework ✅
+
+</button>
+
+
+
+<div
+id="successMessage"
+class="success">
+
+Homework Published Successfully ✅
+
+</div>
+
+
+</div>
+
+
+
+<!-- SHARED DATA -->
+
+<script src="vrrittam-data.js"></script>
+
+
+<script>
+
+
+/* =====================================
+   PUBLISH HOMEWORK
+===================================== */
+
+function publishHomework(){
+
+
+    const selectedClass =
+        document.getElementById(
+            "homeworkClass"
+        ).value;
+
+
+    const selectedSubject =
+        document.getElementById(
+            "homeworkSubject"
+        ).value;
+
+
+    const title =
+        document.getElementById(
+            "homeworkTitle"
+        ).value.trim();
+
+
+    const description =
+        document.getElementById(
+            "homeworkDescription"
+        ).value.trim();
+
+
+    const submissionDate =
+        document.getElementById(
+            "submissionDate"
+        ).value;
+
+
+    /* VALIDATION */
+
+    if(title === ""){
+
+        alert(
+            "Please enter homework title."
+        );
+
+        return;
+
+    }
+
+
+    if(description === ""){
+
+        alert(
+            "Please enter homework description."
+        );
+
+        return;
+
+    }
+
+
+    if(submissionDate === ""){
+
+        alert(
+            "Please select submission date."
+        );
+
+        return;
+
+    }
+
+
+    /* LOAD SHARED DATA */
+
+    const data =
+        loadVRRITTAMData();
+
+
+    /* CREATE HOMEWORK OBJECT */
+
+    const homework = {
+
+        className:
+            selectedClass,
+
+        subject:
+            selectedSubject,
+
+        title:
+            title,
+
+        description:
+            description,
+
+        submissionDate:
+            submissionDate,
+
+        publishedAt:
+            new Date().toISOString()
+
+    };
+
+
+    /* CREATE ARRAY IF NEEDED */
+
+    if(!data.homework){
+
+        data.homework = [];
+
+    }
+
+
+    /* ADD NEW HOMEWORK */
+
+    data.homework.push(
+        homework
+    );
+
+
+    /* SAVE SHARED DATA */
+
+    localStorage.setItem(
+
+        "VRRITTAM_DATA",
+
+        JSON.stringify(data)
+
+    );
+
+
+    /* SUCCESS MESSAGE */
+
+    const message =
+        document.getElementById(
+            "successMessage"
+        );
+
+
+    message.style.display =
+        "block";
+
+
+    /* CLEAR FORM */
+
+    document.getElementById(
+        "homeworkTitle"
+    ).value = "";
+
+
+    document.getElementById(
+        "homeworkDescription"
+    ).value = "";
+
+
+    document.getElementById(
+        "submissionDate"
+    ).value = "";
+
+
+    document.getElementById(
+        "homeworkFile"
+    ).value = "";
+
+
+    setTimeout(function(){
+
+        message.style.display =
+            "none";
+
+    },3000);
+
+
+}
+
+
+
+/* =====================================
+   BACK TO TEACHER DASHBOARD
+===================================== */
+
+function goBack(){
+
+    window.location.href =
+        "teacher-dashboard.html";
+
+}
+
+</script>
+
+
+</body>
+
+</html>

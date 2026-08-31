@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>
+VRRITTAM AI Copilot V2.0
+</title>
+
+<link rel="stylesheet"
+href="ai-copilot.css">
+
+</head>
+
+<body>
+
+
+<!-- =============================== -->
+<!-- HEADER -->
+<!-- =============================== -->
+
+<header class="header">
+
+<div class="headerLeft">
+
+<img
+src="assets/vrrittam-logo.png"
+class="logo">
+
+<h1>
+
+VRRITTAM
+
+</h1>
+
+</div>
+
+
+<div class="headerCenter">
+
+<h2>
+
+AI Curriculum Intelligence Copilot
+
+</h2>
+
+<p>
+
+Learn • Analyse • Improve
+
+</p>
+
+</div>
+
+
+<div class="headerRight">
+
+<img
+src="assets/winjosys-logo.png"
+class="companyLogo">
+
+</div>
+
+</header>
+
+
+
+<!-- =============================== -->
+<!-- TOP NAVIGATION -->
+<!-- =============================== -->
+
+<nav class="topMenu">
+
+<button onclick="goBack()">
+
+⬅ Back
+
+</button>
+
+<button onclick="openDashboard()">
+
+🏠 Dashboard
+
+</button>
+
+<button onclick="logout()">
+
+🚪 Logout
+
+</button>
+
+</nav>
+
+
+
+<!-- =============================== -->
+<!-- MAIN CONTAINER -->
+<!-- =============================== -->
+
+<div class="mainContainer">
+
+    <!-- ====================================== -->
+<!-- STUDENT PROFILE CARD -->
+<!-- ====================================== -->
+
+<section class="studentProfile">
+
+<h2>Student Profile</h2>
+
+<div class="profileGrid">
+
+<div class="profileItem">
+<label>Name</label>
+<p id="studentName">Loading...</p>
+</div>
+
+<div class="profileItem">
+<label>School</label>
+<p id="schoolName">Loading...</p>
+</div>
+
+<div class="profileItem">
+<label>Class</label>
+<p id="studentClass">Loading...</p>
+</div>
+
+<div class="profileItem">
+<label>Board</label>
+<p id="boardName">Loading...</p>
+</div>
+
+<div class="profileItem">
+<label>Language</label>
+<p id="languageName">Loading...</p>
+</div>
+
+<div class="profileItem">
+<label>Academic Year</label>
+<p id="academicYear">Loading...</p>
+</div>
+
+</div>
+
+</section>
+
+
+
+<!-- ====================================== -->
+<!-- AI DASHBOARD -->
+<!-- ====================================== -->
+
+<section class="aiDashboard">
+
+<h2>
+
+VRRITTAM AI Learning Intelligence
+
+</h2>
+
+<p>
+
+Personalised Curriculum Intelligence Engine
+
+</p>
+
+</section>
+
+
+
+<!-- ====================================== -->
+<!-- TODAY'S LEARNING STATE -->
+<!-- ====================================== -->
+
+<section class="learningState">
+
+<h2>
+
+Today's Learning State
+
+</h2>
+
+<div id="learningStateBox">
+
+</div>
+
+</section>
+
+<!-- ====================================== -->
+<!-- PHASE 2.4B -->
+<!-- STUDENT AI ANALYTICS DASHBOARD -->
+<!-- ====================================== -->
+
+<section class="studentAIAnalytics">
+
+<h2>
+
+📊 Student AI Analytics
+
+</h2>
+
+<div id="studentAIAnalyticsBox">
+    
+</div>
+
+</section>
+
+
+
+<!-- ====================================== -->
+<!-- NEXT BEST ACTION -->
+<!-- ====================================== -->
+
+<section class="nextAction">
+
+<h2>
+
+My Next Best Learning Action
+
+</h2>
+
+<div id="nextActionBox">
+
+</div>
+
+</section>
+
+<!-- ====================================== -->
+<!-- LEARNING GAP ANALYSIS -->
+<!-- ====================================== -->
+
+<section class="learningGap">
+
+<h2>
+
+Learning Gap Analysis
+
+</h2>
+
+<div id="learningGapBox">
+
+</div>
+
+</section>
+
+
+
+<!-- ====================================== -->
+<!-- AI CHAT -->
+<!-- ====================================== -->
+
+<section class="aiChat">
+
+<h2>
+
+Ask VRRITTAM AI
+
+</h2>
+
+<div class="chatContainer">
+
+<div id="chatMessages">
+
+</div>
+
+<input
+type="text"
+id="questionBox"
+placeholder="Ask your curriculum question...">
+
+<button onclick="askAI()">
+
+Ask AI
+
+</button>
+
+</div>
+
+</section>
+
+
+
+<!-- ====================================== -->
+<!-- AI INSIGHT -->
+<!-- ====================================== -->
+
+<section class="aiInsight">
+
+<h2>
+
+Today's AI Insight
+
+</h2>
+
+<div id="aiInsightBox">
+
+</div>
+
+</section>
+
+<!-- ====================================== -->
+<!-- PHASE 2.3C -->
+<!-- PARENT AI GUIDANCE -->
+<!-- ====================================== -->
+
+<section class="parentAIGuidance">
+
+<h2>
+
+👨‍👩‍👧 Parent AI Guidance
+
+</h2>
+
+<div id="parentAIGuidanceBox">
+
+<p class="parent-guidance-card">
+
+<strong>VRRITTAM Parent Support</strong>
+
+</p>
+
+<p>
+
+Parent support is designed to encourage the student's
+learning journey without creating pressure.
+
+</p>
+
+<hr>
+
+<p>
+
+🎯 <strong>Today's Support</strong><br>
+
+Spend a few minutes discussing the student's
+learning activity.
+
+</p>
+
+<hr>
+
+<p>
+
+💡 <strong>Guidance Principle</strong><br>
+
+Encourage • Listen • Support • Celebrate Progress
+
+</p>
+
+<hr>
+
+<p>
+
+🛡️ <strong>Student Well-being</strong><br>
+
+VRRITTAM does not use AI predictions to label,
+diagnose, or pressure students.
+
+</p>
+
+</div>
+
+</section>
+
+
+
+<!-- ====================================== -->
+<!-- MY REMINDERS -->
+<!-- ====================================== -->
+
+<section class="reminderArea">
+
+<h2>
+
+My Reminders
+
+</h2>
+
+<div id="reminderBox">
+
+</div>
+
+</section>
+
+<!-- ====================================== -->
+<!-- LEARNING PROGRESS -->
+<!-- ====================================== -->
+
+<section class="progressArea">
+
+<h2>
+
+Learning Progress
+
+</h2>
+
+<div id="progressBox">
+
+</div>
+
+</section>
+
+
+
+<!-- ====================================== -->
+<!-- AI SAFETY RULES -->
+<!-- ====================================== -->
+
+<section class="aiRules">
+
+<h2>
+
+Protected AI Rules
+
+</h2>
+
+<ul>
+
+<li>✅ Curriculum Locked AI</li>
+
+<li>✅ Class Based Access</li>
+
+<li>✅ Subject Based Intelligence</li>
+
+<li>✅ No Random Internet Content</li>
+
+<li>✅ Safe & Age Appropriate Responses</li>
+
+<li>✅ Student Privacy Protected</li>
+
+</ul>
+
+</section>
+
+
+
+<!-- ====================================== -->
+<!-- SAFE LEARNING -->
+<!-- ====================================== -->
+
+<section class="safeLearning">
+
+<h2>
+
+Protected Learning Environment
+
+</h2>
+
+<p>
+
+VRRITTAM provides a curriculum-focused learning environment where students can access only approved learning content for their class and subjects.
+
+</p>
+
+</section>
+
+
+
+<!-- ====================================== -->
+<!-- AI FEATURES -->
+<!-- ====================================== -->
+
+<section class="featureArea">
+
+<h2>
+
+VRRITTAM AI Features
+
+</h2>
+
+<ul>
+
+<li>Learning Intelligence Engine</li>
+
+<li>Student Learning Passport</li>
+
+<li>Learning Gap Detection</li>
+
+<li>Next Best Learning Action</li>
+
+<li>School Early Warning System</li>
+
+<li>Action Centre</li>
+
+<li>Teacher Workload Reduction</li>
+
+<li>Protected Learning AI</li>
+
+</ul>
+
+</section>
+
+
+
+<!-- ====================================== -->
+<!-- INVESTOR NOTE -->
+<!-- ====================================== -->
+
+<section class="investorBox">
+
+<h2>
+
+VRRITTAM Intelligence Layer
+
+</h2>
+
+<p>
+
+AI is not our product.
+
+</p>
+
+<p>
+
+AI is the intelligence engine inside VRRITTAM.
+
+</p>
+
+<p>
+
+Our product is a Student-Centric Learning Intelligence Platform.
+
+</p>
+
+</section>
+
+
+
+<!-- ====================================== -->
+<!-- FOOTER -->
+<!-- ====================================== -->
+
+<footer class="footer">
+
+<p>
+
+© 2026 VRRITTAM
+
+Powered by WinjoSys Technologies Pvt Ltd
+
+</p>
+
+</footer>
+
+</div>
+
+<script src="ai-copilot.js"></script>
+
+</body>
+
+</html>

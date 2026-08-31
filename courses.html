@@ -1,0 +1,1650 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>VRRITTAM - Courses</title>
+
+<style>
+
+/* =========================================
+   GLOBAL
+========================================= */
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+
+    margin:0;
+
+    font-family:
+    Arial,
+    sans-serif;
+
+    background:#f4f7fb;
+
+    color:#1f2937;
+
+}
+
+
+/* =========================================
+   HEADER
+========================================= */
+
+.header{
+
+    background:#1a237e;
+
+    color:white;
+
+    padding:16px 25px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+
+    gap:15px;
+
+}
+
+
+.header-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:12px;
+
+}
+
+
+.logo{
+
+    width:50px;
+
+    height:50px;
+
+    object-fit:contain;
+
+}
+
+
+.header-title h1{
+
+    margin:0;
+
+    font-size:23px;
+
+}
+
+
+.header-title p{
+
+    margin:4px 0 0;
+
+    font-size:13px;
+
+    opacity:.9;
+
+}
+
+
+.company-logo{
+
+    width:120px;
+
+    max-height:45px;
+
+    object-fit:contain;
+
+}
+
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+.navigation{
+
+    max-width:1100px;
+
+    margin:20px auto 0;
+
+    padding:0 20px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    gap:10px;
+
+}
+
+
+.nav-btn{
+
+    border:none;
+
+    padding:10px 18px;
+
+    border-radius:8px;
+
+    background:#e5e7eb;
+
+    color:#1f2937;
+
+    cursor:pointer;
+
+    font-size:14px;
+
+    font-weight:bold;
+
+}
+
+
+.nav-btn:hover{
+
+    background:#d1d5db;
+
+}
+
+
+/* =========================================
+   MAIN CONTAINER
+========================================= */
+
+.container{
+
+    max-width:1100px;
+
+    margin:20px auto;
+
+    padding:0 20px 40px;
+
+}
+
+
+/* =========================================
+   WELCOME
+========================================= */
+
+.welcome-card{
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:15px;
+
+    box-shadow:
+    0 3px 12px
+    rgba(0,0,0,.08);
+
+    margin-bottom:20px;
+
+}
+
+
+.welcome-card h2{
+
+    margin-top:0;
+
+    color:#1e3a8a;
+
+}
+
+
+.welcome-card p{
+
+    margin:7px 0;
+
+}
+
+
+/* =========================================
+   SECTION
+========================================= */
+
+.section{
+
+    background:white;
+
+    padding:25px;
+
+    border-radius:15px;
+
+    box-shadow:
+    0 3px 12px
+    rgba(0,0,0,.08);
+
+    margin-bottom:20px;
+
+}
+
+
+.section h2{
+
+    margin-top:0;
+
+    color:#1e3a8a;
+
+}
+
+
+/* =========================================
+   CURRICULUM PROFILE
+========================================= */
+
+.profile-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(180px,1fr));
+
+    gap:15px;
+
+}
+
+
+.profile-box{
+
+    background:#f1f5f9;
+
+    padding:16px;
+
+    border-radius:10px;
+
+}
+
+
+.profile-box span{
+
+    display:block;
+
+    color:#64748b;
+
+    font-size:13px;
+
+}
+
+
+.profile-box strong{
+
+    display:block;
+
+    margin-top:5px;
+
+    font-size:17px;
+
+}
+
+
+/* =========================================
+   COURSE GRID
+========================================= */
+
+.course-grid{
+
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(200px,1fr));
+
+    gap:18px;
+
+}
+
+
+.course-card{
+
+    background:#f8fafc;
+
+    border:1px solid #e2e8f0;
+
+    border-radius:12px;
+
+    padding:20px;
+
+    cursor:pointer;
+
+    transition:.2s;
+
+}
+
+
+.course-card:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:
+    0 5px 15px
+    rgba(0,0,0,.10);
+
+    border-color:#3949ab;
+
+}
+
+
+.course-icon{
+
+    font-size:35px;
+
+}
+
+
+.course-card h3{
+
+    margin:10px 0 5px;
+
+    color:#1e3a8a;
+
+}
+
+
+.course-card p{
+
+    margin:5px 0;
+
+    color:#64748b;
+
+    font-size:14px;
+
+}
+
+
+.progress-small{
+
+    height:8px;
+
+    background:#e5e7eb;
+
+    border-radius:10px;
+
+    margin-top:12px;
+
+    overflow:hidden;
+
+}
+
+
+.progress-small-bar{
+
+    height:100%;
+
+    background:#16a34a;
+
+}
+
+
+/* =========================================
+   PROGRESS TABLE
+========================================= */
+
+.progress-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+
+.progress-table th,
+.progress-table td{
+
+    padding:13px;
+
+    border-bottom:
+    1px solid #e5e7eb;
+
+    text-align:left;
+
+}
+
+
+.progress-table th{
+
+    background:#f1f5f9;
+
+    color:#334155;
+
+}
+
+
+.status{
+
+    display:inline-block;
+
+    padding:5px 9px;
+
+    border-radius:20px;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+}
+
+
+.completed{
+
+    background:#dcfce7;
+
+    color:#166534;
+
+}
+
+
+.in-progress{
+
+    background:#fef3c7;
+
+    color:#92400e;
+
+}
+
+
+.upcoming{
+
+    background:#e0e7ff;
+
+    color:#3730a3;
+
+}
+
+
+/* =========================================
+   CHAPTER PANEL
+========================================= */
+
+#chapterSection{
+
+    display:none;
+
+}
+
+
+.chapter-list{
+
+    display:grid;
+
+    gap:10px;
+
+}
+
+
+.chapter-item{
+
+    padding:15px;
+
+    background:#f8fafc;
+
+    border:1px solid #e2e8f0;
+
+    border-radius:10px;
+
+    cursor:pointer;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+
+.chapter-item:hover{
+
+    background:#eff6ff;
+
+}
+
+
+.chapter-name{
+
+    font-weight:bold;
+
+}
+
+
+.chapter-status{
+
+    font-size:12px;
+
+    font-weight:bold;
+
+}
+
+
+/* =========================================
+   AI BUTTON
+========================================= */
+
+.ai-button{
+
+    margin-top:15px;
+
+    padding:10px 16px;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:#3949ab;
+
+    color:white;
+
+    cursor:pointer;
+
+    font-weight:bold;
+
+}
+
+
+.ai-button:hover{
+
+    background:#283593;
+
+}
+
+
+/* =========================================
+   FOOTER
+========================================= */
+
+.footer{
+
+    text-align:center;
+
+    margin-top:30px;
+
+    color:#64748b;
+
+    font-size:13px;
+
+}
+
+
+/* =========================================
+   MOBILE
+========================================= */
+
+@media(max-width:650px){
+
+    .header{
+
+        justify-content:center;
+
+        text-align:center;
+
+    }
+
+
+    .header-left{
+
+        flex-direction:column;
+
+    }
+
+
+    .navigation{
+
+        flex-direction:column;
+
+    }
+
+
+    .nav-btn{
+
+        width:100%;
+
+    }
+
+
+    .progress-table{
+
+        font-size:13px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================
+     HEADER
+========================================= -->
+
+<header class="header">
+
+
+    <div class="header-left">
+
+
+        <img
+        src="assets/vrrittam-logo.png"
+        class="logo"
+        alt="VRRITTAM Logo">
+
+
+        <div class="header-title">
+
+            <h1>
+                VRRITTAM
+            </h1>
+
+            <p id="pageSubtitle">
+                Courses
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+    <img
+    src="assets/winjosys-logo.png"
+    class="company-logo"
+    alt="WinjoSys Technologies">
+
+
+</header>
+
+
+
+<!-- =========================================
+     NAVIGATION
+========================================= -->
+
+<div class="navigation">
+
+
+    <button
+    class="nav-btn"
+    onclick="goBack()">
+
+        ← <span id="backText">Back</span>
+
+    </button>
+
+
+    <button
+    class="nav-btn"
+    onclick="goDashboard()">
+
+        <span id="dashboardIcon">🎓</span>
+
+        <span id="dashboardText">
+            Dashboard
+        </span>
+
+    </button>
+
+
+</div>
+
+
+
+<!-- =========================================
+     MAIN
+========================================= -->
+
+<div class="container">
+
+
+    <!-- =====================================
+         WELCOME
+    ====================================== -->
+
+    <div class="welcome-card">
+
+
+        <h2 id="welcomeTitle">
+            📚 Welcome to Courses
+        </h2>
+
+
+        <p id="welcomeDescription">
+            View your curriculum, subjects,
+            chapters and learning progress.
+        </p>
+
+
+        <p>
+
+            <strong>
+                User:
+            </strong>
+
+            <span id="userRole">
+                Student
+            </span>
+
+        </p>
+
+
+        <p>
+
+            <strong>
+                School:
+            </strong>
+
+            VRRITTAM Demo School
+
+        </p>
+
+
+    </div>
+
+
+
+    <!-- =====================================
+         CURRICULUM PROFILE
+    ====================================== -->
+
+    <section class="section">
+
+
+        <h2>
+            📘 Curriculum Profile
+        </h2>
+
+
+        <div class="profile-grid">
+
+
+            <div class="profile-box">
+
+                <span>
+                    Board
+                </span>
+
+                <strong>
+                    Tamil Nadu State Board
+                </strong>
+
+            </div>
+
+
+            <div class="profile-box">
+
+                <span>
+                    Class
+                </span>
+
+                <strong>
+                    8th Standard
+                </strong>
+
+            </div>
+
+
+            <div class="profile-box">
+
+                <span>
+                    Medium
+                </span>
+
+                <strong>
+                    Tamil
+                </strong>
+
+            </div>
+
+
+            <div class="profile-box">
+
+                <span>
+                    Academic Year
+                </span>
+
+                <strong>
+                    2026 - 2027
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================
+         MY COURSES
+    ====================================== -->
+
+    <section class="section">
+
+
+        <h2 id="coursesTitle">
+            📖 My Courses
+        </h2>
+
+
+        <div
+        id="courseGrid"
+        class="course-grid">
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================
+         CURRICULUM PROGRESS
+    ====================================== -->
+
+    <section class="section">
+
+
+        <h2>
+            📊 Curriculum Progress
+        </h2>
+
+
+        <div style="overflow-x:auto;">
+
+
+            <table class="progress-table">
+
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Subject
+                        </th>
+
+                        <th>
+                            Progress
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Topics
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody
+                id="progressTable">
+
+                </tbody>
+
+
+            </table>
+
+
+        </div>
+
+
+    </section>
+
+
+
+    <!-- =====================================
+         CHAPTERS
+    ====================================== -->
+
+    <section
+    id="chapterSection"
+    class="section">
+
+
+        <h2
+        id="chapterTitle">
+
+        </h2>
+
+
+        <p
+        id="chapterDescription">
+
+        </p>
+
+
+        <div
+        id="chapterList"
+        class="chapter-list">
+
+        </div>
+
+
+        <button
+        class="ai-button"
+        onclick="goAI()">
+
+            🤖 <span id="aiButtonText">
+                Ask AI Copilot
+            </span>
+
+        </button>
+
+
+    </section>
+
+
+
+    <!-- =====================================
+         FOOTER
+    ====================================== -->
+
+    <div class="footer">
+
+        © 2026 VRRITTAM |
+        Powered by WinjoSys Technologies Pvt Ltd
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+/* =========================================
+   ROLE DETECTION
+========================================= */
+
+const urlParams =
+    new URLSearchParams(
+        window.location.search
+    );
+
+
+let role =
+    urlParams.get("role");
+
+
+/*
+   Safety default:
+
+   If role is not supplied,
+   assume student.
+
+   This prevents a student
+   from accidentally being
+   redirected to Teacher Dashboard.
+*/
+
+if(
+    role !== "teacher" &&
+    role !== "student"
+){
+
+    role = "student";
+
+}
+
+
+
+/* =========================================
+   ROLE BASED UI
+========================================= */
+
+function configureRole(){
+
+    if(role === "student"){
+
+        document.title =
+            "VRRITTAM - Student Courses";
+
+
+        document.getElementById(
+            "pageSubtitle"
+        ).textContent =
+            "Student Courses & Curriculum";
+
+
+        document.getElementById(
+            "welcomeTitle"
+        ).textContent =
+            "📚 Welcome to My Courses";
+
+
+        document.getElementById(
+            "welcomeDescription"
+        ).textContent =
+            "View your syllabus, subjects, chapters and learning progress.";
+
+
+        document.getElementById(
+            "userRole"
+        ).textContent =
+            "Student";
+
+
+        document.getElementById(
+            "dashboardIcon"
+        ).textContent =
+            "🎓";
+
+
+        document.getElementById(
+            "dashboardText"
+        ).textContent =
+            "Student Dashboard";
+
+
+        document.getElementById(
+            "aiButtonText"
+        ).textContent =
+            "Ask Student AI Copilot";
+
+    }
+
+
+    else{
+
+        document.title =
+            "VRRITTAM - Teacher Courses";
+
+
+        document.getElementById(
+            "pageSubtitle"
+        ).textContent =
+            "Teacher Curriculum & Courses";
+
+
+        document.getElementById(
+            "welcomeTitle"
+        ).textContent =
+            "📚 Welcome to Teacher Courses";
+
+
+        document.getElementById(
+            "welcomeDescription"
+        ).textContent =
+            "Manage your curriculum, subjects, chapters and teaching progress.";
+
+
+        document.getElementById(
+            "userRole"
+        ).textContent =
+            "Teacher";
+
+
+        document.getElementById(
+            "dashboardIcon"
+        ).textContent =
+            "👨‍🏫";
+
+
+        document.getElementById(
+            "dashboardText"
+        ).textContent =
+            "Teacher Dashboard";
+
+
+        document.getElementById(
+            "aiButtonText"
+        ).textContent =
+            "Ask Teacher AI Copilot";
+
+    }
+
+}
+
+
+
+/* =========================================
+   COURSE DATABASE
+========================================= */
+
+const courses = [
+
+    {
+        name:"Tamil",
+        icon:"📝",
+        progress:76,
+        topics:12,
+
+        chapters:[
+            "Chapter 1",
+            "Chapter 2",
+            "Chapter 3",
+            "Grammar",
+            "Reading Practice"
+        ]
+
+    },
+
+
+    {
+        name:"English",
+        icon:"📘",
+        progress:81,
+        topics:14,
+
+        chapters:[
+            "Chapter 1",
+            "Chapter 2",
+            "Chapter 3",
+            "Grammar",
+            "Reading & Writing"
+        ]
+
+    },
+
+
+    {
+        name:"Mathematics",
+        icon:"➗",
+        progress:72,
+        topics:15,
+
+        chapters:[
+            "Chapter 1",
+            "Chapter 2",
+            "Chapter 3",
+            "Fractions",
+            "Algebra"
+        ]
+
+    },
+
+
+    {
+        name:"Science",
+        icon:"🔬",
+        progress:68,
+        topics:13,
+
+        chapters:[
+            "Chapter 1",
+            "Chapter 2",
+            "Chapter 3",
+            "Physics Basics",
+            "Biology Basics"
+        ]
+
+    },
+
+
+    {
+        name:"Social Science",
+        icon:"🌍",
+        progress:70,
+        topics:11,
+
+        chapters:[
+            "History",
+            "Geography",
+            "Civics",
+            "Economics",
+            "Chapter Revision"
+        ]
+
+    }
+
+];
+
+
+
+/* =========================================
+   DISPLAY COURSES
+========================================= */
+
+function loadCourses(){
+
+    const grid =
+        document.getElementById(
+            "courseGrid"
+        );
+
+
+    let html = "";
+
+
+    courses.forEach(
+        function(course,index){
+
+            html += `
+
+                <div
+                class="course-card"
+                onclick="openCourse(${index})">
+
+                    <div class="course-icon">
+
+                        ${course.icon}
+
+                    </div>
+
+                    <h3>
+
+                        ${course.name}
+
+                    </h3>
+
+                    <p>
+
+                        ${course.topics}
+                        topics available
+
+                    </p>
+
+
+                    <div class="progress-small">
+
+                        <div
+                        class="progress-small-bar"
+                        style="width:${course.progress}%">
+
+                        </div>
+
+                    </div>
+
+
+                    <p>
+
+                        <strong>
+                            ${course.progress}%
+                        </strong>
+
+                        curriculum completed
+
+                    </p>
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    grid.innerHTML = html;
+
+}
+
+
+
+/* =========================================
+   CURRICULUM PROGRESS TABLE
+========================================= */
+
+function loadProgress(){
+
+    const table =
+        document.getElementById(
+            "progressTable"
+        );
+
+
+    let html = "";
+
+
+    courses.forEach(
+        function(course){
+
+            let status = "";
+
+            let statusClass = "";
+
+
+            if(course.progress >= 80){
+
+                status =
+                    "Completed / On Track";
+
+                statusClass =
+                    "completed";
+
+            }
+
+            else if(course.progress >= 65){
+
+                status =
+                    "In Progress";
+
+                statusClass =
+                    "in-progress";
+
+            }
+
+            else{
+
+                status =
+                    "Upcoming";
+
+                statusClass =
+                    "upcoming";
+
+            }
+
+
+            html += `
+
+                <tr>
+
+                    <td>
+
+                        <strong>
+                            ${course.icon}
+                            ${course.name}
+                        </strong>
+
+                    </td>
+
+
+                    <td>
+
+                        ${course.progress}%
+
+                    </td>
+
+
+                    <td>
+
+                        <span
+                        class="status ${statusClass}">
+
+                            ${status}
+
+                        </span>
+
+                    </td>
+
+
+                    <td>
+
+                        ${course.topics}
+
+                    </td>
+
+                </tr>
+
+            `;
+
+        }
+    );
+
+
+    table.innerHTML = html;
+
+}
+
+
+
+/* =========================================
+   OPEN COURSE
+========================================= */
+
+function openCourse(index){
+
+    const course =
+        courses[index];
+
+
+    document.getElementById(
+        "chapterSection"
+    ).style.display =
+        "block";
+
+
+    document.getElementById(
+        "chapterTitle"
+    ).innerHTML =
+
+        course.icon +
+        " " +
+        course.name +
+        " - Class 8";
+
+
+    document.getElementById(
+        "chapterDescription"
+    ).innerHTML =
+
+        role === "student"
+
+        ? "Your approved syllabus topics for " +
+          course.name + "."
+
+        : "Approved curriculum topics for " +
+          course.name + ".";
+
+
+    const list =
+        document.getElementById(
+            "chapterList"
+        );
+
+
+    let html = "";
+
+
+    course.chapters.forEach(
+        function(chapter,index){
+
+            let status =
+                index === 0
+                ? "Completed"
+                : index === 1
+                ? "In Progress"
+                : "Upcoming";
+
+
+            let statusClass =
+                status === "Completed"
+                ? "completed"
+                : status === "In Progress"
+                ? "in-progress"
+                : "upcoming";
+
+
+            html += `
+
+                <div
+                class="chapter-item"
+                onclick="openChapter(
+                    '${course.name}',
+                    '${chapter}'
+                )">
+
+
+                    <div>
+
+                        <div class="chapter-name">
+
+                            📖 ${chapter}
+
+                        </div>
+
+                    </div>
+
+
+                    <span
+                    class="status ${statusClass}">
+
+                        ${status}
+
+                    </span>
+
+
+                </div>
+
+            `;
+
+        }
+    );
+
+
+    list.innerHTML = html;
+
+
+    document.getElementById(
+        "chapterSection"
+    ).scrollIntoView({
+
+        behavior:"smooth"
+
+    });
+
+}
+
+
+
+/* =========================================
+   OPEN CHAPTER
+========================================= */
+
+function openChapter(
+    subject,
+    chapter
+){
+
+    alert(
+
+        "📘 " +
+        subject +
+        "\n\n" +
+
+        "Chapter: " +
+        chapter +
+        "\n\n" +
+
+        (
+            role === "student"
+
+            ? "Student learning content is ready for this demo."
+
+            : "Teacher curriculum content is ready for this demo."
+        )
+
+    );
+
+}
+
+
+
+/* =========================================
+   AI COPILOT
+========================================= */
+
+function goAI(){
+
+    if(role === "student"){
+
+        window.location.href =
+            "ai-copilot.html";
+
+    }
+
+    else{
+
+        window.location.href =
+            "teacher-ai-copilot.html";
+
+    }
+
+}
+
+
+
+/* =========================================
+   DASHBOARD
+========================================= */
+
+function goDashboard(){
+
+    if(role === "student"){
+
+        window.location.href =
+            "student-dashboard.html";
+
+    }
+
+    else{
+
+        window.location.href =
+            "teacher-dashboard.html";
+
+    }
+
+}
+
+
+
+/* =========================================
+   BACK
+========================================= */
+
+function goBack(){
+
+    if(role === "student"){
+
+        window.location.href =
+            "student-dashboard.html";
+
+    }
+
+    else{
+
+        window.location.href =
+            "teacher-dashboard.html";
+
+    }
+
+}
+
+
+
+/* =========================================
+   INITIALIZE
+========================================= */
+
+configureRole();
+
+loadCourses();
+
+loadProgress();
+
+
+console.log(
+    "VRRITTAM Courses ACTIVE | Role:",
+    role
+);
+
+</script>
+
+
+</body>
+
+</html>

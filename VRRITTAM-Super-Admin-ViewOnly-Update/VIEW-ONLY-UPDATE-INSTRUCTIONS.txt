@@ -1,0 +1,67 @@
+VRRITTAM SUPER ADMIN — VIEW ONLY UPDATE
+==========================================
+
+1. Keep your existing:
+   super-admin-dashboard-v2.html
+   super-admin-dashboard-v3.js
+
+2. Copy:
+   super-admin-dashboard-v3-viewonly-addon.js
+   into the same repository folder as super-admin-dashboard-v3.js
+
+3. In super-admin-dashboard-v2.html, immediately AFTER:
+      <script src="super-admin-dashboard-v3.js"></script>
+   add:
+      <script src="super-admin-dashboard-v3-viewonly-addon.js"></script>
+
+4. Save all files.
+
+5. Refresh Chrome with Ctrl+F5.
+
+WHAT THIS UPDATE ADDS
+---------------------
+• School Management:
+  - Pending and Approved schools can be opened.
+  - View Details shows complete registered school information.
+  - Pending schools retain Approve + View.
+  - Approved schools show View Details.
+
+• School Admin Management:
+  - View Only.
+  - State → District → Taluk → School filtering.
+  - Search by name / ID / school.
+  - No Create/Edit/Delete.
+
+• User Management:
+  - View Only.
+  - State → District → Taluk → School filtering.
+  - Search.
+  - No Create/Edit/Delete.
+
+• Student Management:
+  - View Only.
+  - State → District → Taluk → School filtering.
+  - Search.
+  - No Create/Edit/Delete.
+
+• Teacher Management:
+  - View Only.
+  - State → District → Taluk → School filtering.
+  - Search.
+  - No Create/Edit/Delete.
+
+• Parent Management:
+  - View Only.
+  - State → District → Taluk → School filtering.
+  - Search.
+  - No Create/Edit/Delete.
+
+IMPORTANT
+---------
+The existing Super Admin V3 JS already stores school records in localStorage.
+This add-on reads those same VRRITTAM localStorage records and does not change
+the existing registration/approval workflow.
+
+User/Student/Teacher/Parent/School Admin tables will show records only when
+those records exist in VRRITTAM_USERS. Until School Admin creates those users,
+the View Only screens correctly show "No records found".

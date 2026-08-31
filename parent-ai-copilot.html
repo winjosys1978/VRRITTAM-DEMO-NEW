@@ -1,0 +1,905 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>VRRITTAM - Parent AI Copilot</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#eef5ff;
+    color:#222;
+}
+
+header{
+    background:#1565C0;
+    color:white;
+    padding:18px 20px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+}
+
+.header-left h1{
+    font-size:23px;
+    margin-bottom:5px;
+}
+
+.header-left p{
+    font-size:14px;
+}
+
+.back-btn{
+    background:white;
+    color:#1565C0;
+    border:none;
+    padding:10px 16px;
+    border-radius:8px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.container{
+    max-width:900px;
+    margin:auto;
+    padding:25px 20px;
+}
+
+.card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,.10);
+    margin-bottom:20px;
+}
+
+.card h2{
+    color:#003366;
+    margin-bottom:12px;
+}
+
+.student-info p{
+    margin:7px 0;
+    color:#555;
+}
+
+/* AI DATA */
+
+.data-grid{
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(150px,1fr));
+    gap:12px;
+}
+
+.data-box{
+    padding:15px;
+    background:#f5f9ff;
+    border-radius:10px;
+    text-align:center;
+}
+
+.data-box h3{
+    color:#003366;
+    font-size:15px;
+    margin-bottom:8px;
+}
+
+.data-value{
+    font-size:24px;
+    font-weight:bold;
+    color:#1565C0;
+}
+
+/* INPUT */
+
+textarea{
+    width:100%;
+    min-height:110px;
+    padding:14px;
+    border:1px solid #ccc;
+    border-radius:8px;
+    font-size:16px;
+    resize:vertical;
+}
+
+textarea:focus{
+    outline:none;
+    border-color:#1565C0;
+}
+
+.ask-btn{
+    width:100%;
+    margin-top:12px;
+    padding:13px;
+    border:none;
+    border-radius:8px;
+    background:#1565C0;
+    color:white;
+    font-size:16px;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.ask-btn:hover{
+    background:#0D47A1;
+}
+
+/* RESPONSE */
+
+.response{
+    display:none;
+    margin-top:20px;
+    padding:18px;
+    background:#f5f9ff;
+    border-left:5px solid #1565C0;
+    border-radius:8px;
+}
+
+.response h3{
+    color:#1565C0;
+    margin-bottom:10px;
+}
+
+.response p{
+    line-height:1.6;
+    color:#444;
+}
+
+/* QUICK QUESTIONS */
+
+.quick-grid{
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(180px,1fr));
+    gap:10px;
+    margin-top:12px;
+}
+
+.quick-btn{
+    padding:12px;
+    border:1px solid #1565C0;
+    background:white;
+    color:#1565C0;
+    border-radius:8px;
+    cursor:pointer;
+}
+
+.quick-btn:hover{
+    background:#e3f2fd;
+}
+
+footer{
+    text-align:center;
+    padding:25px 10px;
+    color:#666;
+    font-size:13px;
+}
+
+@media(max-width:600px){
+
+    header{
+        padding:15px;
+    }
+
+    .header-left h1{
+        font-size:19px;
+    }
+
+    .back-btn{
+        width:100%;
+        margin-top:12px;
+    }
+
+    .container{
+        padding:18px 12px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+<div class="header-left">
+
+<h1>
+🤖 VRRITTAM Parent AI Copilot
+</h1>
+
+<p>
+Education Copilot • Parent Support
+</p>
+
+</div>
+
+
+<button
+class="back-btn"
+onclick="goBack()">
+
+← Back to Parent Dashboard
+
+</button>
+
+</header>
+
+
+
+<div class="container">
+
+
+<!-- STUDENT -->
+
+<div class="card student-info">
+
+<h2>
+👨‍🎓 Student Information
+</h2>
+
+<p>
+<strong>Name:</strong>
+<span id="studentName"></span>
+</p>
+
+<p>
+<strong>Class:</strong>
+<span id="studentClass"></span>
+</p>
+
+<p>
+<strong>Academic Year:</strong>
+<span id="academicYear"></span>
+</p>
+
+</div>
+
+
+
+<!-- LIVE DATA -->
+
+<div class="card">
+
+<h2>
+📊 Current Student Data
+</h2>
+
+<div class="data-grid">
+
+
+<div class="data-box">
+
+<h3>
+Attendance
+</h3>
+
+<div class="data-value">
+<span id="attendance"></span>%
+</div>
+
+</div>
+
+
+<div class="data-box">
+
+<h3>
+Homework Pending
+</h3>
+
+<div class="data-value">
+<span id="pendingHomework"></span>
+</div>
+
+</div>
+
+
+<div class="data-box">
+
+<h3>
+Academic Average
+</h3>
+
+<div class="data-value">
+<span id="averageMarks"></span>%
+</div>
+
+</div>
+
+
+<div class="data-box">
+
+<h3>
+Fee Pending
+</h3>
+
+<div class="data-value">
+₹<span id="pendingFees"></span>
+</div>
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- COPILOT -->
+
+<div class="card">
+
+<h2>
+💬 Ask VRRITTAM AI Copilot
+</h2>
+
+<textarea
+id="question"
+placeholder="Ask about attendance, homework, marks, fees or overall performance...">
+</textarea>
+
+
+<button
+class="ask-btn"
+onclick="askAI()">
+
+🤖 Ask AI Copilot
+
+</button>
+
+
+<div
+id="response"
+class="response">
+
+<h3>
+🤖 VRRITTAM AI Insight
+</h3>
+
+<p id="answer"></p>
+
+</div>
+
+
+
+<h3 style="margin-top:25px;color:#003366;">
+💡 Suggested Questions
+</h3>
+
+
+<div class="quick-grid">
+
+<button
+class="quick-btn"
+onclick="askQuick('overall')">
+
+🎯 Overall Performance
+
+</button>
+
+
+<button
+class="quick-btn"
+onclick="askQuick('attendance')">
+
+📅 Attendance
+
+</button>
+
+
+<button
+class="quick-btn"
+onclick="askQuick('homework')">
+
+📝 Homework
+
+</button>
+
+
+<button
+class="quick-btn"
+onclick="askQuick('marks')">
+
+📊 Marks
+
+</button>
+
+
+<button
+class="quick-btn"
+onclick="askQuick('fees')">
+
+💰 Fees
+
+</button>
+
+
+<button
+class="quick-btn"
+onclick="askQuick('improvement')">
+
+🚀 Improvement
+
+</button>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+
+<footer>
+
+<p>
+VRRITTAM – Education Copilot
+</p>
+
+<p>
+கற்க கசடற, வளர்க அதற்குத் தக.
+</p>
+
+</footer>
+
+
+
+<script>
+
+/* =====================================
+   VRRITTAM DEMO DATA
+===================================== */
+
+const student = {
+
+    name: "Arun Kumar",
+
+    className: "10 - A",
+
+    academicYear: "2026 - 2027",
+
+    attendance: 92,
+
+    totalHomework: 3,
+
+    pendingHomework: 2,
+
+    completedHomework: 1,
+
+    averageMarks: 78,
+
+    pendingFees: 15000
+
+};
+
+
+
+/* =====================================
+   DISPLAY LIVE DATA
+===================================== */
+
+document.getElementById("studentName").innerText =
+student.name;
+
+document.getElementById("studentClass").innerText =
+student.className;
+
+document.getElementById("academicYear").innerText =
+student.academicYear;
+
+document.getElementById("attendance").innerText =
+student.attendance;
+
+document.getElementById("pendingHomework").innerText =
+student.pendingHomework;
+
+document.getElementById("averageMarks").innerText =
+student.averageMarks;
+
+document.getElementById("pendingFees").innerText =
+student.pendingFees.toLocaleString("en-IN");
+
+
+
+/* =====================================
+   QUICK QUESTIONS
+===================================== */
+
+function askQuick(type){
+
+    let question = "";
+
+    if(type === "overall"){
+        question =
+        "How is my child's overall performance?";
+    }
+
+    if(type === "attendance"){
+        question =
+        "How is my child's attendance?";
+    }
+
+    if(type === "homework"){
+        question =
+        "What is the homework status?";
+    }
+
+    if(type === "marks"){
+        question =
+        "How are my child's marks?";
+    }
+
+    if(type === "fees"){
+        question =
+        "What is the current fee status?";
+    }
+
+    if(type === "improvement"){
+        question =
+        "What should my child improve?";
+    }
+
+    document.getElementById("question").value =
+    question;
+
+    askAI();
+
+}
+
+
+
+/* =====================================
+   AI ANALYSIS ENGINE
+===================================== */
+
+function askAI(){
+
+    const question =
+    document.getElementById("question")
+    .value
+    .toLowerCase()
+    .trim();
+
+
+    if(question === ""){
+
+        showAnswer(
+        "Please enter a question so that VRRITTAM AI Copilot can analyse the available student data."
+        );
+
+        return;
+    }
+
+
+    let answer = "";
+
+
+
+    /* ATTENDANCE */
+
+    if(
+        question.includes("attendance") ||
+        question.includes("absent") ||
+        question.includes("present") ||
+        question.includes("வருகை")
+    ){
+
+        if(student.attendance >= 90){
+
+            answer =
+            "Based on the current student data, " +
+            student.name +
+            " has an attendance of " +
+            student.attendance +
+            "%. This is a healthy attendance level. " +
+            "VRRITTAM recommends maintaining regular attendance.";
+
+        }
+
+        else if(student.attendance >= 75){
+
+            answer =
+            student.name +
+            " currently has " +
+            student.attendance +
+            "% attendance. " +
+            "This is acceptable, but improving regular attendance " +
+            "would support better academic continuity.";
+
+        }
+
+        else{
+
+            answer =
+            student.name +
+            " currently has " +
+            student.attendance +
+            "% attendance. " +
+            "VRRITTAM recommends immediate attention to attendance " +
+            "and regular participation in classes.";
+
+        }
+
+    }
+
+
+
+    /* HOMEWORK */
+
+    else if(
+        question.includes("homework") ||
+        question.includes("assignment") ||
+        question.includes("home work")
+    ){
+
+        const completed =
+        student.completedHomework;
+
+        const pending =
+        student.pendingHomework;
+
+        const total =
+        student.totalHomework;
+
+        const completion =
+        Math.round(
+            (completed / total) * 100
+        );
+
+
+        answer =
+        "VRRITTAM analysed the current homework data. " +
+        student.name +
+        " has completed " +
+        completed +
+        " out of " +
+        total +
+        " assignments. " +
+        "The homework completion rate is approximately " +
+        completion +
+        "%. " +
+        pending +
+        " assignment(s) are currently pending. " +
+        "Please encourage timely completion.";
+
+    }
+
+
+
+    /* MARKS */
+
+    else if(
+        question.includes("mark") ||
+        question.includes("score") ||
+        question.includes("grade") ||
+        question.includes("performance")
+    ){
+
+        let average =
+        student.averageMarks;
+
+
+        if(average >= 85){
+
+            answer =
+            student.name +
+            "'s current academic average is " +
+            average +
+            "%. " +
+            "The overall performance is excellent. " +
+            "VRRITTAM recommends maintaining the current learning routine.";
+
+        }
+
+        else if(average >= 70){
+
+            answer =
+            student.name +
+            "'s current academic average is " +
+            average +
+            "%. " +
+            "The overall performance is good. " +
+            "With additional practice, the student can move toward a higher performance level.";
+
+        }
+
+        else{
+
+            answer =
+            student.name +
+            "'s current academic average is " +
+            average +
+            "%. " +
+            "VRRITTAM recommends additional academic support and regular revision.";
+
+        }
+
+    }
+
+
+
+    /* FEES */
+
+    else if(
+        question.includes("fee") ||
+        question.includes("fees") ||
+        question.includes("payment") ||
+        question.includes("fees")
+    ){
+
+        answer =
+        "The current pending fee amount for " +
+        student.name +
+        " is ₹" +
+        student.pendingFees.toLocaleString("en-IN") +
+        ". " +
+        "VRRITTAM recommends checking the fee reminder " +
+        "and completing the pending payment before the due date.";
+
+    }
+
+
+
+    /* IMPROVEMENT */
+
+    else if(
+        question.includes("improve") ||
+        question.includes("improvement") ||
+        question.includes("better") ||
+        question.includes("weak")
+    ){
+
+        let suggestions = [];
+
+
+        if(student.attendance < 90){
+
+            suggestions.push(
+            "improve attendance"
+            );
+
+        }
+
+
+        if(student.pendingHomework > 0){
+
+            suggestions.push(
+            "complete pending homework"
+            );
+
+        }
+
+
+        if(student.averageMarks < 80){
+
+            suggestions.push(
+            "increase revision and subject practice"
+            );
+
+        }
+
+
+        if(suggestions.length === 0){
+
+            answer =
+            student.name +
+            " is currently maintaining good progress. " +
+            "VRRITTAM recommends continuing the present learning routine.";
+
+        }
+
+        else{
+
+            answer =
+            "Based on the current data, VRRITTAM recommends " +
+            suggestions.join(", ") +
+            ". These actions can help improve overall academic progress.";
+
+        }
+
+    }
+
+
+
+    /* OVERALL */
+
+    else{
+
+        const homeworkCompletion =
+        Math.round(
+            (student.completedHomework /
+            student.totalHomework) * 100
+        );
+
+
+        answer =
+        "VRRITTAM analysed the available student data. " +
+
+        "Attendance is " +
+        student.attendance +
+        "%. " +
+
+        "Academic average is " +
+        student.averageMarks +
+        "%. " +
+
+        "Homework completion is " +
+        homeworkCompletion +
+        "%. " +
+
+        "Pending homework: " +
+        student.pendingHomework +
+        ". " +
+
+        "Pending fees: ₹" +
+        student.pendingFees.toLocaleString("en-IN") +
+        ". " +
+
+        "Overall, the student is progressing well, " +
+        "with attention recommended for pending assignments " +
+        "and continued academic improvement.";
+
+    }
+
+
+    showAnswer(answer);
+
+}
+
+
+
+/* =====================================
+   SHOW AI RESPONSE
+===================================== */
+
+function showAnswer(text){
+
+    document.getElementById("answer")
+    .innerText = text;
+
+    document.getElementById("response")
+    .style.display = "block";
+
+}
+
+
+
+/* =====================================
+   BACK
+===================================== */
+
+function goBack(){
+
+    window.location.href =
+    "parent-dashboard.html";
+
+}
+
+</script>
+
+
+</body>
+
+</html>

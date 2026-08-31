@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="ta">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>VRRITTAM - Parent Dashboard</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
+}
+
+body{
+    background:#eef5ff;
+    color:#222;
+}
+
+/* HEADER */
+
+header{
+    background:#1565C0;
+    color:white;
+    padding:18px 20px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    flex-wrap:wrap;
+}
+
+.header-left h1{
+    font-size:24px;
+    margin-bottom:5px;
+}
+
+.header-left p{
+    font-size:14px;
+}
+
+.header-right{
+    display:flex;
+    gap:10px;
+}
+
+.header-btn{
+    border:none;
+    padding:10px 15px;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:bold;
+}
+
+.back-btn{
+    background:white;
+    color:#1565C0;
+}
+
+.logout-btn{
+    background:#e53935;
+    color:white;
+}
+
+/* MAIN */
+
+.container{
+    max-width:1100px;
+    margin:auto;
+    padding:25px 20px;
+}
+
+/* WELCOME */
+
+.welcome{
+    margin-bottom:22px;
+}
+
+.welcome h2{
+    color:#003366;
+    margin-bottom:7px;
+}
+
+.welcome p{
+    color:#666;
+}
+
+/* SECTION */
+
+.section-title{
+    color:#003366;
+    margin:25px 0 15px;
+}
+
+/* STUDENT INFO */
+
+.student-info{
+    background:white;
+    padding:18px;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,.10);
+}
+
+.student-info h3{
+    color:#1565C0;
+    margin-bottom:8px;
+}
+
+.student-info p{
+    margin:5px 0;
+    color:#555;
+}
+
+/* STATISTICS */
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:
+    repeat(auto-fit,minmax(180px,1fr));
+
+    gap:15px;
+}
+
+.stat-card{
+    background:white;
+    padding:20px;
+    border-radius:12px;
+
+    box-shadow:
+    0 4px 10px rgba(0,0,0,.10);
+}
+
+.stat-icon{
+    font-size:28px;
+    margin-bottom:8px;
+}
+
+.stat-card h3{
+    color:#003366;
+    margin-bottom:8px;
+}
+
+.stat-value{
+    font-size:27px;
+    font-weight:bold;
+    color:#1565C0;
+}
+
+.stat-note{
+    font-size:13px;
+    color:#777;
+    margin-top:5px;
+}
+
+/* AI INSIGHT */
+
+.ai-box{
+    background:white;
+    margin-top:15px;
+    padding:20px;
+
+    border-radius:12px;
+
+    border-left:5px solid #1565C0;
+
+    box-shadow:
+    0 4px 10px rgba(0,0,0,.10);
+}
+
+.ai-box h3{
+    color:#1565C0;
+    margin-bottom:10px;
+}
+
+/* REMINDERS */
+
+.reminder-box{
+    background:white;
+    padding:18px;
+
+    border-radius:12px;
+
+    box-shadow:
+    0 4px 10px rgba(0,0,0,.10);
+}
+
+.reminder{
+    display:flex;
+    align-items:center;
+
+    gap:12px;
+
+    padding:13px 5px;
+
+    border-bottom:1px solid #eee;
+}
+
+.reminder:last-child{
+    border-bottom:none;
+}
+
+.reminder-icon{
+    font-size:23px;
+}
+
+.reminder-content{
+    flex:1;
+}
+
+.reminder-content strong{
+    display:block;
+    margin-bottom:4px;
+}
+
+.reminder-content span{
+    font-size:13px;
+    color:#777;
+}
+
+/* MODULES */
+
+.modules-grid{
+    display:grid;
+
+    grid-template-columns:
+    repeat(auto-fit,minmax(200px,1fr));
+
+    gap:18px;
+}
+
+.module-card{
+    background:white;
+
+    padding:22px;
+
+    border-radius:12px;
+
+    box-shadow:
+    0 4px 10px rgba(0,0,0,.12);
+
+    text-align:center;
+}
+
+.module-icon{
+    font-size:35px;
+    margin-bottom:10px;
+}
+
+.module-card h3{
+    color:#003366;
+    margin-bottom:15px;
+}
+
+.module-card button{
+    width:100%;
+
+    padding:12px;
+
+    border:none;
+
+    border-radius:8px;
+
+    background:#1565C0;
+
+    color:white;
+
+    font-size:15px;
+
+    cursor:pointer;
+}
+
+.module-card button:hover{
+    background:#0D47A1;
+}
+
+/* FOOTER */
+
+footer{
+    text-align:center;
+
+    padding:25px 10px;
+
+    color:#666;
+
+    font-size:13px;
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    header{
+        padding:15px;
+    }
+
+    .header-left h1{
+        font-size:19px;
+    }
+
+    .header-right{
+        width:100%;
+        margin-top:12px;
+    }
+
+    .header-btn{
+        flex:1;
+    }
+
+    .container{
+        padding:18px 14px;
+    }
+
+    .stats-grid{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+    }
+
+    .stat-card{
+        padding:15px;
+    }
+
+    .stat-value{
+        font-size:22px;
+    }
+
+    .modules-grid{
+        grid-template-columns:1fr 1fr;
+        gap:10px;
+    }
+
+    .module-card{
+        padding:16px 10px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- HEADER -->
+
+<header>
+
+<div class="header-left">
+
+<h1>
+👨‍👩‍👧 VRRITTAM Parent Dashboard
+</h1>
+
+<p>
+Education Copilot
+</p>
+
+</div>
+
+
+<div class="header-right">
+
+<button
+class="header-btn back-btn"
+onclick="goBack()">
+
+← Back
+
+</button>
+
+
+<button
+class="header-btn logout-btn"
+onclick="logout()">
+
+Logout
+
+</button>
+
+</div>
+
+</header>
+
+
+
+<!-- MAIN -->
+
+<div class="container">
+
+
+<!-- WELCOME -->
+
+<div class="welcome">
+
+<h2>
+Welcome, Parent 👋
+</h2>
+
+<p>
+Monitor your child's learning progress and important activities.
+</p>
+
+</div>
+
+
+
+<!-- CHILD INFO -->
+
+<h2 class="section-title">
+
+👨‍🎓 Child Information
+
+</h2>
+
+
+<div class="student-info">
+
+<h3>
+Arun Kumar
+</h3>
+
+<p>
+Class: 10 - A
+</p>
+
+<p>
+Academic Year: 2026 - 2027
+</p>
+
+</div>
+
+
+
+<!-- AI STATISTICS -->
+
+<h2 class="section-title">
+
+🤖 AI Student Statistics
+
+</h2>
+
+
+<div class="stats-grid">
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+📅
+</div>
+
+<h3>
+Attendance
+</h3>
+
+<div class="stat-value">
+92%
+</div>
+
+<div class="stat-note">
+Good attendance
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+📝
+</div>
+
+<h3>
+Homework
+</h3>
+
+<div class="stat-value">
+85%
+</div>
+
+<div class="stat-note">
+Completion rate
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+📊
+</div>
+
+<h3>
+Marks
+</h3>
+
+<div class="stat-value">
+78%
+</div>
+
+<div class="stat-note">
+Current average
+</div>
+
+</div>
+
+
+<div class="stat-card">
+
+<div class="stat-icon">
+🎯
+</div>
+
+<h3>
+Learning Score
+</h3>
+
+<div class="stat-value">
+88%
+</div>
+
+<div class="stat-note">
+AI learning indicator
+</div>
+
+</div>
+
+
+</div>
+
+
+
+<!-- AI INSIGHT -->
+
+<div class="ai-box">
+
+<h3>
+🤖 AI Insight
+</h3>
+
+<p>
+Your child's attendance and homework completion are good.
+VRRITTAM recommends monitoring Mathematics performance
+and encouraging regular practice.
+</p>
+
+</div>
+
+
+
+<!-- PARENT REMINDERS -->
+
+<h2 class="section-title">
+
+🔔 Parent Reminders
+
+</h2>
+
+
+<div class="reminder-box">
+
+
+<div class="reminder">
+
+<div class="reminder-icon">
+💰
+</div>
+
+<div class="reminder-content">
+
+<strong>
+School Fee Reminder
+</strong>
+
+<span>
+Next fee payment is due soon.
+</span>
+
+</div>
+
+</div>
+
+
+<div class="reminder">
+
+<div class="reminder-icon">
+📝
+</div>
+
+<div class="reminder-content">
+
+<strong>
+Homework Pending
+</strong>
+
+<span>
+Mathematics homework submission is due tomorrow.
+</span>
+
+</div>
+
+</div>
+
+
+<div class="reminder">
+
+<div class="reminder-icon">
+📅
+</div>
+
+<div class="reminder-content">
+
+<strong>
+Attendance Monitoring
+</strong>
+
+<span>
+Continue maintaining good attendance.
+</span>
+
+</div>
+
+</div>
+
+
+<div class="reminder">
+
+<div class="reminder-icon">
+📊
+</div>
+
+<div class="reminder-content">
+
+<strong>
+Academic Performance
+</strong>
+
+<span>
+Mathematics performance needs additional attention.
+</span>
+
+</div>
+
+</div>
+
+
+</div>
+
+
+
+<!-- MODULES -->
+
+<h2 class="section-title">
+
+📚 Parent Services
+
+</h2>
+
+
+<div class="modules-grid">
+
+
+<!-- ATTENDANCE -->
+
+<div class="module-card">
+
+<div class="module-icon">
+📅
+</div>
+
+<h3>
+Attendance
+</h3>
+
+<button
+onclick="openAttendance()">
+
+View Attendance
+
+</button>
+
+</div>
+
+
+
+<!-- HOMEWORK -->
+
+<div class="module-card">
+
+<div class="module-icon">
+📝
+</div>
+
+<h3>
+Homework
+</h3>
+
+<button
+onclick="openHomework()">
+
+View Homework
+
+</button>
+
+</div>
+
+
+
+<!-- MARKS -->
+
+<div class="module-card">
+
+<div class="module-icon">
+📊
+</div>
+
+<h3>
+Marks
+</h3>
+
+<button
+onclick="openMarks()">
+
+View Marks
+
+</button>
+
+</div>
+
+
+
+<!-- FEES -->
+
+<div class="module-card">
+
+<div class="module-icon">
+💰
+</div>
+
+<h3>
+Fees
+
+</h3>
+
+<button
+onclick="openFees()">
+
+View Fees
+
+</button>
+
+</div>
+
+
+
+<!-- AI COPILOT -->
+
+<div class="module-card">
+
+<div class="module-icon">
+🤖
+</div>
+
+<h3>
+AI Copilot
+</h3>
+
+<button
+onclick="openCopilot()">
+
+Open
+
+</button>
+
+</div>
+
+
+
+<!-- COURSES -->
+
+<div class="module-card">
+
+<div class="module-icon">
+📚
+</div>
+
+<h3>
+Courses
+</h3>
+
+<button
+onclick="openCourses()">
+
+View Courses
+
+</button>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+<!-- FOOTER -->
+
+<footer>
+
+<p>
+Powered by
+</p>
+
+<p>
+Winjosys technologies pvt ltd.
+</p>
+
+</footer>
+
+
+
+<script>
+
+
+function openAttendance(){
+
+    window.location.href =
+    "parent-attendance.html";
+
+}
+
+
+function openHomework(){
+
+    window.location.href =
+    "parent-homework.html";
+
+}
+
+
+function openMarks(){
+
+    window.location.href =
+    "parent-marks.html";
+
+}
+
+
+function openFees(){
+
+    window.location.href =
+    "parent-fees.html";
+
+}
+
+
+function openCopilot(){
+
+    window.location.href="ai-copilot.html";
+
+}
+
+
+function openCourses(){
+
+    window.location.href="courses.html";
+
+}
+
+
+function goBack(){
+
+    window.history.back();
+
+}
+
+
+function logout(){
+
+    window.location.href="login.html";
+
+}
+
+
+</script>
+
+
+</body>
+
+</html>

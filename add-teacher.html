@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>Add Teacher - VRRITTAM</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+
+    margin:0;
+
+    font-family:Arial,sans-serif;
+
+    background:#f4f7fb;
+
+    color:#1f2937;
+}
+
+
+/* ================================
+   HEADER
+================================ */
+
+.header{
+
+    background:#1e3a8a;
+
+    color:white;
+
+    padding:18px 25px;
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    flex-wrap:wrap;
+}
+
+.header-left h1{
+
+    margin:0;
+
+    font-size:24px;
+}
+
+.header-left p{
+
+    margin:5px 0 0;
+
+    font-size:14px;
+
+    opacity:.9;
+}
+
+
+/* ================================
+   BACK BUTTON
+================================ */
+
+.back-button{
+
+    background:white;
+
+    color:#1e3a8a;
+
+    border:none;
+
+    padding:10px 18px;
+
+    border-radius:7px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+}
+
+
+/* ================================
+   MAIN
+================================ */
+
+.main{
+
+    max-width:900px;
+
+    margin:30px auto;
+
+    padding:0 20px;
+}
+
+
+/* ================================
+   CARD
+================================ */
+
+.card{
+
+    background:white;
+
+    border-radius:12px;
+
+    padding:28px;
+
+    box-shadow:
+        0 3px 12px rgba(0,0,0,.08);
+}
+
+.card-header{
+
+    border-bottom:1px solid #e5e7eb;
+
+    margin-bottom:25px;
+
+    padding-bottom:15px;
+}
+
+.card-header h2{
+
+    margin:0;
+
+    color:#1e3a8a;
+}
+
+
+/* ================================
+   FORM
+================================ */
+
+.form-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,1fr);
+
+    gap:20px;
+}
+
+.form-group{
+
+    display:flex;
+
+    flex-direction:column;
+}
+
+.form-group.full{
+
+    grid-column:1 / -1;
+}
+
+label{
+
+    font-weight:bold;
+
+    margin-bottom:7px;
+
+    font-size:14px;
+}
+
+input,
+select,
+textarea{
+
+    width:100%;
+
+    padding:11px;
+
+    border:1px solid #cbd5e1;
+
+    border-radius:7px;
+
+    font-size:14px;
+
+    outline:none;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+
+    border-color:#1e3a8a;
+}
+
+textarea{
+
+    min-height:90px;
+
+    resize:vertical;
+}
+
+
+/* ================================
+   BUTTONS
+================================ */
+
+.button-row{
+
+    margin-top:25px;
+
+    display:flex;
+
+    gap:12px;
+
+    justify-content:flex-end;
+}
+
+.cancel-button{
+
+    background:#e5e7eb;
+
+    color:#374151;
+
+    border:none;
+
+    padding:12px 22px;
+
+    border-radius:7px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+}
+
+.register-button{
+
+    background:#1e3a8a;
+
+    color:white;
+
+    border:none;
+
+    padding:12px 25px;
+
+    border-radius:7px;
+
+    cursor:pointer;
+
+    font-weight:bold;
+}
+
+
+/* ================================
+   SUCCESS
+================================ */
+
+.message{
+
+    display:none;
+
+    margin-top:20px;
+
+    padding:14px;
+
+    border-radius:7px;
+
+    background:#dcfce7;
+
+    color:#166534;
+
+    font-weight:bold;
+}
+
+
+/* ================================
+   MOBILE
+================================ */
+
+@media(max-width:650px){
+
+    .form-grid{
+
+        grid-template-columns:1fr;
+    }
+
+    .form-group.full{
+
+        grid-column:auto;
+    }
+
+    .button-row{
+
+        flex-direction:column;
+    }
+
+    .cancel-button,
+    .register-button{
+
+        width:100%;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================================
+     HEADER
+================================ -->
+
+<div class="header">
+
+<div class="header-left">
+
+<h1>
+👩‍🏫 Add Teacher
+</h1>
+
+<p>
+VRRITTAM School Administration
+</p>
+
+</div>
+
+
+<button
+class="back-button"
+onclick="goBack()">
+
+← Back
+
+</button>
+
+</div>
+
+
+
+<!-- ================================
+     MAIN
+================================ -->
+
+<div class="main">
+
+<div class="card">
+
+
+<div class="card-header">
+
+<h2>
+Teacher Registration
+</h2>
+
+</div>
+
+
+
+<form
+id="teacherForm"
+onsubmit="registerTeacher(event)">
+
+
+<div class="form-grid">
+
+
+<!-- NAME -->
+
+<div class="form-group">
+
+<label>
+Teacher Name *
+</label>
+
+<input
+type="text"
+id="teacherName"
+placeholder="Enter teacher name"
+required>
+
+</div>
+
+
+
+<!-- SUBJECT -->
+
+<div class="form-group">
+
+<label>
+Subject *
+</label>
+
+<select
+id="teacherSubject"
+required>
+
+<option value="">
+Select Subject
+</option>
+
+<option value="Mathematics">
+Mathematics
+</option>
+
+<option value="Science">
+Science
+</option>
+
+<option value="English">
+English
+</option>
+
+<option value="Tamil">
+Tamil
+</option>
+
+<option value="Social Science">
+Social Science
+</option>
+
+<option value="Computer Science">
+Computer Science
+</option>
+
+<option value="Physics">
+Physics
+</option>
+
+<option value="Chemistry">
+Chemistry
+</option>
+
+<option value="Biology">
+Biology
+</option>
+
+</select>
+
+</div>
+
+
+
+<!-- TYPE -->
+
+<div class="form-group">
+
+<label>
+Teacher Type *
+</label>
+
+<select
+id="teacherType"
+required>
+
+<option value="">
+Select Teacher Type
+</option>
+
+<option value="Permanent">
+Permanent
+</option>
+
+<option value="Temporary">
+Temporary
+</option>
+
+<option value="Deputation">
+Deputation
+</option>
+
+</select>
+
+</div>
+
+
+
+<!-- PHONE -->
+
+<div class="form-group">
+
+<label>
+Phone Number *
+</label>
+
+<input
+type="tel"
+id="teacherPhone"
+placeholder="Enter phone number"
+required>
+
+</div>
+
+
+
+<!-- EMAIL -->
+
+<div class="form-group">
+
+<label>
+Email Address
+</label>
+
+<input
+type="email"
+id="teacherEmail"
+placeholder="Enter email address">
+
+</div>
+
+
+
+<!-- QUALIFICATION -->
+
+<div class="form-group">
+
+<label>
+Qualification
+</label>
+
+<input
+type="text"
+id="teacherQualification"
+placeholder="Example: B.Ed, M.Sc">
+
+</div>
+
+
+
+<!-- JOINING DATE -->
+
+<div class="form-group">
+
+<label>
+Joining Date
+</label>
+
+<input
+type="date"
+id="joiningDate">
+
+</div>
+
+
+
+<!-- EXPERIENCE -->
+
+<div class="form-group">
+
+<label>
+Experience
+</label>
+
+<input
+type="text"
+id="teacherExperience"
+placeholder="Example: 5 Years">
+
+</div>
+
+
+
+<!-- ADDRESS -->
+
+<div class="form-group full">
+
+<label>
+Address
+</label>
+
+<textarea
+id="teacherAddress"
+placeholder="Enter residential address">
+</textarea>
+
+</div>
+
+
+</div>
+
+
+
+<!-- BUTTONS -->
+
+<div class="button-row">
+
+
+<button
+type="button"
+class="cancel-button"
+onclick="goBack()">
+
+Cancel
+
+</button>
+
+
+<button
+type="submit"
+class="register-button">
+
+Register Teacher
+
+</button>
+
+
+</div>
+
+
+</form>
+
+
+
+<div
+id="successMessage"
+class="message">
+
+✅ Teacher registered successfully.
+
+</div>
+
+
+</div>
+
+</div>
+
+
+
+<!-- ================================
+     SHARED DATA
+================================ -->
+
+<script src="vrrittam-data.js"></script>
+
+
+<script>
+
+/* =================================
+   BACK
+================================= */
+
+function goBack(){
+
+    window.location.href =
+        "teacher-list.html";
+
+}
+
+
+/* =================================
+   REGISTER TEACHER
+================================= */
+
+function registerTeacher(event){
+
+    event.preventDefault();
+
+
+    /* ================================
+       GET FORM DATA
+    ================================= */
+
+    const teacher = {
+
+        id:
+            "T" +
+            Date.now(),
+
+        name:
+            document.getElementById(
+                "teacherName"
+            ).value.trim(),
+
+        subject:
+            document.getElementById(
+                "teacherSubject"
+            ).value,
+
+        type:
+            document.getElementById(
+                "teacherType"
+            ).value,
+
+        phone:
+            document.getElementById(
+                "teacherPhone"
+            ).value.trim(),
+
+        email:
+            document.getElementById(
+                "teacherEmail"
+            ).value.trim(),
+
+        qualification:
+            document.getElementById(
+                "teacherQualification"
+            ).value.trim(),
+
+        joiningDate:
+            document.getElementById(
+                "joiningDate"
+            ).value,
+
+        experience:
+            document.getElementById(
+                "teacherExperience"
+            ).value.trim(),
+
+        address:
+            document.getElementById(
+                "teacherAddress"
+            ).value.trim(),
+
+        attendance:
+            100,
+
+        status:
+            "Active"
+
+    };
+
+
+    /* ================================
+       LOAD EXISTING TEACHERS
+    ================================= */
+
+    const savedTeachers =
+        localStorage.getItem(
+            "VRRITTAM_TEACHERS"
+        );
+
+
+    let teachers = [];
+
+
+    if(savedTeachers){
+
+        try{
+
+            teachers =
+                JSON.parse(
+                    savedTeachers
+                );
+
+            if(!Array.isArray(teachers)){
+
+                teachers = [];
+
+            }
+
+        }
+
+        catch(error){
+
+            teachers = [];
+
+        }
+
+    }
+
+
+    /* ================================
+       ADD TEACHER
+    ================================= */
+
+    teachers.push(teacher);
+
+
+    /* ================================
+       SAVE
+    ================================= */
+
+    localStorage.setItem(
+
+        "VRRITTAM_TEACHERS",
+
+        JSON.stringify(
+            teachers
+        )
+
+    );
+
+
+    /* ================================
+       SUCCESS MESSAGE
+    ================================= */
+
+    const message =
+        document.getElementById(
+            "successMessage"
+        );
+
+
+    message.style.display =
+        "block";
+
+
+    /* ================================
+       CLEAR FORM
+    ================================= */
+
+    document.getElementById(
+        "teacherForm"
+    ).reset();
+
+
+    /* ================================
+       RETURN TO LIST
+    ================================= */
+
+    setTimeout(
+
+        function(){
+
+            window.location.href =
+                "teacher-list.html";
+
+        },
+
+        1200
+
+    );
+
+}
+
+</script>
+
+
+</body>
+
+</html>

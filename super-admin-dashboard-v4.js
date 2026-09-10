@@ -192,6 +192,50 @@ document.addEventListener(
     }
 );
 
+async function loadDashboardCountsFromFirestore() {
+
+    try {
+
+        const schoolsSnap = await db.collection("schools").get();
+        const studentsSnap = await db.collection("students").get();
+        const teachersSnap = await db.collection("teachers").get();
+
+        schools = schoolsSnap.docs.map(function(doc) {
+            return { id: doc.id, ...doc.data() };
+        });
+
+        users.students = studentsSnap.docs.map(function(doc) {
+            return { id: doc.id, ...doc.data() };
+        });
+
+        users.teachers = teachersSnap.docs.map(function(doc) {
+            return { id: doc.id, ...doc.data() };
+        });
+
+        console.log(
+            "VRRITTAM SUPER ADMIN FIRESTORE COUNTS:",
+            "Schools:", schools.length,
+            "Students:", users.students.length,
+            "Teachers:", users.teachers.length
+        );
+
+        renderEverything();
+
+    }
+    catch (error) {
+        console.error("VRRITTAM SUPER ADMIN FIRESTORE LOAD ERROR:", error.code, error.message);
+    }
+
+}
+
+auth.onAuthStateChanged(function(user) {
+    if (user) {
+        loadDashboardCountsFromFirestore();
+    } else {
+        console.error("No logged-in user - dashboard counts not loaded");
+    }
+});
+
 
 /* ============================================================
    STORAGE
